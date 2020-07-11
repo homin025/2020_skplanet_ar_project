@@ -1,0 +1,87 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.arvideo_test"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:5:5-65
+11-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:5:22-62
+12
+13    <uses-feature
+13-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:6:5-87
+14        android:name="android.hardware.camera.ar"
+14-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:6:19-60
+15        android:required="true" />
+15-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:6:61-84
+16
+17    <application
+17-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:8:5-23:19
+18        android:allowBackup="true"
+18-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:9:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.1.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\03736cf4bc3669a69d502627b70a527e\core-1.1.0\AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:extractNativeLibs="false"
+22        android:icon="@mipmap/ic_launcher"
+22-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:10:9-43
+23        android:label="@string/app_name"
+23-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:11:9-41
+24        android:roundIcon="@mipmap/ic_launcher_round"
+24-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:12:9-54
+25        android:supportsRtl="true"
+25-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:13:9-35
+26        android:testOnly="true"
+27        android:theme="@style/AppTheme" >
+27-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:14:9-40
+28        <activity android:name="com.example.arvideo_test.MainActivity" >
+28-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:15:9-21:20
+28-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:15:19-47
+29            <intent-filter>
+29-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:16:13-20:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:17:17-69
+30-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:17:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:19:17-77
+32-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:19:27-74
+33            </intent-filter>
+34        </activity>
+35
+36        <meta-data
+36-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:22:9-81
+37            android:name="com.google.ar.core"
+37-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:22:20-53
+38            android:value="required" />
+38-->C:\Users\skm\Desktop\workspaces\arcore_augmented_video\app\src\main\AndroidManifest.xml:22:54-78
+39        <!-- The minimal version code of ARCore APK required for an app using this SDK. -->
+40        <meta-data
+40-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:33:9-35:41
+41            android:name="com.google.ar.core.min_apk_version"
+41-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:34:13-62
+42            android:value="190805000" /> <!-- This activity is critical for installing ARCore when it is not already present. -->
+42-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:35:13-38
+43        <activity
+43-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:37:9-43:80
+44            android:name="com.google.ar.core.InstallActivity"
+44-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:38:13-62
+45            android:configChanges="keyboardHidden|orientation|screenSize"
+45-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:39:13-74
+46            android:excludeFromRecents="true"
+46-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:40:13-46
+47            android:exported="false"
+47-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:41:13-37
+48            android:launchMode="singleTop"
+48-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:42:13-43
+49            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
+49-->[com.google.ar:core:1.12.0] C:\Users\skm\.gradle\caches\transforms-2\files-2.1\18c6de1e6990724df808d375f959d164\jetified-core-1.12.0\AndroidManifest.xml:43:13-77
+50    </application>
+51
+52</manifest>
