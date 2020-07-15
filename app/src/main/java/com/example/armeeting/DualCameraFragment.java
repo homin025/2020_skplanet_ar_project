@@ -132,6 +132,7 @@ public class DualCameraFragment extends Fragment
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
             openCameraRear(width, height);
+            Toast.makeText(getContext(), ""+width+" "+height, Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -156,6 +157,7 @@ public class DualCameraFragment extends Fragment
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
             openCameraFront(width, height);
+            Toast.makeText(getContext(), ""+width+" "+height, Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -461,6 +463,7 @@ public class DualCameraFragment extends Fragment
         int w = aspectRatio.getWidth();
         int h = aspectRatio.getHeight();
         for (Size option : choices) {
+            Log.i("option", ""+option.getWidth()+" "+option.getHeight());
             if (option.getWidth() <= maxWidth && option.getHeight() <= maxHeight &&
                     option.getHeight() == option.getWidth() * h / w) {
                 if (option.getWidth() >= textureViewWidth &&
@@ -657,6 +660,8 @@ public class DualCameraFragment extends Fragment
                         rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
                         maxPreviewHeight, largest);
 
+                Toast.makeText(getContext(), "previewSizeRear "+previewSizeRear.getWidth()+" "+previewSizeRear.getHeight(), Toast.LENGTH_SHORT).show();
+
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
 //                int orientation = getResources().getConfiguration().orientation;
 //                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -767,6 +772,7 @@ public class DualCameraFragment extends Fragment
                 previewSizeFront = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
                         rotatedPreviewWidth, rotatedPreviewHeight, maxPreviewWidth,
                         maxPreviewHeight, largest);
+                Toast.makeText(getContext(), "previewSizeFront "+previewSizeRear.getWidth()+" "+previewSizeRear.getHeight(), Toast.LENGTH_SHORT).show();
 
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
 //                int orientation = getResources().getConfiguration().orientation;
@@ -804,6 +810,7 @@ public class DualCameraFragment extends Fragment
             requestCameraPermission();
             return;
         }
+        Toast.makeText(getContext(), "openCameraRear "+width+" "+height, Toast.LENGTH_SHORT).show();
         setUpCameraOutputsRear(width, height);
         configureTransformRear(width, height);
         Activity activity = getActivity();
@@ -826,6 +833,7 @@ public class DualCameraFragment extends Fragment
             requestCameraPermission();
             return;
         }
+        Toast.makeText(getContext(), "openCameraFront "+width+" "+height, Toast.LENGTH_SHORT).show();
         setUpCameraOutputsFront(width, height);
         configureTransformFront(width, height);
         Activity activity = getActivity();

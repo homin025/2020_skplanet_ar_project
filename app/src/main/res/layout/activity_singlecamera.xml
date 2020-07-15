@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,4 +13,41 @@
         android:name = "com.google.ar.sceneform.ux.ArFragment"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/layoutGame1"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:background="@drawable/roundedbutton"
+            android:id="@+id/buttonScissor"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="가위"
+            android:textSize="25dp" />
+
+        <Button
+            android:background="@drawable/roundedbutton"
+            android:id="@+id/buttonRock"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="바위"
+            android:textSize="25dp" />
+
+        <Button
+            android:background="@drawable/roundedbutton"
+            android:id="@+id/buttonPaper"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="보"
+            android:textSize="25dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

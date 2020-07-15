@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -39,6 +41,9 @@ public class SingleCameraActivity extends AppCompatActivity {
 
     AugmentedImage currentTrackingImage;
 
+    LinearLayout layoutGame;
+    Button buttonRock, buttonScissor, buttonPaper;
+
     private ModelRenderable videoRenderable;
 
     private boolean tracking;
@@ -47,6 +52,11 @@ public class SingleCameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singlecamera);
+
+        layoutGame = findViewById(R.id.layoutGame1);
+        buttonRock = findViewById(R.id.buttonRock);
+        buttonScissor = findViewById(R.id.buttonScissor);
+        buttonPaper = findViewById(R.id.buttonPaper);
 
         texture = new ExternalTexture();
         mediaPlayer = MediaPlayer.create(this, R.raw.vid1);
