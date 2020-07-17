@@ -37,8 +37,11 @@ import java.util.HashMap;
 
 public class GameFragment extends ArFragment {
     private static final String TAG = "GameFragment";
-    private static final boolean USE_SINGLE_IMAGE = false;
     private static final double MIN_OPENGL_VERSION = 3.0;
+
+    MediaPlayer mediaPlayer;
+    ExternalTexture texture;
+    ModelRenderable videoRenderable;
 
     @Override
     public void onAttach(Context context) {
@@ -63,10 +66,24 @@ public class GameFragment extends ArFragment {
             LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
+        texture = new ExternalTexture();
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid4);
+        mediaPlayer.setSurface(texture.getSurface());
+        mediaPlayer.setLooping(false);
+        ModelRenderable.builder()
+                .setSource(getContext(), R.raw.video_screen)
+                .build()
+                .thenAccept(modelRenderable -> {
+                    videoRenderable = modelRenderable;
+                    videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
+                    videoRenderable.getMaterial().setFloat4("keyColor", new Color(0.01843f, 1.0f, 0.098f));
+                });
+
         // Turn off the plane discovery since we're only looking for images
         getPlaneDiscoveryController().hide();
         getPlaneDiscoveryController().setInstructionView(null);
         getArSceneView().getPlaneRenderer().setEnabled(false);
+        getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
         return view;
     }
 
@@ -108,4 +125,34 @@ public class GameFragment extends ArFragment {
         return true;
     }
 
+
+    public void onUpdateFrame(FrameTime frameTime) {
+        Frame frame = getArSceneView().getArFrame();
+        if(frame == null)
+            return;
+
+        Collection<AugmentedImage> updatedAugmentedImages =
+                frame.getUpdatedTrackables(AugmentedImage.class);
+
+        for (AugmentedImage augmentedImage : updatedAugmentedImages) {
+            switch (augmentedImage.getTrackingState()) {
+                case TRACKING:
+                    getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
+                    break;
+                case STOPPED:
+                    break;
+            }
+        }
+    }
+
+    private AnchorNode createVideoNode(AugmentedImage augmentedImage) {
+        AnchorNode anchorNode = new AnchorNode(augmentedImage.createAnchor(augmentedImage.getCenterPose()));
+        mediaPlayer.start();
+        texture.getSurfaceTexture().setOnFrameAvailableListener(surfaceTexture -> {
+            anchorNode.setRenderable(videoRenderable);
+            anchorNode.setLocalScale(new Vector3(
+                    augmentedImage.getExtentX(), 1.0f, augmentedImage.getExtentZ()));
+        });
+        return anchorNode;
+    }
 }
