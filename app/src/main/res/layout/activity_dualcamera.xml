@@ -13,10 +13,29 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#000"
-    tools:context="com.example.armeeting.DualCameraActivity" />
+    tools:context="com.example.armeeting.DualCameraActivity" >
+
+    <fragment
+        android:id="@+id/fragment_game"
+        android:name="com.example.armeeting.GameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="16"
+        tools:layout="@layout/fragment_game" />
+
+    <fragment
+        android:id="@+id/fragment_opencv"
+        android:name="com.example.armeeting.OpenCvFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        tools:layout="@layout/fragment_opencv" />
+
+</LinearLayout>
