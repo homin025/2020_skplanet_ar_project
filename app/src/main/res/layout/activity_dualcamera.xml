@@ -22,20 +22,18 @@
     android:background="#000"
     tools:context="com.example.armeeting.DualCameraActivity" >
 
-    <fragment
-        android:id="@+id/fragment_game"
+    <FrameLayout
+        android:id="@+id/container_game"
         android:name="com.example.armeeting.GameFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="16"
-        tools:layout="@layout/fragment_game" />
+        android:layout_weight="16"/>
 
-    <fragment
-        android:id="@+id/fragment_opencv"
+    <FrameLayout
+        android:id="@+id/container_opencv"
         android:name="com.example.armeeting.OpenCvFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
-        tools:layout="@layout/fragment_opencv" />
+        android:layout_weight="9"/>
 
 </LinearLayout>

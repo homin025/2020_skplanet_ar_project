@@ -51,7 +51,7 @@ public class SingleCameraActivity extends AppCompatActivity {
 
         if (null == savedInstanceState) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_game, GameFragment.newInstance())
+                    .replace(R.id.container_game, GameFragment.newInstance())
                     .commit();
         }
     }
