@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -160,5 +161,12 @@ public class GameFragment extends ArFragment {
                     augmentedImage.getExtentX(), 1.0f, augmentedImage.getExtentZ()));
         });
         return anchorNode;
+    }
+
+    public void changeVideo() {
+        texture = new ExternalTexture();
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid2);
+        mediaPlayer.setSurface(texture.getSurface());
+        videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
     }
 }

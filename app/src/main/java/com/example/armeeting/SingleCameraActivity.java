@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -51,7 +52,7 @@ public class SingleCameraActivity extends AppCompatActivity {
 
         if (null == savedInstanceState) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_game, GameFragment.newInstance())
+                    .replace(R.id.container_game, GameFragment.newInstance(), "fragment_game")
                     .commit();
         }
     }
