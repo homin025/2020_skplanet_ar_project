@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.AugmentedImageDatabase;
@@ -42,6 +43,10 @@ public class GameFragment extends ArFragment {
     MediaPlayer mediaPlayer;
     ExternalTexture texture;
     ModelRenderable videoRenderable;
+
+    public static GameFragment newInstance() {
+        return new GameFragment();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -84,6 +89,7 @@ public class GameFragment extends ArFragment {
         getPlaneDiscoveryController().setInstructionView(null);
         getArSceneView().getPlaneRenderer().setEnabled(false);
         getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
+
         return view;
     }
 
