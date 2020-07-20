@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.AugmentedImageDatabase;
@@ -36,8 +37,6 @@ public class SingleCameraActivity extends AppCompatActivity {
     LinearLayout layoutGame;
     Button buttonRock, buttonScissor, buttonPaper;
 
-    GameFragment arFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +47,12 @@ public class SingleCameraActivity extends AppCompatActivity {
         buttonScissor = findViewById(R.id.buttonScissor);
         buttonPaper = findViewById(R.id.buttonPaper);
 
-        arFragment = (GameFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_game);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (null == savedInstanceState) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_game, GameFragment.newInstance())
+                    .commit();
+        }
     }
 }
