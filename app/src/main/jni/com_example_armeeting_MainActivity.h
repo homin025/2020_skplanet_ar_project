@@ -65,14 +65,6 @@ extern "C" {
 #define com_example_armeeting_MainActivity_RESULT_OK -1L
 #undef com_example_armeeting_MainActivity_CAMERA_PERMISSION_REQUEST_CODE
 #define com_example_armeeting_MainActivity_CAMERA_PERMISSION_REQUEST_CODE 200L
-/*
- * Class:     com_example_armeeting_MainActivity
- * Method:    ConvertRGBtoGray
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_example_armeeting_MainActivity_ConvertRGBtoGray
-  (JNIEnv *, jobject, jlong, jlong);
-
 #ifdef __cplusplus
 }
 #endif
