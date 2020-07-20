@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->C:\Users\homin\Documents\AndroidStudio\2020_skplanet_ar_project\sdk\java\AndroidManifest.xml
+8-->C:\Users\skm\AndroidStudioProjects\ARMeeting\sdk\java\AndroidManifest.xml
 9        android:targetSdkVersion="26" />
-9-->C:\Users\homin\Documents\AndroidStudio\2020_skplanet_ar_project\sdk\java\AndroidManifest.xml
+9-->C:\Users\skm\AndroidStudioProjects\ARMeeting\sdk\java\AndroidManifest.xml
 10
 11</manifest>

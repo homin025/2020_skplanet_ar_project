@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutGame2"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    tools:showIn="@layout/activity_singlecamera">
+
+    <Button
+        android:background="@drawable/roundedbutton"
+        android:id="@+id/buttonScissor"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:text="왼쪽"
+        android:textSize="25dp" />
+
+    <Button
+        android:background="@drawable/roundedbutton"
+        android:id="@+id/buttonRock"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="가운데"
+        android:textSize="25dp" />
+
+    <Button
+        android:background="@drawable/roundedbutton"
+        android:id="@+id/buttonPaper"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:text="오른쪽"
+        android:textSize="25dp" />
+</LinearLayout>

@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-OPENCV_ROOT := C:\Users\homin\Documents\AndroidStudio\2020_skplanet_ar_project\sdk
+OPENCV_ROOT := C:\Users\skm\AndroidStudioProjects\ARMeeting\sdk
 OPENCV_CAMERA_MODULE := on
 OPENCV_INSTALL_MODULE := on
 OPENCV_LIB_TYPE := SHARED

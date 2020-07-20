@@ -10,44 +10,24 @@
         android:layout_width= "match_parent"
         android:layout_height="match_parent"
         android:id = "@+id/container_game"
-        android:name = "com.example.armeeting.GameFragment"
-        />
+        android:name = "com.example.armeeting.GameFragment" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:text="Button" />
+
+    <include layout="@layout/game_ui_1"
         android:id="@+id/layoutGame1"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:background="@drawable/roundedbutton"
-            android:id="@+id/buttonScissor"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="가위"
-            android:textSize="25dp" />
-
-        <Button
-            android:background="@drawable/roundedbutton"
-            android:id="@+id/buttonRock"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="바위"
-            android:textSize="25dp" />
-
-        <Button
-            android:background="@drawable/roundedbutton"
-            android:id="@+id/buttonPaper"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="보"
-            android:textSize="25dp" />
-
-    </LinearLayout>
+        android:visibility="invisible" />
+    <include layout="@layout/game_ui_2"
+        android:id="@+id/layoutGame2"
+        android:visibility="invisible" />
+    <include layout="@layout/game_ui_3"
+        android:id="@+id/layoutGame3"
+        android:visibility="invisible" />
 
 </FrameLayout>
