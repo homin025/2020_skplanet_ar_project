@@ -47,12 +47,12 @@ public class SingleCameraActivity extends AppCompatActivity {
         buttonScissor = findViewById(R.id.buttonScissor);
         buttonPaper = findViewById(R.id.buttonPaper);
 
-//        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-//        if (null == savedInstanceState) {
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_game, GameFragment.newInstance())
-//                    .commit();
-//        }
+        if (null == savedInstanceState) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container_game, GameFragment.newInstance())
+                    .commit();
+        }
     }
 }
