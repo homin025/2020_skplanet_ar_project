@@ -155,4 +155,11 @@ public class GameFragment extends ArFragment {
         });
         return anchorNode;
     }
+
+    public void changeVideo() {
+        texture = new ExternalTexture();
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid2);
+        mediaPlayer.setSurface(texture.getSurface());
+        videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
+    }
 }
