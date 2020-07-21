@@ -10,6 +10,8 @@ include ${OPENCV_ROOT}\native\jni\OpenCV.mk
 
 LOCAL_MODULE    := native-lib
 LOCAL_SRC_FILES := main.cpp
+LOCAL_LDLIBS += -llog
+LOCAL_LDLIBS += -landroid
 LOCAL_CFALGS = -DSTDC_HEADERS
 
 include $(BUILD_SHARED_LIBRARY)

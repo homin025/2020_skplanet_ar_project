@@ -92,7 +92,7 @@ public class OpenCvFragment extends Fragment
     /**
      * Tag for the {@link Log}.
      */
-    private static final String TAG = "Camera2BasicFragment";
+    private static final String TAG = "OpenCvFragment";
 
     /**
      * Camera state: Showing camera preview.
@@ -168,6 +168,11 @@ public class OpenCvFragment extends Fragment
     private AutoFitTextureView mTextureView;
 
     /**
+     * A {@Link Surface} for camera preview
+     */
+    private Surface mSurface;
+
+    /**
      * A {@link CameraCaptureSession } for camera preview.
      */
     private CameraCaptureSession mCaptureSession;
@@ -229,6 +234,7 @@ public class OpenCvFragment extends Fragment
      * An {@link ImageReader} that handles still image capture.
      */
     private ImageReader mImageReader;
+    private int mImageFormat = ImageFormat.YUV_420_888;
 
     /**
      * This is the output file for our picture.
@@ -244,9 +250,30 @@ public class OpenCvFragment extends Fragment
 
         @Override
         public void onImageAvailable(ImageReader reader) {
-            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
-        }
+//            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
+            Image image = null;
+            int format;
+            int result;
 
+            try {
+                image = reader.acquireLatestImage();
+                // No image is acquired
+                if(null == image) {
+                    return;
+                }
+
+                format = reader.getImageFormat();
+
+                result = OpenCvUtils.detectFinger(image, mSurface);
+
+                showToast("Finger number: " + result);
+
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+
+            image.close();
+        }
     };
 
     /**
@@ -346,7 +373,6 @@ public class OpenCvFragment extends Fragment
                                        @NonNull TotalCaptureResult result) {
             process(result);
         }
-
     };
 
     /**
@@ -693,15 +719,18 @@ public class OpenCvFragment extends Fragment
             texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
 
             // This is the output Surface we need to start preview.
-            Surface surface = new Surface(texture);
+            mSurface = new Surface(texture);
 
             // We set up a CaptureRequest.Builder with the output Surface.
             mPreviewRequestBuilder
                     = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            mPreviewRequestBuilder.addTarget(surface);
+//            mPreviewRequestBuilder.addTarget(mSurface);
+            mPreviewRequestBuilder.addTarget(mImageReader.getSurface());
+
+            Log.d(TAG, "MINHO1");
 
             // Here, we create a CameraCaptureSession for camera preview.
-            mCameraDevice.createCaptureSession(Arrays.asList(surface, mImageReader.getSurface()),
+            mCameraDevice.createCaptureSession(Arrays.asList(mSurface, mImageReader.getSurface()),
                     new CameraCaptureSession.StateCallback() {
 
                         @Override
@@ -710,7 +739,7 @@ public class OpenCvFragment extends Fragment
                             if (null == mCameraDevice) {
                                 return;
                             }
-                            showToast("Succeeded    ");
+                            showToast("Succeeded");
 
                             // When the session is ready, we start displaying the preview.
                             mCaptureSession = cameraCaptureSession;
@@ -900,7 +929,7 @@ public class OpenCvFragment extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.texture: {
+            case R.id.picture: {
                 takePicture();
                 break;
             }
