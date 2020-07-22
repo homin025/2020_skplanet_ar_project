@@ -53,12 +53,9 @@ public class SingleCameraActivity extends AppCompatActivity {
         adb.show();
 
         button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adb.show();
-            }
-        });
+        button.setOnClickListener(view -> adb.show());
+
+        new IntroDialog(this).show();
     }
 
     private void setLayoutVisibility(int index) {

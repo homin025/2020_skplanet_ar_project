@@ -13,4 +13,12 @@
 
     <string name="single_camera_activity">Single</string>
     <string name="dual_camera_activity">Dual</string>
+
+    <string name="armeeting_intro_title">AR 겜미팅이란?</string>
+    <string name="armeeting_intro_description">
+        내가 좋아하는 아이돌과 즐길 수 있는\n
+        3가지 AR게임을 모아보았습니다.\n
+        가위바위보, 참참참, 스피드퀴즈로\n
+        게임을 즐기고 우승상품을 받아보세요.
+    </string>
 </resources>

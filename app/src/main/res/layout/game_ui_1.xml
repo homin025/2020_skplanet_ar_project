@@ -11,7 +11,7 @@
     tools:showIn="@layout/activity_singlecamera">
 
     <Button
-        android:background="@drawable/roundedbutton"
+        android:background="@drawable/button_shape"
         android:id="@+id/buttonScissor"
         android:layout_width="100dp"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
         android:textSize="25dp" />
 
     <Button
-        android:background="@drawable/roundedbutton"
+        android:background="@drawable/button_shape"
         android:id="@+id/buttonRock"
         android:layout_width="100dp"
         android:layout_height="match_parent"
@@ -29,7 +29,7 @@
         android:textSize="25dp" />
 
     <Button
-        android:background="@drawable/roundedbutton"
+        android:background="@drawable/button_shape"
         android:id="@+id/buttonPaper"
         android:layout_width="100dp"
         android:layout_height="match_parent"
