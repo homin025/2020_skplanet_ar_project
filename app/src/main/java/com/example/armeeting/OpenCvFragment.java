@@ -253,7 +253,7 @@ public class OpenCvFragment extends Fragment
 //            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
             Image image = null;
             int format;
-            int result;
+            int result = -1;
 
             try {
                 image = reader.acquireLatestImage();
@@ -724,10 +724,8 @@ public class OpenCvFragment extends Fragment
             // We set up a CaptureRequest.Builder with the output Surface.
             mPreviewRequestBuilder
                     = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-//            mPreviewRequestBuilder.addTarget(mSurface);
             mPreviewRequestBuilder.addTarget(mImageReader.getSurface());
-
-            Log.d(TAG, "MINHO1");
+            mPreviewRequestBuilder.addTarget(mSurface);
 
             // Here, we create a CameraCaptureSession for camera preview.
             mCameraDevice.createCaptureSession(Arrays.asList(mSurface, mImageReader.getSurface()),
