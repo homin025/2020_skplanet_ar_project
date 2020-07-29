@@ -40,6 +40,8 @@ public class SingleCameraActivity extends AppCompatActivity {
         layouts.add(layoutGame2);
         layouts.add(layoutGame3);
 
+        // 임시용 게임 선택 다이얼로그 (작업본 곧 업로드)
+        // 마커를 인식시키면 게임 선택하도록 하기
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         CharSequence items[] = new CharSequence[] {"가위바위보", "참참참", "스피드퀴즈"};
         adb.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
@@ -50,12 +52,16 @@ public class SingleCameraActivity extends AppCompatActivity {
             }
         });
         adb.setTitle("게임을 선택하세요");
-        adb.show();
 
         button = findViewById(R.id.button);
         button.setOnClickListener(view -> adb.show());
 
-        new IntroDialog(this).show();
+        IntroDialog introDialog = new IntroDialog(this);
+        FitLogoDialog fitLogoDialog = new FitLogoDialog(this);
+
+        introDialog.show();
+        introDialog.setOnDismissListener(dialogInterface -> fitLogoDialog.show());
+
     }
 
     private void setLayoutVisibility(int index) {

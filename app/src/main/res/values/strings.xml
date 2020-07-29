@@ -21,4 +21,8 @@
         가위바위보, 참참참, 스피드퀴즈로\n
         게임을 즐기고 우승상품을 받아보세요.
     </string>
+    <string name="armeeting_fit_logo_description">
+        함께 게임을 즐기고 싶은 아이돌의\n
+        로고를 인식해 주세요.
+    </string>
 </resources>

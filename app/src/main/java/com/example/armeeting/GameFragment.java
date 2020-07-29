@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-
 public class GameFragment extends ArFragment {
     private static final String TAG = "GameFragment";
     private static final double MIN_OPENGL_VERSION = 3.0;
