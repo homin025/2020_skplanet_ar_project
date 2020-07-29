@@ -25,4 +25,10 @@
         함께 게임을 즐기고 싶은 아이돌의\n
         로고를 인식해 주세요.
     </string>
+    <string name="result_title_win">승리✨</string>
+    <string name="result_title_lose">패배💦</string>
+    <string name="result_description_win">이겼어요! 혹시 게임 천재?</string>
+    <string name="result_description_lose">아쉬워요... 다시 한 번 해볼까요?</string>
+    <string name="result_button_win">상품 받으러 가기</string>
+    <string name="result_button_lose">다른 게임 도전하기</string>
 </resources>

@@ -11,13 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SingleCameraActivity extends AppCompatActivity {
 
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
 
-    Button button;
+    Button button, buttonWin, buttonLose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +59,22 @@ public class SingleCameraActivity extends AppCompatActivity {
 
         IntroDialog introDialog = new IntroDialog(this);
         FitLogoDialog fitLogoDialog = new FitLogoDialog(this);
+        GameResultDialog gameResultDialog = new GameResultDialog(this);
 
         introDialog.show();
         introDialog.setOnDismissListener(dialogInterface -> fitLogoDialog.show());
 
+        buttonWin = findViewById(R.id.buttonWin);
+        buttonLose = findViewById(R.id.buttonLose);
+
+        buttonWin.setOnClickListener(view -> {
+            gameResultDialog.setResult(true);
+            gameResultDialog.show();
+        });
+        buttonLose.setOnClickListener(view -> {
+            gameResultDialog.setResult(false);
+            gameResultDialog.show();
+        });
     }
 
     private void setLayoutVisibility(int index) {

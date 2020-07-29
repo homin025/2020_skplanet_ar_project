@@ -20,6 +20,22 @@
         android:layout_marginTop="0dp"
         android:text="Button" />
 
+    <Button
+        android:id="@+id/buttonWin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="0dp"
+        android:text="win" />
+
+    <Button
+        android:id="@+id/buttonLose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="0dp"
+        android:text="lose" />
+
     <include layout="@layout/game_ui_1"
         android:id="@+id/layoutGame1"
         android:visibility="invisible" />
