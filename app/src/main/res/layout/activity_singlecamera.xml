@@ -13,12 +13,12 @@
         android:name = "com.example.armeeting.GameFragment" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonGameChoose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        android:text="Button" />
+        android:text="game" />
 
     <Button
         android:id="@+id/buttonWin"

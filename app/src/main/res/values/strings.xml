@@ -25,6 +25,10 @@
         함께 게임을 즐기고 싶은 아이돌의\n
         로고를 인식해 주세요.
     </string>
+    <string name="armeeting_game_choose">
+        NCT127과\n
+        함께 즐기고 싶은 게임은?
+    </string>
     <string name="result_title_win">승리✨</string>
     <string name="result_title_lose">패배💦</string>
     <string name="result_description_win">이겼어요! 혹시 게임 천재?</string>

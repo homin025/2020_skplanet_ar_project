@@ -30,26 +30,26 @@
         android:textAlignment="center"/>
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/textViewDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/armeeting_intro_description"
         android:textSize="16dp"
         android:textColor="@color/colorBlack"
         android:textAlignment="center"/>
 
     <Button
+        android:id="@+id/buttonOk"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/button_shape"
-        android:id="@+id/buttonOk"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
         android:text="게임 상대 찾기"
-        android:textSize="18dp" />
-
+        android:textSize="18dp"
+        android:textColor="@drawable/button_text_color"/>
 
 </LinearLayout>

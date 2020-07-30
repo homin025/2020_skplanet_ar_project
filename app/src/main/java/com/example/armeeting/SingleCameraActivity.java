@@ -5,20 +5,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class SingleCameraActivity extends AppCompatActivity {
 
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
 
-    Button button, buttonWin, buttonLose;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,40 +41,20 @@ public class SingleCameraActivity extends AppCompatActivity {
         layouts.add(layoutGame2);
         layouts.add(layoutGame3);
 
-        // 임시용 게임 선택 다이얼로그 (작업본 곧 업로드)
-        // 마커를 인식시키면 게임 선택하도록 하기
-        AlertDialog.Builder adb = new AlertDialog.Builder(this);
-        CharSequence items[] = new CharSequence[] {"가위바위보", "참참참", "스피드퀴즈"};
-        adb.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                setLayoutVisibility(i);
-                dialogInterface.dismiss();
-            }
-        });
-        adb.setTitle("게임을 선택하세요");
-
-        button = findViewById(R.id.button);
-        button.setOnClickListener(view -> adb.show());
 
         IntroDialog introDialog = new IntroDialog(this);
         FitLogoDialog fitLogoDialog = new FitLogoDialog(this);
-        GameResultDialog gameResultDialog = new GameResultDialog(this);
+        GameChooseDialog gameChooseDialog = new GameChooseDialog(this);
 
         introDialog.show();
-        introDialog.setOnDismissListener(dialogInterface -> fitLogoDialog.show());
+        introDialog.setOnDismissListener(view -> fitLogoDialog.show());
 
-        buttonWin = findViewById(R.id.buttonWin);
-        buttonLose = findViewById(R.id.buttonLose);
+        // AR 마커를 인식하면 GameChooseDialog 표시
+        gameChooseDialog.setOnDismissListener(view ->
+                setLayoutVisibility(gameChooseDialog.getChoice()));
 
-        buttonWin.setOnClickListener(view -> {
-            gameResultDialog.setResult(true);
-            gameResultDialog.show();
-        });
-        buttonLose.setOnClickListener(view -> {
-            gameResultDialog.setResult(false);
-            gameResultDialog.show();
-        });
+        button = findViewById(R.id.buttonGameChoose);
+        button.setOnClickListener(view -> gameChooseDialog.show());
     }
 
     private void setLayoutVisibility(int index) {
