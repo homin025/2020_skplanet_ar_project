@@ -29,6 +29,10 @@
         NCT127과\n
         함께 즐기고 싶은 게임은?
     </string>
+    <string name="armeeting_game_1">가위바위보</string>
+    <string name="armeeting_game_2">참참참</string>
+    <string name="armeeting_game_3">스피드퀴즈</string>
+    <string name="armeeting_other_idol">다른 아이돌 찾기</string>
     <string name="result_title_win">승리✨</string>
     <string name="result_title_lose">패배💦</string>
     <string name="result_description_win">이겼어요! 혹시 게임 천재?</string>
