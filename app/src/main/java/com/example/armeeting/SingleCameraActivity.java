@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -29,17 +30,13 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
 
+    TextView textViewTrackingImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singlecamera);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if (null == savedInstanceState) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentGame, GameFragment.newInstance(), "fragment_game")
-                    .commit();
-        }
         gameFragment = (GameFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentGame);
 
         layoutGame1 = findViewById(R.id.layoutGame1);
@@ -56,8 +53,10 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         gameChooseDialog = new GameChooseDialog(this);
         gameResultDialog = new GameResultDialog(this);
 
+        // introDialog, fitLogoDialog 순서대로 표시, 끝나면 instructionDone이 true로 바뀜
         introDialog.show();
         introDialog.setOnDismissListener(view -> fitLogoDialog.show());
+        fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
         // AR 마커를 인식하면 GameChooseDialog 표시
         gameChooseDialog.setOnDismissListener(view ->
@@ -76,6 +75,8 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             gameResultDialog.setResult(false);
             gameResultDialog.show();
         });
+
+        textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
     }
 
     private void setLayoutVisibility(int index) {
@@ -86,6 +87,8 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     @Override
     public void onMarkerFound(String name) {
         idolName = name;
+        textViewTrackingImage.setText(idolName);
+
         gameChooseDialog.show();
         gameChooseDialog.setOpponentName(idolName);
     }

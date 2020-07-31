@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.armeeting.SingleCameraActivity">
 
-    <FrameLayout
-        android:layout_width= "match_parent"
+    <fragment
+        android:id="@+id/fragmentGame"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id = "@+id/fragmentGame"
-        android:name = "com.example.armeeting.GameFragment" />
+        android:name="com.example.armeeting.GameFragment" />
 
     <Button
         android:id="@+id/buttonGameChoose"
@@ -36,14 +36,24 @@
         android:layout_marginTop="0dp"
         android:text="lose" />
 
+    <TextView
+        android:id="@+id/textViewTrackingImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:text="Trackig Image Name" />
+
     <include layout="@layout/game_ui_1"
         android:id="@+id/layoutGame1"
         android:visibility="invisible" />
+
     <include layout="@layout/game_ui_2"
         android:id="@+id/layoutGame2"
         android:visibility="invisible" />
+
     <include layout="@layout/game_ui_3"
         android:id="@+id/layoutGame3"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 </FrameLayout>

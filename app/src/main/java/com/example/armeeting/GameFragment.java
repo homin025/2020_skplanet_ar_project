@@ -47,6 +47,9 @@ public class GameFragment extends ArFragment {
 
     GameEventListener listener;
 
+    boolean instructionDone;
+    String currentTrackingImageName = "";
+
     public interface GameEventListener {
         void onMarkerFound(String name);
         // 게임들 끝났을 떄 (가위바위보 내는 타이밍, 참참참 타이밍) 호출되는 이벤트메소드 추가하기
@@ -144,21 +147,27 @@ public class GameFragment extends ArFragment {
 
     public void onUpdateFrame(FrameTime frameTime) {
         Frame frame = getArSceneView().getArFrame();
-        if(frame == null)
+        if(frame == null || !instructionDone)
             return;
 
         Collection<AugmentedImage> updatedAugmentedImages =
                 frame.getUpdatedTrackables(AugmentedImage.class);
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
-            listener.onMarkerFound(augmentedImage.getName());
+            String imageName = augmentedImage.getName();
+            if(!currentTrackingImageName.equals(imageName)) {
+                listener.onMarkerFound(imageName);
+                currentTrackingImageName = imageName;
+            }
+
             switch (augmentedImage.getTrackingState()) {
                 case TRACKING:
-                    getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
+                    //getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
                     break;
                 case STOPPED:
                     break;
             }
+            break;
         }
     }
 
@@ -178,5 +187,9 @@ public class GameFragment extends ArFragment {
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid_alpha);
         mediaPlayer.setSurface(texture.getSurface());
         videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
+    }
+
+    public void setInstructionDone(boolean value) {
+        instructionDone = value;
     }
 }
