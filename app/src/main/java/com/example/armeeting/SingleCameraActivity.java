@@ -13,12 +13,21 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
-public class SingleCameraActivity extends AppCompatActivity {
+public class SingleCameraActivity extends AppCompatActivity implements GameFragment.GameEventListener {
+
+    GameFragment gameFragment;
 
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
 
-    Button button;
+    Button button, buttonWin, buttonLose;
+
+    String idolName;
+
+    IntroDialog introDialog;
+    FitLogoDialog fitLogoDialog;
+    GameChooseDialog gameChooseDialog;
+    GameResultDialog gameResultDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +37,10 @@ public class SingleCameraActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (null == savedInstanceState) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_game, GameFragment.newInstance(), "fragment_game")
+                    .replace(R.id.fragmentGame, GameFragment.newInstance(), "fragment_game")
                     .commit();
         }
+        gameFragment = (GameFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentGame);
 
         layoutGame1 = findViewById(R.id.layoutGame1);
         layoutGame2 = findViewById(R.id.layoutGame2);
@@ -41,10 +51,10 @@ public class SingleCameraActivity extends AppCompatActivity {
         layouts.add(layoutGame2);
         layouts.add(layoutGame3);
 
-
-        IntroDialog introDialog = new IntroDialog(this);
-        FitLogoDialog fitLogoDialog = new FitLogoDialog(this);
-        GameChooseDialog gameChooseDialog = new GameChooseDialog(this);
+        introDialog = new IntroDialog(this);
+        fitLogoDialog = new FitLogoDialog(this);
+        gameChooseDialog = new GameChooseDialog(this);
+        gameResultDialog = new GameResultDialog(this);
 
         introDialog.show();
         introDialog.setOnDismissListener(view -> fitLogoDialog.show());
@@ -54,11 +64,29 @@ public class SingleCameraActivity extends AppCompatActivity {
                 setLayoutVisibility(gameChooseDialog.getChoice()));
 
         button = findViewById(R.id.buttonGameChoose);
+        buttonWin = findViewById(R.id.buttonWin);
+        buttonLose = findViewById(R.id.buttonLose);
+
         button.setOnClickListener(view -> gameChooseDialog.show());
+        buttonWin.setOnClickListener(view -> {
+            gameResultDialog.setResult(true);
+            gameResultDialog.show();
+        });
+        buttonLose.setOnClickListener(view -> {
+            gameResultDialog.setResult(false);
+            gameResultDialog.show();
+        });
     }
 
     private void setLayoutVisibility(int index) {
         for(int i=0; i<layouts.size(); i++)
             layouts.get(i).setVisibility(i == index ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    public void onMarkerFound(String name) {
+        idolName = name;
+        gameChooseDialog.show();
+        gameChooseDialog.setOpponentName(idolName);
     }
 }

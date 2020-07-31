@@ -15,7 +15,7 @@ public class GameChooseDialog extends Dialog{
     int choice;
 
     public Button buttonGame1, buttonGame2, buttonGame3;
-    public TextView textViewOther;
+    public TextView textViewOpponent, textViewOther;
 
     public GameChooseDialog(@NonNull Context context) {
         super(context);
@@ -27,6 +27,7 @@ public class GameChooseDialog extends Dialog{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_game_choose);
 
+        textViewOpponent = findViewById(R.id.textViewOpponent);
         buttonGame1 = findViewById(R.id.buttonGame1);
         buttonGame2 = findViewById(R.id.buttonGame2);
         buttonGame3 = findViewById(R.id.buttonGame3);
@@ -36,6 +37,11 @@ public class GameChooseDialog extends Dialog{
         buttonGame2.setOnClickListener(view -> { choice = 1; dismiss(); });
         buttonGame3.setOnClickListener(view -> { choice = 2; dismiss(); });
         textViewOther.setOnClickListener(view -> cancel());
+    }
+
+    public void setOpponentName(String name) {
+        String text = textViewOpponent.getText().toString();
+        textViewOpponent.setText(name + text);
     }
 
     public int getChoice() { return choice; }

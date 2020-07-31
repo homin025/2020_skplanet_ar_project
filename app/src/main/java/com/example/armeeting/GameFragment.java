@@ -1,5 +1,6 @@
 package com.example.armeeting;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -44,6 +45,13 @@ public class GameFragment extends ArFragment {
     ExternalTexture texture;
     ModelRenderable videoRenderable;
 
+    GameEventListener listener;
+
+    public interface GameEventListener {
+        void onMarkerFound(String name);
+        // 게임들 끝났을 떄 (가위바위보 내는 타이밍, 참참참 타이밍) 호출되는 이벤트메소드 추가하기
+    }
+
     public static GameFragment newInstance() {
         return new GameFragment();
     }
@@ -53,7 +61,7 @@ public class GameFragment extends ArFragment {
         super.onAttach(context);
 
         // Check for Sceneform being supported on this device.  This check will be integrated into
-        // Sceneform eventually.
+        // Sceneform eventually./
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
             Log.e(TAG, "Sceneform requires Android N or later");
 
@@ -63,6 +71,8 @@ public class GameFragment extends ArFragment {
                         .getGlEsVersion();
         if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
             Log.e(TAG, "Sceneform requires OpenGL ES 3.0 or later");
+
+        listener = (GameEventListener)context;
     }
 
 
@@ -108,9 +118,9 @@ public class GameFragment extends ArFragment {
 
     private boolean setupAugmentedImageDatabase(Config config, Session session) {
         HashMap<String, String> fileNames = new HashMap<>();
-        fileNames.put("img1.png", "vid4.mp4");
-//        fileNames.put("img2.png", "vid2.mp4");
-//        fileNames.put("img3.png", "vid3.mp4");
+        fileNames.put("img1.png", "방탄소년단");
+        fileNames.put("img2.png", "NCT127");
+        fileNames.put("img3.jpg", "레드벨벳");
 
         AugmentedImageDatabase augmentedImageDatabase = new AugmentedImageDatabase(session);
         ArrayList<Bitmap> augmentedImageBitmap = new ArrayList<>();
@@ -141,6 +151,7 @@ public class GameFragment extends ArFragment {
                 frame.getUpdatedTrackables(AugmentedImage.class);
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
+            listener.onMarkerFound(augmentedImage.getName());
             switch (augmentedImage.getTrackingState()) {
                 case TRACKING:
                     getArSceneView().getScene().addChild(createVideoNode(augmentedImage));

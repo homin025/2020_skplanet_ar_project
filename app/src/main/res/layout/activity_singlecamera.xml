@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width= "match_parent"
         android:layout_height="match_parent"
-        android:id = "@+id/container_game"
+        android:id = "@+id/fragmentGame"
         android:name = "com.example.armeeting.GameFragment" />
 
     <Button
