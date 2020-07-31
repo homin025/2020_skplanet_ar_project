@@ -15,16 +15,14 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/armeeting" />
+        android:adjustViewBounds="true" />
 
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/armeeting_intro_title"
-        android:textSize="18dp"
+        android:layout_marginTop="25dp"
+        android:textSize="30dp"
         android:textStyle="bold"
         android:textColor="@color/colorMain"
         android:textAlignment="center"/>
@@ -34,13 +32,12 @@
         android:id="@+id/textViewDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/armeeting_intro_description"
         android:textSize="16dp"
         android:textColor="@color/colorBlack"
         android:textAlignment="center"/>
 
     <Button
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -48,8 +45,8 @@
         android:id="@+id/button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="게임 상대 찾기"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:textColor="@drawable/button_text_color" />
 
 
 </LinearLayout>

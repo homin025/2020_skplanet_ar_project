@@ -48,18 +48,13 @@ public class GameResultDialog extends Dialog {
             textViewTitle.setText(res.getString(R.string.result_title_win));
             textViewDescription.setText(res.getString(R.string.result_description_win));
             button.setText(res.getString(R.string.result_button_win));
-            button.setOnClickListener(view->dismiss());
         }
         else {
             imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.lose));
             textViewTitle.setText(res.getString(R.string.result_title_lose));
             textViewDescription.setText(res.getString(R.string.result_description_lose));
             button.setText(res.getString(R.string.result_button_lose));
-            button.setOnClickListener(view->dismiss());
         }
-    }
-
-    public boolean getResult() {
-        return win;
+        button.setOnClickListener(view->dismiss());
     }
 }

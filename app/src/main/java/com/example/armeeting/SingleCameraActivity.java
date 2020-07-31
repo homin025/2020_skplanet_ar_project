@@ -54,8 +54,10 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         gameResultDialog = new GameResultDialog(this);
 
         // introDialog, fitLogoDialog 순서대로 표시, 끝나면 instructionDone이 true로 바뀜
-        introDialog.show();
+        introDialog.create();
         introDialog.setOnDismissListener(view -> fitLogoDialog.show());
+        introDialog.show();
+
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
         // AR 마커를 인식하면 GameChooseDialog 표시
@@ -68,10 +70,12 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
         button.setOnClickListener(view -> gameChooseDialog.show());
         buttonWin.setOnClickListener(view -> {
+            gameResultDialog.create();
             gameResultDialog.setResult(true);
             gameResultDialog.show();
         });
         buttonLose.setOnClickListener(view -> {
+            gameResultDialog.create();
             gameResultDialog.setResult(false);
             gameResultDialog.show();
         });
