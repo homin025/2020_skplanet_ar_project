@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutGame2"
     android:layout_gravity="bottom"
-    android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:layout_marginBottom="17dp"
+    android:layout_marginLeft="17dp"
+    android:layout_marginRight="17dp"
     android:orientation="vertical"
     android:gravity="center"
     tools:showIn="@layout/activity_singlecamera">
@@ -15,9 +17,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:orientation="horizontal"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" >
+        android:layout_marginBottom="10dp">
 
         <Button
             android:background="@drawable/button_shape"
@@ -25,9 +25,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:text="선택1"
-            android:textSize="25dp" />
+            android:textSize="18dp" />
         <Button
             android:background="@drawable/button_shape"
             android:id="@+id/buttonChoice2"
@@ -35,15 +35,13 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="선택2"
-            android:textSize="25dp" />
+            android:textSize="18dp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:orientation="horizontal"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" >
+        android:orientation="horizontal" >
 
         <Button
             android:background="@drawable/button_shape"
@@ -51,9 +49,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:text="선택3"
-            android:textSize="25dp" />
+            android:textSize="18dp" />
         <Button
             android:background="@drawable/button_shape"
             android:id="@+id/buttonChoice4"
@@ -61,6 +59,6 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="선택4"
-            android:textSize="25dp" />
+            android:textSize="18dp" />
     </LinearLayout>
 </LinearLayout>

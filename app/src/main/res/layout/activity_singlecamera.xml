@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        android:text="game" />
+        android:text="game"/>
 
     <Button
         android:id="@+id/buttonWin"
@@ -44,6 +44,6 @@
         android:visibility="invisible" />
     <include layout="@layout/game_ui_3"
         android:id="@+id/layoutGame3"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
 </FrameLayout>

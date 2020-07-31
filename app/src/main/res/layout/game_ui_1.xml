@@ -3,36 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutGame1"
     android:layout_gravity="bottom"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="20dp"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="80dp"
     android:orientation="horizontal"
     android:gravity="center"
     tools:showIn="@layout/activity_singlecamera">
 
-    <Button
-        android:background="@drawable/button_shape"
+    <ImageButton
         android:id="@+id/buttonScissor"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:text="가위"
-        android:textSize="25dp" />
+        android:background="@drawable/game_button_shape"
+        android:src="@drawable/ic_vector_scissors"
+        android:scaleType="fitCenter"
+        android:padding="15dp"/>
 
-    <Button
-        android:background="@drawable/button_shape"
+    <ImageButton
         android:id="@+id/buttonRock"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="바위"
-        android:textSize="25dp" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/game_button_shape"
+        android:src="@drawable/ic_vector_rock"
+        android:scaleType="fitCenter"
+        android:padding="20dp" />
 
-    <Button
-        android:background="@drawable/button_shape"
+    <ImageButton
         android:id="@+id/buttonPaper"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:text="보"
-        android:textSize="25dp" />
+        android:background="@drawable/game_button_shape"
+        android:src="@drawable/ic_vector_paper"
+        android:scaleType="fitCenter"
+        android:padding="15dp" />
 </LinearLayout>
