@@ -19,6 +19,8 @@ public class GameChooseDialog extends Dialog{
 
     public GameChooseDialog(@NonNull Context context) {
         super(context);
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class GameChooseDialog extends Dialog{
     }
 
     public void setOpponentName(String name) {
-        String text = textViewOpponent.getText().toString();
+        String text = getContext().getString(R.string.armeeting_game_choose);
         textViewOpponent.setText(name + text);
     }
 

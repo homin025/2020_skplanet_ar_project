@@ -14,6 +14,8 @@ public class IntroDialog extends Dialog {
 
     public IntroDialog(@NonNull Context context) {
         super(context);
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
     }
 
     @Override

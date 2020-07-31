@@ -22,7 +22,11 @@ public class GameResultDialog extends Dialog {
     TextView textViewTitle, textViewDescription;
     Button button;
 
-    public GameResultDialog(@NonNull Context context) { super(context); }
+    public GameResultDialog(@NonNull Context context) {
+        super(context);
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

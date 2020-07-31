@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.Window;
 import android.widget.Button;
 
@@ -15,6 +16,8 @@ public class FitLogoDialog extends Dialog {
 
     public FitLogoDialog(@NonNull Context context) {
         super(context);
+        setCancelable(false);
+        setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -24,6 +27,6 @@ public class FitLogoDialog extends Dialog {
         setContentView(R.layout.dialog_fit_logo);
 
         getWindow().setBackgroundDrawable(null);
-        new Handler().postDelayed(() -> dismiss(), 2500);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> dismiss(), 2500);
     }
 }
