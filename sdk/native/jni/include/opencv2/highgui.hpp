@@ -78,10 +78,10 @@ It provides easy interface to:
 
     -   To attach a trackbar, the window name parameter must be NULL.
 
-    -   To attach a buttonbar, a button must be created. If the last bar attached to the control panel
-        is a buttonbar, the new button is added to the right of the last button. If the last bar
+    -   To attach a buttonbar, a button_shape must be created. If the last bar attached to the control panel
+        is a buttonbar, the new button_shape is added to the right of the last button_shape. If the last bar
         attached to the control panel is a trackbar, or the control panel is empty, a new buttonbar is
-        created. Then, a new button is attached to it.
+        created. Then, a new button_shape is attached to it.
 
     See below the example used to generate the figure:
     @code
@@ -204,24 +204,24 @@ enum WindowPropertyFlags {
 //! Mouse Events see cv::MouseCallback
 enum MouseEventTypes {
        EVENT_MOUSEMOVE      = 0, //!< indicates that the mouse pointer has moved over the window.
-       EVENT_LBUTTONDOWN    = 1, //!< indicates that the left mouse button is pressed.
-       EVENT_RBUTTONDOWN    = 2, //!< indicates that the right mouse button is pressed.
-       EVENT_MBUTTONDOWN    = 3, //!< indicates that the middle mouse button is pressed.
-       EVENT_LBUTTONUP      = 4, //!< indicates that left mouse button is released.
-       EVENT_RBUTTONUP      = 5, //!< indicates that right mouse button is released.
-       EVENT_MBUTTONUP      = 6, //!< indicates that middle mouse button is released.
-       EVENT_LBUTTONDBLCLK  = 7, //!< indicates that left mouse button is double clicked.
-       EVENT_RBUTTONDBLCLK  = 8, //!< indicates that right mouse button is double clicked.
-       EVENT_MBUTTONDBLCLK  = 9, //!< indicates that middle mouse button is double clicked.
+       EVENT_LBUTTONDOWN    = 1, //!< indicates that the left mouse button_shape is pressed.
+       EVENT_RBUTTONDOWN    = 2, //!< indicates that the right mouse button_shape is pressed.
+       EVENT_MBUTTONDOWN    = 3, //!< indicates that the middle mouse button_shape is pressed.
+       EVENT_LBUTTONUP      = 4, //!< indicates that left mouse button_shape is released.
+       EVENT_RBUTTONUP      = 5, //!< indicates that right mouse button_shape is released.
+       EVENT_MBUTTONUP      = 6, //!< indicates that middle mouse button_shape is released.
+       EVENT_LBUTTONDBLCLK  = 7, //!< indicates that left mouse button_shape is double clicked.
+       EVENT_RBUTTONDBLCLK  = 8, //!< indicates that right mouse button_shape is double clicked.
+       EVENT_MBUTTONDBLCLK  = 9, //!< indicates that middle mouse button_shape is double clicked.
        EVENT_MOUSEWHEEL     = 10,//!< positive and negative values mean forward and backward scrolling, respectively.
        EVENT_MOUSEHWHEEL    = 11 //!< positive and negative values mean right and left scrolling, respectively.
      };
 
 //! Mouse Event Flags see cv::MouseCallback
 enum MouseEventFlags {
-       EVENT_FLAG_LBUTTON   = 1, //!< indicates that the left mouse button is down.
-       EVENT_FLAG_RBUTTON   = 2, //!< indicates that the right mouse button is down.
-       EVENT_FLAG_MBUTTON   = 4, //!< indicates that the middle mouse button is down.
+       EVENT_FLAG_LBUTTON   = 1, //!< indicates that the left mouse button_shape is down.
+       EVENT_FLAG_RBUTTON   = 2, //!< indicates that the right mouse button_shape is down.
+       EVENT_FLAG_MBUTTON   = 4, //!< indicates that the middle mouse button_shape is down.
        EVENT_FLAG_CTRLKEY   = 8, //!< indicates that CTRL Key is pressed.
        EVENT_FLAG_SHIFTKEY  = 16,//!< indicates that SHIFT Key is pressed.
        EVENT_FLAG_ALTKEY    = 32 //!< indicates that ALT Key is pressed.
@@ -243,11 +243,11 @@ enum QtFontStyles {
         QT_STYLE_OBLIQUE        = 2  //!< Oblique font.
      };
 
-//! Qt "button" type
+//! Qt "button_shape" type
 enum QtButtonTypes {
-       QT_PUSH_BUTTON   = 0,    //!< Push button.
-       QT_CHECKBOX      = 1,    //!< Checkbox button.
-       QT_RADIOBOX      = 2,    //!< Radiobox button.
+       QT_PUSH_BUTTON   = 0,    //!< Push button_shape.
+       QT_CHECKBOX      = 1,    //!< Checkbox button_shape.
+       QT_RADIOBOX      = 2,    //!< Radiobox button_shape.
        QT_NEW_BUTTONBAR = 1024  //!< Button should create a new buttonbar
      };
 
@@ -271,8 +271,8 @@ typedef void (*TrackbarCallback)(int pos, void* userdata);
  */
 typedef void (*OpenGlDrawCallback)(void* userdata);
 
-/** @brief Callback function for a button created by cv::createButton
-@param state current state of the button. It could be -1 for a push button, 0 or 1 for a check/radio box button.
+/** @brief Callback function for a button_shape created by cv::createButton
+@param state current state of the button_shape. It could be -1 for a push button_shape, 0 or 1 for a check/radio box button_shape.
 @param userdata The optional parameter.
  */
 typedef void (*ButtonCallback)(int state, void* userdata);
@@ -803,30 +803,30 @@ CV_EXPORTS  int startLoop(int (*pt2Func)(int argc, char *argv[]), int argc, char
 
 CV_EXPORTS  void stopLoop();
 
-/** @brief Attaches a button to the control panel.
+/** @brief Attaches a button_shape to the control panel.
 
-The function createButton attaches a button to the control panel. Each button is added to a
-buttonbar to the right of the last button. A new buttonbar is created if nothing was attached to the
+The function createButton attaches a button_shape to the control panel. Each button_shape is added to a
+buttonbar to the right of the last button_shape. A new buttonbar is created if nothing was attached to the
 control panel before, or if the last element attached to the control panel was a trackbar or if the
 QT_NEW_BUTTONBAR flag is added to the type.
 
 See below various examples of the cv::createButton function call: :
 @code
-    createButton("",callbackButton);//create a push button "button 0", that will call callbackButton.
+    createButton("",callbackButton);//create a push button_shape "button_shape 0", that will call callbackButton.
     createButton("button2",callbackButton,NULL,QT_CHECKBOX,0);
     createButton("button3",callbackButton,&value);
     createButton("button5",callbackButton1,NULL,QT_RADIOBOX);
     createButton("button6",callbackButton2,NULL,QT_PUSH_BUTTON,1);
-    createButton("button6",callbackButton2,NULL,QT_PUSH_BUTTON|QT_NEW_BUTTONBAR);// create a push button in a new row
+    createButton("button6",callbackButton2,NULL,QT_PUSH_BUTTON|QT_NEW_BUTTONBAR);// create a push button_shape in a new row
 @endcode
 
-@param  bar_name Name of the button.
-@param on_change Pointer to the function to be called every time the button changes its state.
+@param  bar_name Name of the button_shape.
+@param on_change Pointer to the function to be called every time the button_shape changes its state.
 This function should be prototyped as void Foo(int state,\*void); . *state* is the current state
-of the button. It could be -1 for a push button, 0 or 1 for a check/radio box button.
+of the button_shape. It could be -1 for a push button_shape, 0 or 1 for a check/radio box button_shape.
 @param userdata Pointer passed to the callback function.
-@param type Optional type of the button. Available types are: (cv::QtButtonTypes)
-@param initial_button_state Default state of the button. Use for checkbox and radiobox. Its
+@param type Optional type of the button_shape. Available types are: (cv::QtButtonTypes)
+@param initial_button_state Default state of the button_shape. Use for checkbox and radiobox. Its
 value could be 0 or 1. (__Optional__)
 */
 CV_EXPORTS int createButton( const String& bar_name, ButtonCallback on_change,

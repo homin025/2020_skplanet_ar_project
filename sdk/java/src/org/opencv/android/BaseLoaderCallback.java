@@ -32,7 +32,7 @@ public abstract class BaseLoaderCallback implements LoaderCallbackInterface {
                 AlertDialog MarketErrorMessage = new AlertDialog.Builder(mAppContext).create();
                 MarketErrorMessage.setTitle("OpenCV Manager");
                 MarketErrorMessage.setMessage("Package installation failed!");
-                MarketErrorMessage.setCancelable(false); // This blocks the 'BACK' button
+                MarketErrorMessage.setCancelable(false); // This blocks the 'BACK' button_shape
                 MarketErrorMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -53,7 +53,7 @@ public abstract class BaseLoaderCallback implements LoaderCallbackInterface {
                 AlertDialog IncomatibilityMessage = new AlertDialog.Builder(mAppContext).create();
                 IncomatibilityMessage.setTitle("OpenCV Manager");
                 IncomatibilityMessage.setMessage("OpenCV Manager service is incompatible with this app. Try to update it via Google Play.");
-                IncomatibilityMessage.setCancelable(false); // This blocks the 'BACK' button
+                IncomatibilityMessage.setCancelable(false); // This blocks the 'BACK' button_shape
                 IncomatibilityMessage.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -68,7 +68,7 @@ public abstract class BaseLoaderCallback implements LoaderCallbackInterface {
                 AlertDialog InitFailedDialog = new AlertDialog.Builder(mAppContext).create();
                 InitFailedDialog.setTitle("OpenCV error");
                 InitFailedDialog.setMessage("OpenCV was not initialised correctly. Application will be shut down");
-                InitFailedDialog.setCancelable(false); // This blocks the 'BACK' button
+                InitFailedDialog.setCancelable(false); // This blocks the 'BACK' button_shape
                 InitFailedDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
@@ -90,7 +90,7 @@ public abstract class BaseLoaderCallback implements LoaderCallbackInterface {
                 AlertDialog InstallMessage = new AlertDialog.Builder(mAppContext).create();
                 InstallMessage.setTitle("Package not found");
                 InstallMessage.setMessage(callback.getPackageName() + " package was not found! Try to install it?");
-                InstallMessage.setCancelable(false); // This blocks the 'BACK' button
+                InstallMessage.setCancelable(false); // This blocks the 'BACK' button_shape
                 InstallMessage.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int which)
@@ -114,7 +114,7 @@ public abstract class BaseLoaderCallback implements LoaderCallbackInterface {
                 AlertDialog WaitMessage = new AlertDialog.Builder(mAppContext).create();
                 WaitMessage.setTitle("OpenCV is not ready");
                 WaitMessage.setMessage("Installation is in progress. Wait or exit?");
-                WaitMessage.setCancelable(false); // This blocks the 'BACK' button
+                WaitMessage.setCancelable(false); // This blocks the 'BACK' button_shape
                 WaitMessage.setButton(AlertDialog.BUTTON_POSITIVE, "Wait", new OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         callback.wait_install();

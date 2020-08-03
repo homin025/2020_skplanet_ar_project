@@ -22,20 +22,14 @@ public class MainActivity extends AppCompatActivity {
         buttonSingle = findViewById(R.id.buttonSingle);
         buttonDual = findViewById(R.id.buttonDual);
 
-        buttonSingle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SingleCameraActivity.class);
-                startActivity(intent);
-            }
+        buttonSingle.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SingleCameraActivity.class);
+            startActivity(intent);
         });
 
-        buttonDual.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DualCameraActivity.class);
-                startActivity(intent);
-            }
+        buttonDual.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, DualCameraActivity.class);
+            startActivity(intent);
         });
     }
 }
