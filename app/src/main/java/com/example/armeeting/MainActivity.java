@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Button buttonSingle, buttonDual;
+    Button buttonSingle, buttonDual, buttonTreasure;
 
     static {
         System.loadLibrary("native-lib");
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         buttonSingle = findViewById(R.id.buttonSingle);
         buttonDual = findViewById(R.id.buttonDual);
+        buttonTreasure = findViewById(R.id.buttonTreasure);
 
         buttonSingle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DualCameraActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonTreasure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TreasureFindActivity.class);
                 startActivity(intent);
             }
         });

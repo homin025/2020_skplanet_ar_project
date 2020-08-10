@@ -13,4 +13,5 @@
 
     <string name="single_camera_activity">Single</string>
     <string name="dual_camera_activity">Dual</string>
+    <string name="treasure_find_activity">Treasure</string>
 </resources>
