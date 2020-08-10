@@ -60,6 +60,9 @@ import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 import androidx.annotation.NonNull;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -71,6 +74,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.armeeting.OpenCvUtils.detectFinger;
+import static org.opencv.core.CvType.CV_8UC1;
+import static org.opencv.imgproc.Imgproc.cvtColor;
 
 public class OpenCvFragment extends Fragment
         implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -248,31 +255,26 @@ public class OpenCvFragment extends Fragment
     private final ImageReader.OnImageAvailableListener mOnImageAvailableListener
             = new ImageReader.OnImageAvailableListener() {
 
+        Image mImage = null;
+        int answer = -1;
+
         @Override
         public void onImageAvailable(ImageReader reader) {
-//            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
-            Image image = null;
-            int format;
-            int result = -1;
+            //mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
 
             try {
-                image = reader.acquireLatestImage();
-                // No image is acquired
-                if(null == image) {
-                    return;
-                }
-
-                format = reader.getImageFormat();
-
-                result = OpenCvUtils.detectFinger(image, mSurface);
-
-                showToast("Finger number: " + result);
-
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
+                Log.d(TAG, "ONIMAGEAVAILABLE 1");
+                mImage = reader.acquireNextImage();
+                Log.d(TAG, "ONIMAGEAVAILABLE 2");
+            } catch (Exception e) {
+                Log.d(TAG, "onImageAvailable Error");
+            } finally {
+                Log.d(TAG, "ONIMAGEAVAILABLE 3");
+                answer = detectFinger(mImage, mSurface);
+                Log.d(TAG, "ONIMAGEAVAILABLE 4");
+                showToast("Answer is " + Integer.toString(answer));
+                mImage.close();
             }
-
-            image.close();
         }
     };
 

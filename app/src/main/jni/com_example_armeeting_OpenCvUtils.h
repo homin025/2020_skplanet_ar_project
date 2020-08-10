@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (IILjava/nio/ByteBuffer;Landroid/view/Surface;)Ljava/lang/String;
  */
 JNIEXPORT jint JNICALL Java_com_example_armeeting_OpenCvUtils_detectFinger
-  (JNIEnv *, jclass, jint, jint, jobject, jobject);
+  (JNIEnv *, jclass, jint, jint, jlong, jobject);
 
 #ifdef __cplusplus
 }
