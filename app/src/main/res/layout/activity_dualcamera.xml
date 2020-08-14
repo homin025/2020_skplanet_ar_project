@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
-        android:id="@+id/container_opencv"
-        android:name="com.example.armeeting.OpenCvFragment" />
+        android:id="@+id/container_detect"
+        android:name="com.example.armeeting.DetectFragment" />
 
 </LinearLayout>

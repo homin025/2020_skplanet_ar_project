@@ -1,8 +1,10 @@
 #include <jni.h>
 #include <android/log.h>
 #include <android/bitmap.h>
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
 #include <android/native_window_jni.h>
-#include "com_example_armeeting_OpenCvUtils.h"
+#include "com_example_armeeting_JNIUtils.h"
 
 #include <algorithm>
 #include <cstring>
@@ -121,9 +123,9 @@ int cutLowConfidence(Mat& frame, const vector<Mat>& outs) {
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_example_armeeting_OpenCvUtils_detectFinger(JNIEnv *env, jclass clazz, jint src_width,
-                                                    jint src_height, jlong src_mat_addr, jobject dst_surface) {
-    LOGD("NUMBER 1");
+Java_com_example_armeeting_util_JNIUtils_detectFinger(JNIEnv *env, jclass clazz, jint src_width,
+                                                      jint src_height, jlong src_mat_addr,
+                                                      jobject dst) {
     Net net = readNetFromDarknet(modelConfiguration, modelWeights);
     LOGD("NUMBER 2");
     net.setPreferableBackend(DNN_BACKEND_OPENCV);
@@ -142,5 +144,3 @@ Java_com_example_armeeting_OpenCvUtils_detectFinger(JNIEnv *env, jclass clazz, j
     int answer = cutLowConfidence(frame, outputs);
 
     return answer;
-}
-

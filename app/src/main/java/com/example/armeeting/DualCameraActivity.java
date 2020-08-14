@@ -25,13 +25,12 @@ public class DualCameraActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (null == savedInstanceState) {
+            //fragmentManager.beginTransaction()
+            //        .replace(R.id.container_game, GameFragment.newInstance())
+            //        .commit();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_game, GameFragment.newInstance())
-                    .commit();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container_opencv, OpenCvFragment.newInstance())
+                    .replace(R.id.container_detect, DetectFragment.newInstance())
                     .commit();
         }
     }
-
 }
