@@ -133,14 +133,16 @@ Java_com_example_armeeting_util_JNIUtils_detectFinger(JNIEnv *env, jclass clazz,
     net.setPreferableTarget(DNN_TARGET_CPU);
     LOGD("NUMBER 4");
 
-    Mat& frame = *(Mat *)src_mat_addr;
+    Mat &frame = *(Mat *) src_mat_addr;
     Mat blob;
     vector<Mat> outputs;
 
-    blobFromImage(frame, blob, 1/255.0, cvSize(inpWidth, inpHeigth), Scalar(0,0,0), true, false);
+    blobFromImage(frame, blob, 1 / 255.0, cvSize(inpWidth, inpHeigth), Scalar(0, 0, 0), true,
+                  false);
 
     net.setInput(blob);
     net.forward(outputs, getOutLayerNames(net));
     int answer = cutLowConfidence(frame, outputs);
 
     return answer;
+}

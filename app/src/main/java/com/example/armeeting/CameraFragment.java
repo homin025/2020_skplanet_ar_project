@@ -99,6 +99,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
 
     private Context mContext;
     private AppCompatActivity mActivity;
+
     @Override
     public void onAttach(Context context) {
         LOGGER.d("onAttach " + this);

@@ -22,6 +22,7 @@ import com.google.ar.core.Frame;
 import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.FrameTime;
+import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.ExternalTexture;
@@ -39,9 +40,12 @@ public class GameFragment extends ArFragment {
     private static final String TAG = "GameFragment";
     private static final double MIN_OPENGL_VERSION = 3.0;
 
-    MediaPlayer mediaPlayer;
-    ExternalTexture texture;
-    ModelRenderable videoRenderable;
+    private Session session;
+    private Scene scene;
+
+    public MediaPlayer mediaPlayer;
+    public ExternalTexture texture;
+    public ModelRenderable videoRenderable;
 
     public static GameFragment newInstance() {
         return new GameFragment();
@@ -60,10 +64,10 @@ public class GameFragment extends ArFragment {
                 ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE))
                         .getDeviceConfigurationInfo()
                         .getGlEsVersion();
+
         if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
             Log.e(TAG, "Sceneform requires OpenGL ES 3.0 or later");
     }
-
 
     @Override
     public View onCreateView(
@@ -102,6 +106,7 @@ public class GameFragment extends ArFragment {
 
         session.configure(config);
         getArSceneView().setupSession(session);
+
         return config;
     }
 
@@ -125,6 +130,7 @@ public class GameFragment extends ArFragment {
             return false;
 
         config.setAugmentedImageDatabase(augmentedImageDatabase);
+
         return true;
     }
 
