@@ -13,5 +13,30 @@
 
     <string name="single_camera_activity">Single</string>
     <string name="dual_camera_activity">Dual</string>
-    <string name="treasure_find_activity">Treasure</string>
+
+    <string name="armeeting_intro_title">AR 겜미팅이란?</string>
+    <string name="armeeting_intro_description">
+        내가 좋아하는 아이돌과 즐길 수 있는\n
+        3가지 AR게임을 모아보았습니다.\n
+        가위바위보, 참참참, 스피드퀴즈로\n
+        게임을 즐기고 우승상품을 받아보세요.
+    </string>
+    <string name="armeeting_fit_logo_description">
+        함께 게임을 즐기고 싶은 아이돌의\n
+        로고를 인식해 주세요.
+    </string>
+    <string name="armeeting_game_choose">
+        과(와)\n
+        함께 즐기고 싶은 게임은?
+    </string>
+    <string name="armeeting_game_1">가위바위보</string>
+    <string name="armeeting_game_2">참참참</string>
+    <string name="armeeting_game_3">스피드퀴즈</string>
+    <string name="armeeting_other_idol">다른 아이돌 찾기</string>
+    <string name="result_title_win">승리✨</string>
+    <string name="result_title_lose">패배💦</string>
+    <string name="result_description_win">이겼어요! 혹시 게임 천재?</string>
+    <string name="result_description_lose">아쉬워요... 다시 한 번 해볼까요?</string>
+    <string name="result_button_win">상품 받으러 가기</string>
+    <string name="result_button_lose">다른 게임 도전하기</string>
 </resources>

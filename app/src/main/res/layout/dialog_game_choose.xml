@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_shape"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/textViewOpponent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/armeeting_game_choose"
+        android:textSize="16dp"
+        android:textColor="@color/colorBlack"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/buttonGame1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_shape"
+        android:text="@string/armeeting_game_1"
+        android:textSize="18dp"
+        android:textColor="@drawable/button_text_color"/>
+
+    <Button
+        android:id="@+id/buttonGame2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_shape"
+        android:text="@string/armeeting_game_2"
+        android:textSize="18dp"
+        android:textColor="@drawable/button_text_color"/>
+
+    <Button
+        android:id="@+id/buttonGame3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_shape"
+        android:text="@string/armeeting_game_3"
+        android:textSize="18dp"
+        android:textColor="@drawable/button_text_color"/>
+
+    <TextView
+        android:id="@+id/textViewOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/armeeting_other_idol"
+        android:textSize="16dp"
+        android:textColor="@color/colorMain"/>
+
+</LinearLayout>

@@ -13,27 +13,76 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#000"
     tools:context="com.example.armeeting.DualCameraActivity" >
 
-    <FrameLayout
-        android:id="@+id/container_game"
-        android:name="com.example.armeeting.GameFragment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="16"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:id="@+id/container_detect"
-        android:name="com.example.armeeting.DetectFragment" />
+        <fragment
+            android:id="@+id/fragmentGame"
+            android:name="com.example.armeeting.GameFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="16"/>
 
-</LinearLayout>
+        <fragment
+            android:id="@+id/fragmentDetect"
+            android:layout_width="match_parent"
+            android:name="com.example.armeeting.DetectFragment"
+            android:layout_height="0dp"
+            android:layout_weight="9"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonGameChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:text="game"/>
+
+    <Button
+        android:id="@+id/buttonWin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="0dp"
+        android:text="win" />
+
+    <Button
+        android:id="@+id/buttonLose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="0dp"
+        android:text="lose" />
+
+    <TextView
+        android:id="@+id/textViewTrackingImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:text="Tracking Image Name" />
+
+    <include layout="@layout/game_ui_1"
+        android:id="@+id/layoutGame1"
+        android:visibility="invisible" />
+
+    <include layout="@layout/game_ui_2"
+        android:id="@+id/layoutGame2"
+        android:visibility="invisible" />
+
+    <include layout="@layout/game_ui_3"
+        android:id="@+id/layoutGame3"
+        android:visibility="invisible" />
+        
+</FrameLayout>

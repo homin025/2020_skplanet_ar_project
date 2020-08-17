@@ -1,5 +1,6 @@
 package com.example.armeeting;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -35,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-
 public class GameFragment extends ArFragment {
     private static final String TAG = "GameFragment";
     private static final double MIN_OPENGL_VERSION = 3.0;
@@ -47,6 +48,16 @@ public class GameFragment extends ArFragment {
     public ExternalTexture texture;
     public ModelRenderable videoRenderable;
 
+    GameEventListener listener;
+
+    boolean instructionDone;
+    String currentTrackingImageName = "";
+
+    public interface GameEventListener {
+        void onMarkerFound(String name);
+        // 게임들 끝났을 떄 (가위바위보 내는 타이밍, 참참참 타이밍) 호출되는 이벤트메소드 추가하기
+    }
+
     public static GameFragment newInstance() {
         return new GameFragment();
     }
@@ -56,7 +67,7 @@ public class GameFragment extends ArFragment {
         super.onAttach(context);
 
         // Check for Sceneform being supported on this device.  This check will be integrated into
-        // Sceneform eventually.
+        // Sceneform eventually./
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
             Log.e(TAG, "Sceneform requires Android N or later");
 
@@ -67,6 +78,8 @@ public class GameFragment extends ArFragment {
 
         if (Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION)
             Log.e(TAG, "Sceneform requires OpenGL ES 3.0 or later");
+
+        listener = (GameEventListener)context;
     }
 
     @Override
@@ -112,7 +125,9 @@ public class GameFragment extends ArFragment {
 
     private boolean setupAugmentedImageDatabase(Config config, Session session) {
         HashMap<String, String> fileNames = new HashMap<>();
-        fileNames.put("img1.png", "vid1.mp4");
+        fileNames.put("img1.png", "방탄소년단");
+        fileNames.put("img2.png", "NCT127");
+        fileNames.put("img3.jpg", "레드벨벳");
 
         AugmentedImageDatabase augmentedImageDatabase = new AugmentedImageDatabase(session);
         ArrayList<Bitmap> augmentedImageBitmap = new ArrayList<>();
@@ -137,20 +152,27 @@ public class GameFragment extends ArFragment {
 
     public void onUpdateFrame(FrameTime frameTime) {
         Frame frame = getArSceneView().getArFrame();
-        if(frame == null)
+        if(frame == null || !instructionDone)
             return;
 
         Collection<AugmentedImage> updatedAugmentedImages =
                 frame.getUpdatedTrackables(AugmentedImage.class);
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
+            String imageName = augmentedImage.getName();
+            if(!currentTrackingImageName.equals(imageName)) {
+                listener.onMarkerFound(imageName);
+                currentTrackingImageName = imageName;
+            }
+
             switch (augmentedImage.getTrackingState()) {
                 case TRACKING:
-                    getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
+                    //getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
                     break;
                 case STOPPED:
                     break;
             }
+            break;
         }
     }
 
@@ -167,8 +189,12 @@ public class GameFragment extends ArFragment {
 
     public void changeVideo() {
         texture = new ExternalTexture();
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid2);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid_alpha);
         mediaPlayer.setSurface(texture.getSurface());
         videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
+    }
+
+    public void setInstructionDone(boolean value) {
+        instructionDone = value;
     }
 }
