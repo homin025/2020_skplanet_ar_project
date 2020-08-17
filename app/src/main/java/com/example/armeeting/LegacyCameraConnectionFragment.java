@@ -16,6 +16,9 @@ package com.example.armeeting;
  * limitations under the License.
  */
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -30,6 +33,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.armeeting.view.AutoFitTextureView;
@@ -39,6 +43,7 @@ import com.example.armeeting.util.Logger;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class LegacyCameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
   /** Conversion from screen rotation to JPEG orientation. */

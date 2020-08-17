@@ -69,17 +69,6 @@ import java.util.concurrent.TimeUnit;
 public class CameraConnectionFragment extends Fragment {
   private static final Logger LOGGER = new Logger();
 
-  private Context mContext;
-  private Activity mActivity;
-  @Override
-  public void onAttach(Context context) {
-    mContext = context;
-    if(context instanceof Activity) {
-      mActivity = (Activity) context;
-    }
-    super.onAttach(context);
-  }
-
   /**
    * The camera preview size will be chosen to be the smallest frame by pixel size capable of
    * containing a DESIRED_SIZE x DESIRED_SIZE square.

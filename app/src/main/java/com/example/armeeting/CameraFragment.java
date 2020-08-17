@@ -28,6 +28,7 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -437,7 +438,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
 
                 // We don't use a front facing camera in this sample.
                 final Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
+                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
                     continue;
                 }
 
@@ -493,7 +494,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                     new LegacyCameraConnectionFragment(this, getLayoutId(), getDesiredPreviewFrameSize());
         }
 
-        mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.container_detect, fragment).commit();
+        mActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentDetect, fragment).commit();
     }
 
     protected void fillBytes(final Image.Plane[] planes, final byte[][] yuvBytes) {
