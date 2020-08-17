@@ -16,12 +16,14 @@
 
 package com.example.armeeting;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
@@ -51,6 +53,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -342,6 +345,7 @@ public class CameraConnectionFragment extends Fragment {
                       map.getOutputSizes(SurfaceTexture.class),
                       inputSize.getWidth(),
                       inputSize.getHeight());
+      Toast.makeText(getContext(), "width:" + previewSize.getWidth() + ", height:" + previewSize.getHeight(), Toast.LENGTH_LONG).show();
 
       // We fit the aspect ratio of TextureView to the size of preview we picked.
       final int orientation = getResources().getConfiguration().orientation;
@@ -372,6 +376,10 @@ public class CameraConnectionFragment extends Fragment {
     try {
       if (!cameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
         throw new RuntimeException("Time out waiting to lock camera opening.");
+      }
+      if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        // 권한 체크 안되었을경우 추가로 권한 확인
+        return;
       }
       manager.openCamera(cameraId, stateCallback, backgroundHandler);
     } catch (final CameraAccessException e) {
@@ -468,27 +476,29 @@ public class CameraConnectionFragment extends Fragment {
                 previewRequestBuilder.set(
                     CaptureRequest.CONTROL_AF_MODE,
                     CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-                // Flash is automatically enabled when necessary.
-                previewRequestBuilder.set(
-                    CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
 
                 // Finally, we start displaying the camera preview.
                 previewRequest = previewRequestBuilder.build();
                 captureSession.setRepeatingRequest(
                     previewRequest, captureCallback, backgroundHandler);
+
+                 showToast("Capture Session 구성 성공");
               } catch (final CameraAccessException e) {
                 LOGGER.e(e, "Exception!");
+                LOGGER.e(e, ""+e.getMessage());
+                showToast("Capture Session 구성 중 예외발생");
               }
             }
 
             @Override
             public void onConfigureFailed(final CameraCaptureSession cameraCaptureSession) {
-              showToast("Failed");
+              showToast("Capture Session 구성 실패");
             }
           },
           null);
     } catch (final CameraAccessException e) {
       LOGGER.e(e, "Exception!");
+      LOGGER.e(e, ""+e.getMessage());
     }
   }
 

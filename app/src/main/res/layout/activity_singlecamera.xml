@@ -10,7 +10,7 @@
         android:id="@+id/fragmentGame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.armeeting.DetectFragment" />
+        android:name="com.example.armeeting.GameFragment" />
 
     <Button
         android:id="@+id/buttonGameChoose"

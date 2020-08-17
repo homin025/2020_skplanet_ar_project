@@ -438,7 +438,8 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
 
                 // We don't use a front facing camera in this sample.
                 final Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
+                if (facing != null &&
+                        (facing == CameraCharacteristics.LENS_FACING_EXTERNAL || facing == CameraCharacteristics.LENS_FACING_BACK)) {
                     continue;
                 }
 
@@ -453,7 +454,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                 // This should help with legacy situations where using the camera2 API causes
                 // distorted or otherwise broken previews.
                 useCamera2API =
-                        (facing == CameraCharacteristics.LENS_FACING_EXTERNAL)
+                        (facing == CameraCharacteristics.LENS_FACING_FRONT)
                                 || isHardwareLevelSupported(
                                 characteristics, CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_FULL);
                 LOGGER.i("Camera API lv2?: %s", useCamera2API);
@@ -486,6 +487,8 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                             getLayoutId(),
                             getDesiredPreviewFrameSize());
 
+            Size pSize = getDesiredPreviewFrameSize();
+            Toast.makeText(getContext(), "desired preview frame width:" + pSize.getWidth() + ", height:" + pSize.getHeight(), Toast.LENGTH_LONG).show();
             camera2Fragment.setCamera(cameraId);
             fragment = camera2Fragment;
         } else {
