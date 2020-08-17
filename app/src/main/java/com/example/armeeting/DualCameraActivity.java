@@ -9,29 +9,26 @@ import androidx.fragment.app.FragmentManager;
 
 public class DualCameraActivity extends AppCompatActivity {
 
-    LinearLayout layoutGame;
-    Button buttonRock, buttonScissor, buttonPaper;
+    GameFragment gameFragment;
+    DetectFragment detectFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dualcamera);
 
-        layoutGame = findViewById(R.id.layoutGame1);
-        buttonRock = findViewById(R.id.buttonRock);
-        buttonScissor = findViewById(R.id.buttonScissor);
-        buttonPaper = findViewById(R.id.buttonPaper);
+        gameFragment = GameFragment.newInstance();
+        detectFragment = DetectFragment.newInstance();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (null == savedInstanceState) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_game, GameFragment.newInstance())
+                    .replace(R.id.container_game, gameFragment)
                     .commit();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container_opencv, OpenCvFragment.newInstance())
+                    .replace(R.id.container_detect, detectFragment)
                     .commit();
         }
     }
-
 }
