@@ -112,11 +112,16 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
         }
     }
 
+    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LOGGER.d("onCreateView " + this);
 
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
+//      setDesiredPreviewFrameSize(new Size(view.getMeasuredWidth(), view.getMeasuredHeight()));
+//      setDesiredPreviewFrameSize(new Size(1280, 600));
+//        Toast.makeText(getContext(), "measured width:" + view.getMeasuredWidth() + ", height:" + view.getMeasuredHeight(), Toast.LENGTH_LONG).show();
 
         threadsTextView = view.findViewById(R.id.threads);
         plusImageView = view.findViewById(R.id.plus);
@@ -132,7 +137,14 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
         inferenceTimeTextView = view.findViewById(R.id.info_inference);
 
         if (hasPermission()) {
-            setFragment();
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    setDesiredPreviewFrameSize(new Size(view.getMeasuredWidth(), view.getMeasuredHeight()));
+                    Toast.makeText(getContext(), "measured width:" + view.getMeasuredWidth() + ", height:" + view.getMeasuredHeight(), Toast.LENGTH_LONG).show();
+                    setFragment();
+                }
+            });
         } else {
             requestPermission();
         }
@@ -486,6 +498,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                             this,
                             getLayoutId(),
                             getDesiredPreviewFrameSize());
+            camera2Fragment.setAspectRatio(getDesiredPreviewFrameSize().getWidth(), getDesiredPreviewFrameSize().getHeight());
 
             Size pSize = getDesiredPreviewFrameSize();
             Toast.makeText(getContext(), "desired preview frame width:" + pSize.getWidth() + ", height:" + pSize.getHeight(), Toast.LENGTH_LONG).show();
@@ -583,6 +596,8 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
     protected abstract int getLayoutId();
 
     protected abstract Size getDesiredPreviewFrameSize();
+
+    protected abstract void setDesiredPreviewFrameSize(Size size);
 
     protected abstract void setNumThreads(int numThreads);
 

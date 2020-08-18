@@ -14,10 +14,14 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -41,7 +45,7 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
     public static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
     private static final boolean MAINTAIN_ASPECT = false;
-    private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
+    private Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
     OverlayView trackingOverlay;
@@ -248,6 +252,11 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
     @Override
     protected Size getDesiredPreviewFrameSize() {
         return DESIRED_PREVIEW_SIZE;
+    }
+
+    @Override
+    protected void setDesiredPreviewFrameSize(Size size) {
+        DESIRED_PREVIEW_SIZE = size;
     }
 
     // Which detection model to use: by default uses Tensorflow Object Detection API frozen

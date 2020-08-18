@@ -128,6 +128,7 @@ public class CameraConnectionFragment extends Fragment {
   private Integer sensorOrientation;
   /** The {@link Size} of camera preview. */
   private Size previewSize;
+  private Size aspectSize;
   /** An additional thread for running tasks that shouldn't block the UI. */
   private HandlerThread backgroundThread;
   /** A {@link Handler} for running tasks in the background. */
@@ -349,10 +350,12 @@ public class CameraConnectionFragment extends Fragment {
 
       // We fit the aspect ratio of TextureView to the size of preview we picked.
       final int orientation = getResources().getConfiguration().orientation;
-      if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        textureView.setAspectRatio(previewSize.getWidth(), previewSize.getHeight());
+      if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+        Toast.makeText(getContext(), "portrait", Toast.LENGTH_SHORT).show();
+        textureView.setAspectRatio(aspectSize.getWidth(), aspectSize.getHeight());
       } else {
-        textureView.setAspectRatio(previewSize.getHeight(), previewSize.getWidth());
+        Toast.makeText(getContext(), "landscape", Toast.LENGTH_SHORT).show();
+        textureView.setAspectRatio(aspectSize.getHeight(), aspectSize.getWidth());
       }
     } catch (final CameraAccessException e) {
       LOGGER.e(e, "Exception!");
@@ -581,5 +584,9 @@ public class CameraConnectionFragment extends Fragment {
               })
           .create();
     }
+  }
+
+  public void setAspectRatio(int width, int height) {
+    aspectSize = new Size(width, height);
   }
 }
