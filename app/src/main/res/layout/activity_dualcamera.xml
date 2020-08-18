@@ -14,6 +14,7 @@
  limitations under the License.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -31,15 +32,26 @@
             android:name="com.example.armeeting.GameFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="16"/>
+            android:layout_weight="65"
+            />
 
-        <fragment
-            android:id="@+id/fragmentDetect"
-            android:name="com.example.armeeting.DetectFragment"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragmentDetectContainer"
             android:layout_width="match_parent"
-            android:layout_height="228dp"
-            android:layout_weight="9"
-            android:layout_marginBottom="-200dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-130dp">
+
+            <fragment
+                android:id="@+id/fragmentDetect"
+                android:name="com.example.armeeting.DetectFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintDimensionRatio="1:1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <Button

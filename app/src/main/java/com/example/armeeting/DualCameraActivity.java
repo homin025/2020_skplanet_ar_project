@@ -1,19 +1,30 @@
 package com.example.armeeting;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.ar.core.Frame;
 
 import java.util.ArrayList;
 
 public class DualCameraActivity extends AppCompatActivity implements GameFragment.GameEventListener {
 
+    FrameLayout container;
+
     GameFragment gameFragment;
+    DetectFragment detectFragment;
+    ConstraintLayout detectFragmentContainer;
 
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
@@ -34,7 +45,25 @@ public class DualCameraActivity extends AppCompatActivity implements GameFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dualcamera);
 
+        container = (FrameLayout)findViewById(R.id.container);
+
         gameFragment = (GameFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentGame);
+        detectFragment = (DetectFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentDetect);
+        detectFragmentContainer = (ConstraintLayout) findViewById(R.id.fragmentDetectContainer);
+
+//        detectFragmentContainer.post(() -> {
+//            // 화면의 35%만큼 차지하게 margin 설정
+//            DisplayMetrics displayMetrics = new DisplayMetrics();
+//            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//            int screenWidth = displayMetrics.widthPixels;
+//            int screenHeight = displayMetrics.heightPixels;
+//            int offset = (int)(screenHeight * 0.35 - screenWidth);
+//
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)detectFragmentContainer.getLayoutParams();
+//            params.setMargins(0,0,0, offset);
+//            detectFragmentContainer.setLayoutParams(params);
+//            detectFragmentContainer.postInvalidate();
+//        });
 
         layoutGame1 = findViewById(R.id.layoutGame1);
         layoutGame2 = findViewById(R.id.layoutGame2);
