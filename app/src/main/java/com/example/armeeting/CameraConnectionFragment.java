@@ -352,7 +352,8 @@ public class CameraConnectionFragment extends Fragment {
       final int orientation = getResources().getConfiguration().orientation;
       if (orientation == Configuration.ORIENTATION_PORTRAIT) {
         Toast.makeText(getContext(), "portrait", Toast.LENGTH_SHORT).show();
-        textureView.setAspectRatio(aspectSize.getWidth(), aspectSize.getHeight());
+        //textureView.setAspectRatio(aspectSize.getWidth(), aspectSize.getHeight());
+        textureView.setAspectRatio(previewSize.getWidth(), previewSize.getHeight());
       } else {
         Toast.makeText(getContext(), "landscape", Toast.LENGTH_SHORT).show();
         textureView.setAspectRatio(aspectSize.getHeight(), aspectSize.getWidth());

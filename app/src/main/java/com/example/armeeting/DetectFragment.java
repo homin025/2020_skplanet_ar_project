@@ -77,6 +77,8 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
         return new DetectFragment();
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         LOGGER.d("onAttach " + this);

@@ -15,6 +15,7 @@ limitations under the License.
 
 package com.example.armeeting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.TypedValue;
+import android.view.Surface;
 
 import com.example.armeeting.util.BorderedText;
 import com.example.armeeting.util.ImageUtils;
@@ -136,6 +138,7 @@ public class MultiBoxTracker {
             (int) (multiplier * (rotated ? frameWidth : frameHeight)),
             sensorOrientation,
             false);
+    frameToCanvasMatrix.postScale(-1, 1, frameWidth/2, frameHeight/2);
     for (final TrackedRecognition recognition : trackedObjects) {
       final RectF trackedPos = new RectF(recognition.location);
 
