@@ -75,7 +75,13 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
         return new DetectFragment();
     }
 
+    public interface DetectEventListener {
+        // 가위바위보 인식결과 코드
+        int ROCK = 101, SCISSORS = 102, PAPER = 103;
 
+        void onHandDetected(int result);
+        void onHandDisappeared();
+    }
 
     @Override
     public void onAttach(Context context) {

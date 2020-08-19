@@ -12,7 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 
-public class DualCameraActivity extends AppCompatActivity implements GameFragment.GameEventListener {
+public class DualCameraActivity extends AppCompatActivity
+        implements GameFragment.GameEventListener, DetectFragment.DetectEventListener {
 
     FrameLayout container;
 
@@ -115,5 +116,15 @@ public class DualCameraActivity extends AppCompatActivity implements GameFragmen
 
         gameChooseDialog.show();
         gameChooseDialog.setOpponentName(idolName);
+    }
+
+    @Override
+    public void onHandDetected(int result) {
+        gameFragment.showHand(result);
+    }
+
+    @Override
+    public void onHandDisappeared() {
+        gameFragment.removeHand();
     }
 }
