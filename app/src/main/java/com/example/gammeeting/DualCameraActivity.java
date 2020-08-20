@@ -1,11 +1,14 @@
 package com.example.gammeeting;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,7 +27,7 @@ public class DualCameraActivity extends AppCompatActivity
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
 
-    Button button, buttonWin, buttonLose;
+    Button button, buttonWin, buttonLose, buttonStart, buttonDetect;
 
     String idolName;
     String detectResult;
@@ -35,6 +38,9 @@ public class DualCameraActivity extends AppCompatActivity
     GameResultDialog gameResultDialog;
 
     TextView textViewTrackingImage;
+
+    ImageView imageView;
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,7 @@ public class DualCameraActivity extends AppCompatActivity
         detectFragment = (DetectFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentDetect);
         detectFragmentContainer = (ConstraintLayout) findViewById(R.id.fragmentDetectContainer);
 
+        detectFragment.setDetectionEventListener(this);
 //        detectFragmentContainer.post(() -> {
 //            // 화면의 35%만큼 차지하게 margin 설정
 //            DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -86,9 +93,37 @@ public class DualCameraActivity extends AppCompatActivity
         gameChooseDialog.setOnDismissListener(view ->
                 setLayoutVisibility(gameChooseDialog.getChoice()));
 
+        countDownTimer = new CountDownTimer(6000, 1000) {
+            @Override
+            public void onTick(long l) {
+                switch ((int) Math.round((double)l / 1000)) {
+                    case 5:
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView.setImageResource(R.drawable.ready);
+                        break;
+                    case 3:
+                        imageView.setImageResource(R.drawable.three);
+                        break;
+                    case 2:
+                        imageView.setImageResource(R.drawable.two);
+                        break;
+                    case 1:
+                        imageView.setImageResource(R.drawable.one);
+                        break;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                imageView.setVisibility(View.INVISIBLE);
+            }
+        };
+
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);
         buttonLose = findViewById(R.id.buttonLose);
+        buttonStart = findViewById(R.id.buttonStart);
+        buttonDetect = findViewById(R.id.buttonDetect);
 
         button.setOnClickListener(view -> gameChooseDialog.show());
         buttonWin.setOnClickListener(view -> {
@@ -100,6 +135,15 @@ public class DualCameraActivity extends AppCompatActivity
             gameResultDialog.create();
             gameResultDialog.setResult(false);
             gameResultDialog.show();
+        });
+        buttonStart.setOnClickListener(view -> {
+            countDownTimer.start();
+        });
+        buttonDetect.setOnClickListener(view -> {
+            // isHandDetected = false로 바꿔서
+            // 손 모양이 결정된 후 중지된 인식 과정을 다시 활성화
+            // 안그러면 박스가 인식됐을때 상태 그대로 멈춰있음
+            detectFragment.resumeDetection();
         });
 
         textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
@@ -121,6 +165,7 @@ public class DualCameraActivity extends AppCompatActivity
 
     @Override
     public void onHandDetected(int result) {
+        Toast.makeText(getApplicationContext(), "detection result: "+result, Toast.LENGTH_SHORT).show();
         switch(result) {
             case 101:
                 detectResult = "rock";
@@ -133,7 +178,8 @@ public class DualCameraActivity extends AppCompatActivity
                 break;
         }
 
-        gameFragment.showHand(result);
+        runOnUiThread(()->gameFragment.showHand(result));
+        Toast.makeText(getApplicationContext(), "return", Toast.LENGTH_SHORT).show();
     }
 
     @Override

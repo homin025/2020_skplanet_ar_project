@@ -87,6 +87,14 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
         void onHandDisappeared();
     }
 
+    public void setDetectionEventListener(DetectEventListener listener) {
+        this.listener = listener;
+    }
+
+    public void resumeDetection() {
+        isHandDetected = false;
+    }
+
     @Override
     public void onAttach(Context context) {
         LOGGER.d("onAttach " + this);
