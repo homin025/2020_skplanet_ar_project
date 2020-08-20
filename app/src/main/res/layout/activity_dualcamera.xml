@@ -78,6 +78,14 @@
         android:layout_marginTop="0dp"
         android:text="lose" />
 
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="0dp"
+        android:text="start" />
+
     <TextView
         android:id="@+id/textViewTrackingImage"
         android:layout_width="wrap_content"

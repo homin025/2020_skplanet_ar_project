@@ -24,7 +24,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     ArrayList<LinearLayout> layouts;
 
     ImageView imageView;
-    Button button, buttonWin, buttonLose;
+    Button button, buttonWin, buttonLose, buttonStart;
 
     String idolName;
 
@@ -34,12 +34,13 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     GameResultDialog gameResultDialog;
     TextView textViewTrackingImage;
 
-    CountDownTimer countDownTimer = new CountDownTimer(7000, 1000) {
+    CountDownTimer countDownTimer = new CountDownTimer(6000, 1000) {
         @Override
         public void onTick(long l) {
-            switch ((int) l / 1000) {
+            switch ((int) Math.round((double)l / 1000)) {
                 case 5:
                     imageView.setVisibility(View.VISIBLE);
+                    imageView.setImageResource(R.drawable.ready);
                     break;
                 case 3:
                     imageView.setImageResource(R.drawable.three);
@@ -77,7 +78,6 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
         imageView = findViewById(R.id.imageView);
         imageView.setVisibility(View.INVISIBLE);
-//        countDownTimer.start();
 
         introDialog = new IntroDialog(this);
         fitLogoDialog = new FitLogoDialog(this);
@@ -98,6 +98,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);
         buttonLose = findViewById(R.id.buttonLose);
+        buttonStart = findViewById(R.id.buttonStart);
 
         button.setOnClickListener(view -> gameChooseDialog.show());
         buttonWin.setOnClickListener(view -> {
@@ -109,6 +110,9 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             gameResultDialog.create();
             gameResultDialog.setResult(false);
             gameResultDialog.show();
+        });
+        buttonStart.setOnClickListener(view -> {
+            countDownTimer.start();
         });
 
         textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
