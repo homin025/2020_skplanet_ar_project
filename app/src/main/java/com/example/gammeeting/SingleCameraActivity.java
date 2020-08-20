@@ -34,31 +34,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     GameResultDialog gameResultDialog;
     TextView textViewTrackingImage;
 
-    CountDownTimer countDownTimer = new CountDownTimer(6000, 1000) {
-        @Override
-        public void onTick(long l) {
-            switch ((int) Math.round((double)l / 1000)) {
-                case 5:
-                    imageView.setVisibility(View.VISIBLE);
-                    imageView.setImageResource(R.drawable.ready);
-                    break;
-                case 3:
-                    imageView.setImageResource(R.drawable.three);
-                    break;
-                case 2:
-                    imageView.setImageResource(R.drawable.two);
-                    break;
-                case 1:
-                    imageView.setImageResource(R.drawable.one);
-                    break;
-            }
-        }
-
-        @Override
-        public void onFinish() {
-            imageView.setVisibility(View.INVISIBLE);
-        }
-    };
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +70,32 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         // AR 마커를 인식하면 GameChooseDialog 표시
         gameChooseDialog.setOnDismissListener(view ->
                 setLayoutVisibility(gameChooseDialog.getChoice()));
+
+        countDownTimer = new CountDownTimer(6000, 1000) {
+            @Override
+            public void onTick(long l) {
+                switch ((int) Math.round((double)l / 1000)) {
+                    case 5:
+                        imageView.setVisibility(View.VISIBLE);
+                        imageView.setImageResource(R.drawable.ready);
+                        break;
+                    case 3:
+                        imageView.setImageResource(R.drawable.three);
+                        break;
+                    case 2:
+                        imageView.setImageResource(R.drawable.two);
+                        break;
+                    case 1:
+                        imageView.setImageResource(R.drawable.one);
+                        break;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                imageView.setVisibility(View.INVISIBLE);
+            }
+        };
 
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);

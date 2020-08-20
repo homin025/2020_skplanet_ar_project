@@ -200,41 +200,42 @@ public class GameFragment extends ArFragment {
         instructionDone = value;
     }
 
-    public void showHand(int type) {
-        Frame frame = getArSceneView().getArFrame();
-        if (frame == null)
-            return;
-
-        Pose pos = frame.getCamera().getPose().compose(Pose.makeTranslation(0, 0, -0.3f));
-        Anchor anchor = getArSceneView().getSession().createAnchor(pos);
-        AnchorNode anchorNode = new AnchorNode(anchor);
-        anchorNode.setParent(getArSceneView().getScene());
-
-        Node hand = new Node();
-        hand.setParent(anchorNode);
-
-        Renderable handRenderable;
-        switch(type) {
-            case DetectFragment.DetectEventListener.ROCK:
-                handRenderable = null;
-                break;
-            case DetectFragment.DetectEventListener.SCISSORS:
-                handRenderable = null;
-                break;
-            case DetectFragment.DetectEventListener.PAPER:
-                handRenderable = null;
-                break;
-            default:
-                Log.e("GameFragment","Improper type of hand");
-                return;
-        }
-        hand.setRenderable(handRenderable);
-
-        // TODO: 매 프레임마다 손 계속 생성하지 않도록 DetectFragment 혹은 GameFragment 둘 중 하나에서 조정
-        // TODO: GameFragment 생성 시 가위, 바위, 보 손 모델링 미리 로드해놓기, 적절하게 회전해놓기
-    }
-
-    public void removeHand() {
-        // TODO: showHand에서 만든 앵커 삭제, 앵커 가져올 수 있는 방법 구글링
-    }
+    // 손 표시 방식이 2d로 결정됨
+//    public void showHand(int type) {
+//        Frame frame = getArSceneView().getArFrame();
+//        if (frame == null)
+//            return;
+//
+//        Pose pos = frame.getCamera().getPose().compose(Pose.makeTranslation(0, 0, -0.3f));
+//        Anchor anchor = getArSceneView().getSession().createAnchor(pos);
+//        AnchorNode anchorNode = new AnchorNode(anchor);
+//        anchorNode.setParent(getArSceneView().getScene());
+//
+//        Node hand = new Node();
+//        hand.setParent(anchorNode);
+//
+//        Renderable handRenderable;
+//        switch(type) {
+//            case DetectFragment.DetectEventListener.ROCK:
+//                handRenderable = null;
+//                break;
+//            case DetectFragment.DetectEventListener.SCISSORS:
+//                handRenderable = null;
+//                break;
+//            case DetectFragment.DetectEventListener.PAPER:
+//                handRenderable = null;
+//                break;
+//            default:
+//                Log.e("GameFragment","Improper type of hand");
+//                return;
+//        }
+//        hand.setRenderable(handRenderable);
+//
+//        // TODO: 매 프레임마다 손 계속 생성하지 않도록 DetectFragment 혹은 GameFragment 둘 중 하나에서 조정
+//        // TODO: GameFragment 생성 시 가위, 바위, 보 손 모델링 미리 로드해놓기, 적절하게 회전해놓기
+//    }
+//
+//    public void removeHand() {
+//        // TODO: showHand에서 만든 앵커 삭제, 앵커 가져올 수 있는 방법 구글링
+//    }
 }

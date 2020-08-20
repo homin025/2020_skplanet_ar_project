@@ -238,17 +238,23 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
                         // 인식 결과가 3번 연속으로 동일하게 나오면 인식 결과 확정
                         // 인식 결과 확정되면 인식 중단 (카운트에 맞춰서 다시 인식 시작)
                         if (detectCount == 3) {
+                            int handType;
                             switch (currDetectResult) {
                                 case "rock":
-                                    listener.onHandDetected(listener.ROCK);
+                                    handType = listener.ROCK;
                                     break;
                                 case "scissors":
-                                    listener.onHandDetected(listener.SCISSORS);
+                                    handType = listener.SCISSORS;
                                     break;
                                 case "paper":
-                                    listener.onHandDetected(listener.PAPER);
+                                    handType = listener.PAPER;
                                     break;
+                                default:
+                                    handType = -1;
                             }
+
+                            getActivity().runOnUiThread(()->listener.onHandDetected(handType));
+
                             isHandDetected = true;
                             detectCount = 0;
                         }

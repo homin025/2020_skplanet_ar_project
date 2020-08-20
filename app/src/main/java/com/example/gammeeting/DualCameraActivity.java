@@ -164,9 +164,8 @@ public class DualCameraActivity extends AppCompatActivity
     }
 
     @Override
-    public void onHandDetected(int result) {
-        Toast.makeText(getApplicationContext(), "detection result: "+result, Toast.LENGTH_SHORT).show();
-        switch(result) {
+    public void onHandDetected(int handType) {
+        switch(handType) {
             case 101:
                 detectResult = "rock";
                 break;
@@ -178,12 +177,10 @@ public class DualCameraActivity extends AppCompatActivity
                 break;
         }
 
-        runOnUiThread(()->gameFragment.showHand(result));
-        Toast.makeText(getApplicationContext(), "return", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onHandDisappeared() {
-        gameFragment.removeHand();
+
     }
 }
