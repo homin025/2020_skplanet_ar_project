@@ -269,16 +269,6 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
                 trackingOverlay.postInvalidate();
 
                 computingDetection = false;
-
-                mActivity.runOnUiThread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                showFrameInfo(previewWidth + "x" + previewHeight);
-                                showCropInfo(cropCopyBitmap.getWidth() + "x" + cropCopyBitmap.getHeight());
-                                showInference(lastProcessingTimeMs + "ms");
-                            }
-                        });
             }
         };
 
