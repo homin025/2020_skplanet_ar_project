@@ -85,17 +85,5 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="50dp"
         android:text="Tracking Image Name" />
-
-    <include layout="@layout/game_ui_1"
-        android:id="@+id/layoutGame1"
-        android:visibility="invisible" />
-
-    <include layout="@layout/game_ui_2"
-        android:id="@+id/layoutGame2"
-        android:visibility="invisible" />
-
-    <include layout="@layout/game_ui_3"
-        android:id="@+id/layoutGame3"
-        android:visibility="invisible" />
         
 </FrameLayout>

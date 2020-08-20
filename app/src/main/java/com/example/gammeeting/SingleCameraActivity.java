@@ -1,12 +1,18 @@
 package com.example.gammeeting;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.example.gammeeting.util.Logger;
 
 import java.util.ArrayList;
 
@@ -17,6 +23,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
 
+    ImageView imageView;
     Button button, buttonWin, buttonLose;
 
     String idolName;
@@ -25,8 +32,32 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     FitLogoDialog fitLogoDialog;
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
-
     TextView textViewTrackingImage;
+
+    CountDownTimer countDownTimer = new CountDownTimer(7000, 1000) {
+        @Override
+        public void onTick(long l) {
+            switch ((int) l / 1000) {
+                case 5:
+                    imageView.setVisibility(View.VISIBLE);
+                    break;
+                case 3:
+                    imageView.setImageResource(R.drawable.three);
+                    break;
+                case 2:
+                    imageView.setImageResource(R.drawable.two);
+                    break;
+                case 1:
+                    imageView.setImageResource(R.drawable.one);
+                    break;
+            }
+        }
+
+        @Override
+        public void onFinish() {
+            imageView.setVisibility(View.INVISIBLE);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +74,10 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         layouts.add(layoutGame1);
         layouts.add(layoutGame2);
         layouts.add(layoutGame3);
+
+        imageView = findViewById(R.id.imageView);
+        imageView.setVisibility(View.INVISIBLE);
+//        countDownTimer.start();
 
         introDialog = new IntroDialog(this);
         fitLogoDialog = new FitLogoDialog(this);

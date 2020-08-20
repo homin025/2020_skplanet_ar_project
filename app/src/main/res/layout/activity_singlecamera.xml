@@ -12,6 +12,17 @@
         android:layout_height="match_parent"
         android:name="com.example.gammeeting.GameFragment" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ready"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="250dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center" />
+
     <Button
         android:id="@+id/buttonGameChoose"
         android:layout_width="wrap_content"

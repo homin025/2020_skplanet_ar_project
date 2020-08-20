@@ -27,6 +27,7 @@ public class DualCameraActivity extends AppCompatActivity
     Button button, buttonWin, buttonLose;
 
     String idolName;
+    String detectResult;
 
     IntroDialog introDialog;
     FitLogoDialog fitLogoDialog;
@@ -120,6 +121,18 @@ public class DualCameraActivity extends AppCompatActivity
 
     @Override
     public void onHandDetected(int result) {
+        switch(result) {
+            case 101:
+                detectResult = "rock";
+                break;
+            case 102:
+                detectResult = "scissors";
+                break;
+            case 103:
+                detectResult = "paper";
+                break;
+        }
+
         gameFragment.showHand(result);
     }
 

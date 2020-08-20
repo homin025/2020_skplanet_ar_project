@@ -57,6 +57,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
     private HandlerThread handlerThread;
     private boolean useCamera2API;
     private boolean isProcessingFrame = false;
+    public boolean isHandDetected = false;
     private byte[][] yuvBytes = new byte[3][];
     private int[] rgbBytes = null;
     private int yRowStride;
@@ -273,6 +274,12 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                 image.close();
                 return;
             }
+
+            if (isHandDetected) {
+                image.close();
+                return;
+            }
+
             isProcessingFrame = true;
             Trace.beginSection("imageAvailable");
             final Image.Plane[] planes = image.getPlanes();

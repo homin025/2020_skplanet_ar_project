@@ -50,7 +50,9 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
     private Integer sensorOrientation;
 
     private Classifier detector;
-
+    private String currDetectResult;
+    private String prevDetectResult;
+    private int detectCount = 0;
 
     private long lastProcessingTimeMs;
     private Bitmap rgbFrameBitmap = null;
@@ -70,6 +72,8 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
 
     private Context mContext;
     private AppCompatActivity mActivity;
+
+    DetectEventListener listener;
 
     public static DetectFragment newInstance() {
         return new DetectFragment();
@@ -221,7 +225,38 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
                         canvas.drawRect(location, paint);
                         LOGGER.i("Detection result " + result.getTitle());
 
+                        currDetectResult = result.getTitle();
 
+                        // 인식 결과가 3번 연속으로 동일하게 나오면 인식 결과 확정
+                        // 인식 결과 확정되면 인식 중단 (카운트에 맞춰서 다시 인식 시작)
+                        if (detectCount == 3) {
+                            switch (currDetectResult) {
+                                case "rock":
+                                    listener.onHandDetected(listener.ROCK);
+                                    break;
+                                case "scissors":
+                                    listener.onHandDetected(listener.SCISSORS);
+                                    break;
+                                case "paper":
+                                    listener.onHandDetected(listener.PAPER);
+                                    break;
+                            }
+                            isHandDetected = true;
+                            detectCount = 0;
+                        }
+                        else if (detectCount == 0) {
+                            detectCount += 1;
+                            prevDetectResult = currDetectResult;
+                        }
+                        else {
+                            if (prevDetectResult.equals(currDetectResult)) {
+                                detectCount += 1;
+                            }
+                            else {
+                                detectCount = 0;
+                                prevDetectResult = currDetectResult;
+                            }
+                        }
 
                         cropToFrameTransform.mapRect(location);
 

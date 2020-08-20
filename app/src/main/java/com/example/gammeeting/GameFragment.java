@@ -53,7 +53,7 @@ public class GameFragment extends ArFragment {
     GameEventListener listener;
 
     boolean instructionDone;
-    String currentTrackingImageName = "";
+    String currTrackingImageName = "";
 
     public interface GameEventListener {
         void onMarkerFound(String name);
@@ -162,9 +162,9 @@ public class GameFragment extends ArFragment {
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
             String imageName = augmentedImage.getName();
-            if(!currentTrackingImageName.equals(imageName)) {
+            if(!currTrackingImageName.equals(imageName)) {
                 listener.onMarkerFound(imageName);
-                currentTrackingImageName = imageName;
+                currTrackingImageName = imageName;
             }
 
             switch (augmentedImage.getTrackingState()) {
