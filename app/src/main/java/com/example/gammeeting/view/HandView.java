@@ -31,7 +31,7 @@ public class HandView extends ConstraintLayout {
     }
 
     private void initView(Context context, @Nullable AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.hand_view_self, this, true);
+        LayoutInflater.from(context).inflate(R.layout.hand_view_opponent, this, true);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HandView, 0, 0);
         boolean isOpponent = false;
@@ -44,7 +44,7 @@ public class HandView extends ConstraintLayout {
             a.recycle();
         }
 
-        //inflate(context, isOpponent?R.layout.hand_view_opponent:R.layout.hand_view_self, this);
+        LayoutInflater.from(context).inflate(isOpponent?R.layout.hand_view_opponent:R.layout.hand_view_self, this, true);
 
         textViewName = findViewById(R.id.textViewName);
         textViewHand = findViewById(R.id.textViewHand);
