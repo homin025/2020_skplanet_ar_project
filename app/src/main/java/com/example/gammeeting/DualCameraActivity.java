@@ -1,8 +1,11 @@
 package com.example.gammeeting;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -155,8 +158,8 @@ public class DualCameraActivity extends AppCompatActivity
         handViewOpponent = findViewById(R.id.handViewOpponent);
         handViewSelf = findViewById(R.id.handViewSelf);
 
-        handViewOpponent.setHandType(HandView.SCISSORS).setName("asdf");
-        handViewSelf.setHandType(HandView.PAPER).setName("ㅁㄴㅇㄹ");
+        handViewOpponent.setHandType(HandView.SCISSORS).setName("NCT127");
+        handViewSelf.setHandType(HandView.PAPER).setName("YOU");
     }
 
     private void setLayoutVisibility(int index) {

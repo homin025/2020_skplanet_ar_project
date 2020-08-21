@@ -2,6 +2,7 @@ package com.example.gammeeting.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -25,14 +25,14 @@ public class HandView extends ConstraintLayout {
     TextView textViewName, textViewHand;
     ImageView imageViewHand;
 
-    public HandView(Context context) {
-        super(context);
-        initView(context, null);
-    }
-
     public HandView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView(context, attrs);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
@@ -41,6 +41,8 @@ public class HandView extends ConstraintLayout {
     }
 
     private void initView(Context context, @Nullable AttributeSet attrs) {
+        LayoutInflater.from(context).inflate(R.layout.hand_view_self, this, true);
+
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HandView, 0, 0);
         boolean isOpponent = false;
         try {
@@ -51,19 +53,12 @@ public class HandView extends ConstraintLayout {
         } finally {
             a.recycle();
         }
-        Toast.makeText(context, "" + isOpponent, Toast.LENGTH_SHORT).show();
 
-        ViewGroup viewGroup;
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (layoutInflater == null)
-            return;
+        //inflate(context, isOpponent?R.layout.hand_view_opponent:R.layout.hand_view_self, this);
 
-        viewGroup = (ViewGroup)layoutInflater.inflate(isOpponent ? R.layout.hand_opponent_view : R.layout.hand_self_view, this, true);
-        Toast.makeText(context, ""+viewGroup, Toast.LENGTH_SHORT).show();
-
-        textViewName = viewGroup.findViewById(R.id.textViewName);
-        textViewHand = viewGroup.findViewById(R.id.textViewHand);
-        imageViewHand = viewGroup.findViewById(R.id.imageViewHand);
+        textViewName = findViewById(R.id.textViewName);
+        textViewHand = findViewById(R.id.textViewHand);
+        imageViewHand = findViewById(R.id.imageViewHand);
 
         if(!isOpponent)
             textViewName.setText("YOU");
