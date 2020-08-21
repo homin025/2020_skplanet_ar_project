@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="250dp"
     android:layout_height="70dp"
-    android:background="@drawable/hand_opponent_background"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+    android:background="@drawable/hand_opponent_background">
 
     <TextView
         android:id="@+id/textViewName"
@@ -44,4 +43,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>

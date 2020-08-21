@@ -30,16 +30,6 @@ public class HandView extends ConstraintLayout {
         initView(context, attrs);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
-
-    }
-
     private void initView(Context context, @Nullable AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.hand_view_self, this, true);
 
