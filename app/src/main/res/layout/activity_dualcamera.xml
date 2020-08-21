@@ -19,7 +19,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
     tools:context="com.example.gammeeting.DualCameraActivity" >
 
     <LinearLayout
@@ -56,7 +55,7 @@
 
     <Button
         android:id="@+id/buttonGameChoose"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
@@ -64,38 +63,57 @@
 
     <Button
         android:id="@+id/buttonWin"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="0dp"
         android:text="win" />
 
     <Button
         android:id="@+id/buttonLose"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="160dp"
         android:layout_marginTop="0dp"
         android:text="lose" />
 
+    <Button
+        android:id="@+id/buttonStart"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="0dp"
+        android:text="start" />
+
+    <Button
+        android:id="@+id/buttonDetect"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="0dp"
+        android:text="detect" />
+
     <TextView
         android:id="@+id/textViewTrackingImage"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="50dp"
         android:text="Tracking Image Name" />
 
-    <include layout="@layout/game_ui_1"
-        android:id="@+id/layoutGame1"
-        android:visibility="invisible" />
+    <com.example.gammeeting.view.HandView
+        android:id="@+id/handViewOpponent"
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        app:opponent="true"/>
 
-    <include layout="@layout/game_ui_2"
-        android:id="@+id/layoutGame2"
-        android:visibility="invisible" />
-
-    <include layout="@layout/game_ui_3"
-        android:id="@+id/layoutGame3"
-        android:visibility="invisible" />
+    <com.example.gammeeting.view.HandView
+        android:id="@+id/handViewSelf"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="490dp"/>
         
 </FrameLayout>

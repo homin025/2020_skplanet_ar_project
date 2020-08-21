@@ -14,18 +14,23 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
+import com.google.ar.core.Anchor;
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.AugmentedImageDatabase;
 import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
+import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
+import com.google.ar.core.TrackingState;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.FrameTime;
+import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.ExternalTexture;
 import com.google.ar.sceneform.rendering.ModelRenderable;
+import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.ArFragment;
 
 import java.io.IOException;
@@ -48,7 +53,7 @@ public class GameFragment extends ArFragment {
     GameEventListener listener;
 
     boolean instructionDone;
-    String currentTrackingImageName = "";
+    String currTrackingImageName = "";
 
     public interface GameEventListener {
         void onMarkerFound(String name);
@@ -157,9 +162,9 @@ public class GameFragment extends ArFragment {
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
             String imageName = augmentedImage.getName();
-            if(!currentTrackingImageName.equals(imageName)) {
+            if(!currTrackingImageName.equals(imageName)) {
                 listener.onMarkerFound(imageName);
-                currentTrackingImageName = imageName;
+                currTrackingImageName = imageName;
             }
 
             switch (augmentedImage.getTrackingState()) {
@@ -194,4 +199,43 @@ public class GameFragment extends ArFragment {
     public void setInstructionDone(boolean value) {
         instructionDone = value;
     }
+
+    // 손 표시 방식이 2d로 결정됨
+//    public void showHand(int type) {
+//        Frame frame = getArSceneView().getArFrame();
+//        if (frame == null)
+//            return;
+//
+//        Pose pos = frame.getCamera().getPose().compose(Pose.makeTranslation(0, 0, -0.3f));
+//        Anchor anchor = getArSceneView().getSession().createAnchor(pos);
+//        AnchorNode anchorNode = new AnchorNode(anchor);
+//        anchorNode.setParent(getArSceneView().getScene());
+//
+//        Node hand = new Node();
+//        hand.setParent(anchorNode);
+//
+//        Renderable handRenderable;
+//        switch(type) {
+//            case DetectFragment.DetectEventListener.ROCK:
+//                handRenderable = null;
+//                break;
+//            case DetectFragment.DetectEventListener.SCISSORS:
+//                handRenderable = null;
+//                break;
+//            case DetectFragment.DetectEventListener.PAPER:
+//                handRenderable = null;
+//                break;
+//            default:
+//                Log.e("GameFragment","Improper type of hand");
+//                return;
+//        }
+//        hand.setRenderable(handRenderable);
+//
+//        // TODO: 매 프레임마다 손 계속 생성하지 않도록 DetectFragment 혹은 GameFragment 둘 중 하나에서 조정
+//        // TODO: GameFragment 생성 시 가위, 바위, 보 손 모델링 미리 로드해놓기, 적절하게 회전해놓기
+//    }
+//
+//    public void removeHand() {
+//        // TODO: showHand에서 만든 앵커 삭제, 앵커 가져올 수 있는 방법 구글링
+//    }
 }

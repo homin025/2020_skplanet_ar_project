@@ -14,8 +14,6 @@ import androidx.core.content.ContextCompat;
 
 public class GameResultDialog extends Dialog {
 
-    boolean win;
-
     ImageView imageView;
     TextView textViewTitle, textViewDescription;
     Button button;

@@ -44,8 +44,4 @@
         </androidx.appcompat.widget.Toolbar>
 
     </RelativeLayout>
-
-    <include
-        android:id="@+id/layout_bottomsheet"
-        layout="@layout/layout_bottomsheet" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

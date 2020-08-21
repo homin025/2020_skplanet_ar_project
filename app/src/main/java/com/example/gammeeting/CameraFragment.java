@@ -57,21 +57,12 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
     private HandlerThread handlerThread;
     private boolean useCamera2API;
     private boolean isProcessingFrame = false;
+    public boolean isHandDetected = false;
     private byte[][] yuvBytes = new byte[3][];
     private int[] rgbBytes = null;
     private int yRowStride;
     private Runnable postInferenceCallback;
     private Runnable imageConverter;
-
-    private LinearLayout bottomSheetLayout;
-    private LinearLayout gestureLayout;
-    private BottomSheetBehavior<LinearLayout> sheetBehavior;
-
-    protected TextView frameValueTextView, cropValueTextView, inferenceTimeTextView;
-    protected ImageView bottomSheetArrowImageView;
-    private ImageView plusImageView, minusImageView;
-    private SwitchCompat apiSwitchCompat;
-    private TextView threadsTextView;
 
     private Context mContext;
     private AppCompatActivity mActivity;
@@ -98,19 +89,6 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
 //      setDesiredPreviewFrameSize(new Size(1280, 600));
 //        Toast.makeText(getContext(), "measured width:" + view.getMeasuredWidth() + ", height:" + view.getMeasuredHeight(), Toast.LENGTH_LONG).show();
 
-        threadsTextView = view.findViewById(R.id.threads);
-        plusImageView = view.findViewById(R.id.plus);
-        minusImageView = view.findViewById(R.id.minus);
-        apiSwitchCompat = view.findViewById(R.id.switch_apiinfo);
-        bottomSheetLayout = view.findViewById(R.id.layout_bottomsheet);
-        gestureLayout = view.findViewById(R.id.layout_gesture);
-        sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
-        bottomSheetArrowImageView = view.findViewById(R.id.arrow);
-
-        frameValueTextView = view.findViewById(R.id.info_frame);
-        cropValueTextView = view.findViewById(R.id.info_crop);
-        inferenceTimeTextView = view.findViewById(R.id.info_inference);
-
         if (hasPermission()) {
             view.post(new Runnable() {
                 @Override
@@ -123,57 +101,6 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
         } else {
             requestPermission();
         }
-
-        ViewTreeObserver vto = gestureLayout.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                            gestureLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        } else {
-                            gestureLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        }
-                        //                int width = bottomSheetLayout.getMeasuredWidth();
-                        int height = gestureLayout.getMeasuredHeight();
-
-                        sheetBehavior.setPeekHeight(height);
-                    }
-                });
-        sheetBehavior.setHideable(false);
-
-        sheetBehavior.setBottomSheetCallback(
-                new BottomSheetBehavior.BottomSheetCallback() {
-                    @Override
-                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                        switch (newState) {
-                            case BottomSheetBehavior.STATE_HIDDEN:
-                                break;
-                            case BottomSheetBehavior.STATE_EXPANDED: {
-                                bottomSheetArrowImageView.setImageResource(R.drawable.ic_chevron_down);
-                            }
-                            break;
-                            case BottomSheetBehavior.STATE_COLLAPSED: {
-                                bottomSheetArrowImageView.setImageResource(R.drawable.ic_chevron_up);
-                            }
-                            break;
-                            case BottomSheetBehavior.STATE_DRAGGING:
-                                break;
-                            case BottomSheetBehavior.STATE_SETTLING:
-                                bottomSheetArrowImageView.setImageResource(R.drawable.ic_chevron_up);
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                    }
-                });
-
-        apiSwitchCompat.setOnCheckedChangeListener(this);
-
-        plusImageView.setOnClickListener(this);
-        minusImageView.setOnClickListener(this);
 
         handlerThread = new HandlerThread("inference");
         handlerThread.start();
@@ -273,6 +200,12 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                 image.close();
                 return;
             }
+
+            if (isHandDetected) {
+                image.close();
+                return;
+            }
+
             isProcessingFrame = true;
             Trace.beginSection("imageAvailable");
             final Image.Plane[] planes = image.getPlanes();
@@ -527,41 +460,10 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         setUseNNAPI(isChecked);
-        if (isChecked) apiSwitchCompat.setText("NNAPI");
-        else apiSwitchCompat.setText("TFLITE");
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.plus) {
-            String threads = threadsTextView.getText().toString().trim();
-            int numThreads = Integer.parseInt(threads);
-            if (numThreads >= 9) return;
-            numThreads++;
-            threadsTextView.setText(String.valueOf(numThreads));
-            setNumThreads(numThreads);
-        } else if (v.getId() == R.id.minus) {
-            String threads = threadsTextView.getText().toString().trim();
-            int numThreads = Integer.parseInt(threads);
-            if (numThreads == 1) {
-                return;
-            }
-            numThreads--;
-            threadsTextView.setText(String.valueOf(numThreads));
-            setNumThreads(numThreads);
-        }
-    }
-
-    protected void showFrameInfo(String frameInfo) {
-        frameValueTextView.setText(frameInfo);
-    }
-
-    protected void showCropInfo(String cropInfo) {
-        cropValueTextView.setText(cropInfo);
-    }
-
-    protected void showInference(String inferenceTime) {
-        inferenceTimeTextView.setText(inferenceTime);
     }
 
     protected abstract void processImage();
