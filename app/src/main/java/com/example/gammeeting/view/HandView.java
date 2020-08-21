@@ -1,13 +1,11 @@
 package com.example.gammeeting.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.gammeeting.R;
 
 public class HandView extends ConstraintLayout {
-
     public static final int ROCK = 101;
     public static final int SCISSORS = 102;
     public static final int PAPER = 103;
@@ -31,20 +28,20 @@ public class HandView extends ConstraintLayout {
     }
 
     private void initView(Context context, @Nullable AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.hand_view_opponent, this, true);
+        LayoutInflater.from(context).inflate(R.layout.handview_opponent, this, true);
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HandView, 0, 0);
+        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HandView, 0, 0);
         boolean isOpponent = false;
         try {
-            isOpponent = a.getBoolean(R.styleable.HandView_opponent, false);
+            isOpponent = typedArray.getBoolean(R.styleable.HandView_opponent, false);
         } catch (Exception e) {
             Log.e("HandView", e.getMessage());
             e.printStackTrace();
         } finally {
-            a.recycle();
+            typedArray.recycle();
         }
 
-        LayoutInflater.from(context).inflate(isOpponent?R.layout.hand_view_opponent:R.layout.hand_view_self, this, true);
+        LayoutInflater.from(context).inflate(isOpponent?R.layout.handview_opponent :R.layout.handview_self, this, true);
 
         textViewName = findViewById(R.id.textViewName);
         textViewHand = findViewById(R.id.textViewHand);
@@ -56,6 +53,9 @@ public class HandView extends ConstraintLayout {
 
     public HandView setName(String name) {
         textViewName.setText(name);
+
+        ((Activity)getContext()).runOnUiThread(() -> textViewName.setText(name));
+
         return this;
     }
 
@@ -86,8 +86,10 @@ public class HandView extends ConstraintLayout {
             return this;
         }
 
-        textViewHand.setText(handText);
-        imageViewHand.setImageResource(imgId);
+        ((Activity)getContext()).runOnUiThread(() -> {
+            textViewHand.setText(handText);
+            imageViewHand.setImageResource(imgId);
+        });
 
         return this;
     }

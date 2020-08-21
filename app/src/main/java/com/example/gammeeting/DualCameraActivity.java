@@ -3,6 +3,7 @@ package com.example.gammeeting;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -29,24 +30,20 @@ public class DualCameraActivity extends AppCompatActivity
     DetectFragment detectFragment;
     ConstraintLayout detectFragmentContainer;
 
-    LinearLayout layoutGame1, layoutGame2, layoutGame3;
-    ArrayList<LinearLayout> layouts;
+    LinearLayout layoutGameCount;
+    CountDownTimer countDownTimer;
 
     Button button, buttonWin, buttonLose, buttonStart, buttonDetect;
-
-    String idolName;
-    String detectResult;
 
     IntroDialog introDialog;
     FitLogoDialog fitLogoDialog;
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
-
     TextView textViewTrackingImage;
 
-    ImageView imageView;
-    CountDownTimer countDownTimer;
-
+    String idolName;
+    String idolHandType;
+    String detectedHandType;
     HandView handViewSelf, handViewOpponent;
 
     @Override
@@ -75,14 +72,36 @@ public class DualCameraActivity extends AppCompatActivity
 //            detectFragmentContainer.postInvalidate();
 //        });
 
-        layoutGame1 = findViewById(R.id.layoutGame1);
-        layoutGame2 = findViewById(R.id.layoutGame2);
-        layoutGame3 = findViewById(R.id.layoutGame3);
+        layoutGameCount = findViewById(R.id.layoutGameCount);
+        countDownTimer = new CountDownTimer(7000, 1000) {
+            ImageView imageGameCount = layoutGameCount.findViewById(R.id.imageGameCount);
 
-        layouts = new ArrayList<>();
-        layouts.add(layoutGame1);
-        layouts.add(layoutGame2);
-        layouts.add(layoutGame3);
+            @Override
+            public void onTick(long l) {
+                switch ((int) Math.round((double)l / 1000)) {
+                    case 6:
+                        imageGameCount.setImageResource(R.drawable.ready);
+                        break;
+                    case 5:
+                        layoutGameCount.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        imageGameCount.setImageResource(R.drawable.three);
+                        break;
+                    case 2:
+                        imageGameCount.setImageResource(R.drawable.two);
+                        break;
+                    case 1:
+                        imageGameCount.setImageResource(R.drawable.one);
+                        break;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                layoutGameCount.setVisibility(View.INVISIBLE);
+            }
+        };
 
         introDialog = new IntroDialog(this);
         fitLogoDialog = new FitLogoDialog(this);
@@ -95,36 +114,6 @@ public class DualCameraActivity extends AppCompatActivity
         introDialog.show();
 
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
-
-        // AR 마커를 인식하면 GameChooseDialog 표시
-        gameChooseDialog.setOnDismissListener(view ->
-                setLayoutVisibility(gameChooseDialog.getChoice()));
-
-        countDownTimer = new CountDownTimer(6000, 1000) {
-            @Override
-            public void onTick(long l) {
-                switch ((int) Math.round((double)l / 1000)) {
-                    case 5:
-                        imageView.setVisibility(View.VISIBLE);
-                        imageView.setImageResource(R.drawable.ready);
-                        break;
-                    case 3:
-                        imageView.setImageResource(R.drawable.three);
-                        break;
-                    case 2:
-                        imageView.setImageResource(R.drawable.two);
-                        break;
-                    case 1:
-                        imageView.setImageResource(R.drawable.one);
-                        break;
-                }
-            }
-
-            @Override
-            public void onFinish() {
-                imageView.setVisibility(View.INVISIBLE);
-            }
-        };
 
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);
@@ -147,9 +136,6 @@ public class DualCameraActivity extends AppCompatActivity
             countDownTimer.start();
         });
         buttonDetect.setOnClickListener(view -> {
-            // isHandDetected = false로 바꿔서
-            // 손 모양이 결정된 후 중지된 인식 과정을 다시 활성화
-            // 안그러면 박스가 인식됐을때 상태 그대로 멈춰있음
             detectFragment.resumeDetection();
         });
 
@@ -157,38 +143,62 @@ public class DualCameraActivity extends AppCompatActivity
 
         handViewOpponent = findViewById(R.id.handViewOpponent);
         handViewSelf = findViewById(R.id.handViewSelf);
-
-        handViewOpponent.setHandType(HandView.SCISSORS).setName("NCT127");
-        handViewSelf.setHandType(HandView.PAPER).setName("YOU");
     }
 
-    private void setLayoutVisibility(int index) {
-        for(int i=0; i<layouts.size(); i++)
-            layouts.get(i).setVisibility(i == index ? View.VISIBLE : View.INVISIBLE);
+    private void setHandViewVisibility(boolean visible) {
+        if (visible) {
+            handViewOpponent.setVisibility(View.VISIBLE);
+            handViewSelf.setVisibility(View.VISIBLE);
+        }
+        else {
+            handViewOpponent.setVisibility(View.INVISIBLE);
+            handViewSelf.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
-    public void onMarkerFound(String name) {
-        idolName = name;
+    public void onMarkerFound(GameFragment.Idol idol) {
+        // 마커가 인식됐을 때, 받아오는 클래스를 만듬 (아이돌 이름과 아이돌이 낼 손 모양)
+        idolName = idol.getName();
+        idolHandType = idol.getHandType();
+
         textViewTrackingImage.setText(idolName);
 
         gameChooseDialog.show();
         gameChooseDialog.setOpponentName(idolName);
+
+        // 아이돌의 이름과 손 모양을 세팅함
+        handViewOpponent.setName(idolName);
+        switch (idolHandType) {
+            case "rock":
+                handViewOpponent.setHandType(HandView.ROCK);
+                break;
+            case "scissors":
+                handViewOpponent.setHandType(HandView.SCISSORS);
+                break;
+            case "paper":
+                handViewOpponent.setHandType(HandView.PAPER);
+                break;
+        }
     }
 
     @Override
     public void onHandDetected(int handType) {
         switch(handType) {
             case 101:
-                detectResult = "rock";
+                detectedHandType = "rock";
                 break;
             case 102:
-                detectResult = "scissors";
+                detectedHandType = "scissors";
                 break;
             case 103:
-                detectResult = "paper";
+                detectedHandType = "paper";
                 break;
         }
+
+        // 사용자의 손 모양이 인식되면 HandView를 보이도록 함
+        handViewSelf.setHandType(handType).setName("YOU");
+        setHandViewVisibility(true);
     }
 
     @Override

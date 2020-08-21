@@ -43,8 +43,7 @@ public class GameFragment extends ArFragment {
     private static final String TAG = "GameFragment";
     private static final double MIN_OPENGL_VERSION = 3.0;
 
-    private Session session;
-    private Scene scene;
+    public HashMap<String, Idol> fileNames = new HashMap<>();
 
     public MediaPlayer mediaPlayer;
     public ExternalTexture texture;
@@ -56,12 +55,25 @@ public class GameFragment extends ArFragment {
     String currTrackingImageName = "";
 
     public interface GameEventListener {
-        void onMarkerFound(String name);
+        void onMarkerFound(Idol idol);
         // 게임들 끝났을 떄 (가위바위보 내는 타이밍, 참참참 타이밍) 호출되는 이벤트메소드 추가하기
     }
 
     public static GameFragment newInstance() {
         return new GameFragment();
+    }
+
+    public static class Idol {
+        public String idolName;
+        public String idolHandType;
+
+        Idol(String name, String handType) {
+            this.idolName = name;
+            this.idolHandType = handType;
+        }
+
+        public String getName() { return this.idolName; }
+        public String getHandType() { return this.idolHandType; }
     }
 
     @Override
@@ -126,17 +138,16 @@ public class GameFragment extends ArFragment {
     }
 
     private boolean setupAugmentedImageDatabase(Config config, Session session) {
-        HashMap<String, String> fileNames = new HashMap<>();
-        fileNames.put("img1.png", "방탄소년단");
-        fileNames.put("img2.png", "NCT127");
-        fileNames.put("img3.jpg", "레드벨벳");
+        fileNames.put("img1.png", new Idol("방탄소년단", "rock"));
+        fileNames.put("img2.png", new Idol("NCT127", "scissors"));
+        fileNames.put("img3.jpg", new Idol("레드벨벳", "paper"));
 
         AugmentedImageDatabase augmentedImageDatabase = new AugmentedImageDatabase(session);
         ArrayList<Bitmap> augmentedImageBitmap = new ArrayList<>();
 
         for(String imgName: fileNames.keySet()) {
             try (InputStream is = getActivity().getAssets().open(imgName)) {
-                augmentedImageDatabase.addImage(fileNames.get(imgName), BitmapFactory.decodeStream(is));
+                augmentedImageDatabase.addImage(imgName, BitmapFactory.decodeStream(is));
             } catch (IOException e) {
                 Log.e("error", "IOError on loading Bitmap");
                 return false;
@@ -161,15 +172,15 @@ public class GameFragment extends ArFragment {
                 frame.getUpdatedTrackables(AugmentedImage.class);
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
-            String imageName = augmentedImage.getName();
-            if(!currTrackingImageName.equals(imageName)) {
-                listener.onMarkerFound(imageName);
-                currTrackingImageName = imageName;
+            Idol idol = fileNames.get(augmentedImage.getName());
+            if(!currTrackingImageName.equals(idol.getName())) {
+                listener.onMarkerFound(idol);
+                currTrackingImageName = idol.getName();
             }
 
             switch (augmentedImage.getTrackingState()) {
                 case TRACKING:
-                    //getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
+                    getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
                     break;
                 case STOPPED:
                     break;

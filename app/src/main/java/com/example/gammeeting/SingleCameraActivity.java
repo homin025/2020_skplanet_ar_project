@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.gammeeting.util.Logger;
+import com.example.gammeeting.view.HandView;
 
 import java.util.ArrayList;
 
@@ -22,19 +23,19 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
     LinearLayout layoutGame1, layoutGame2, layoutGame3;
     ArrayList<LinearLayout> layouts;
+    LinearLayout layoutGameCount;
+    CountDownTimer countDownTimer;
 
-    ImageView imageView;
     Button button, buttonWin, buttonLose, buttonStart;
 
     String idolName;
+    String idolHandType;
 
     IntroDialog introDialog;
     FitLogoDialog fitLogoDialog;
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
     TextView textViewTrackingImage;
-
-    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,36 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         layouts.add(layoutGame2);
         layouts.add(layoutGame3);
 
-        imageView = findViewById(R.id.imageView);
-        imageView.setVisibility(View.INVISIBLE);
+        layoutGameCount = findViewById(R.id.layoutGameCount);
+        countDownTimer = new CountDownTimer(7000, 1000) {
+            ImageView imageGameCount = layoutGameCount.findViewById(R.id.imageGameCount);
+
+            @Override
+            public void onTick(long l) {
+                switch ((int) Math.round((double)l / 1000)) {
+                    case 6:
+                        imageGameCount.setImageResource(R.drawable.ready);
+                        break;
+                    case 5:
+                        layoutGameCount.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        imageGameCount.setImageResource(R.drawable.three);
+                        break;
+                    case 2:
+                        imageGameCount.setImageResource(R.drawable.two);
+                        break;
+                    case 1:
+                        imageGameCount.setImageResource(R.drawable.one);
+                        break;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                layoutGameCount.setVisibility(View.INVISIBLE);
+            }
+        };
 
         introDialog = new IntroDialog(this);
         fitLogoDialog = new FitLogoDialog(this);
@@ -70,32 +99,6 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         // AR 마커를 인식하면 GameChooseDialog 표시
         gameChooseDialog.setOnDismissListener(view ->
                 setLayoutVisibility(gameChooseDialog.getChoice()));
-
-        countDownTimer = new CountDownTimer(6000, 1000) {
-            @Override
-            public void onTick(long l) {
-                switch ((int) Math.round((double)l / 1000)) {
-                    case 5:
-                        imageView.setVisibility(View.VISIBLE);
-                        imageView.setImageResource(R.drawable.ready);
-                        break;
-                    case 3:
-                        imageView.setImageResource(R.drawable.three);
-                        break;
-                    case 2:
-                        imageView.setImageResource(R.drawable.two);
-                        break;
-                    case 1:
-                        imageView.setImageResource(R.drawable.one);
-                        break;
-                }
-            }
-
-            @Override
-            public void onFinish() {
-                imageView.setVisibility(View.INVISIBLE);
-            }
-        };
 
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);
@@ -125,9 +128,10 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             layouts.get(i).setVisibility(i == index ? View.VISIBLE : View.INVISIBLE);
     }
 
-    @Override
-    public void onMarkerFound(String name) {
-        idolName = name;
+    public void onMarkerFound(GameFragment.Idol idol) {
+        idolName = idol.getName();
+        idolHandType = idol.getHandType();
+
         textViewTrackingImage.setText(idolName);
 
         gameChooseDialog.show();

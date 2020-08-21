@@ -101,12 +101,17 @@
         android:layout_marginTop="50dp"
         android:text="Tracking Image Name" />
 
+    <include layout="@layout/ui_game_count"
+        android:id="@+id/layoutGameCount"
+        android:visibility="invisible" />
+
     <com.example.gammeeting.view.HandView
         android:id="@+id/handViewOpponent"
         android:layout_gravity="left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="340dp"
+        android:visibility="invisible"
         app:opponent="true"/>
 
     <com.example.gammeeting.view.HandView
@@ -114,6 +119,7 @@
         android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="490dp"/>
+        android:layout_marginTop="490dp"
+        android:visibility="invisible"/>
         
 </FrameLayout>

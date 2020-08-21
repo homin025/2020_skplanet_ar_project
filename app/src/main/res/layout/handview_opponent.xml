@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:layout_marginStart="21dp"
-        android:text="asdf"
+        android:text="OPPONENT"
         android:textColor="@color/colorWhite"
         android:textSize="16dp"
         android:textStyle="bold"

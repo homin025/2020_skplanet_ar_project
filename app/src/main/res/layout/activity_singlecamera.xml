@@ -12,14 +12,6 @@
         android:layout_height="match_parent"
         android:name="com.example.gammeeting.GameFragment" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="80dp"
-        android:src="@drawable/ready" />
-
     <Button
         android:id="@+id/buttonGameChoose"
         android:layout_width="wrap_content"
@@ -60,15 +52,19 @@
         android:layout_marginTop="50dp"
         android:text="Tracking Image Name" />
 
-    <include layout="@layout/game_ui_1"
+    <include layout="@layout/ui_game_count"
+        android:id="@+id/layoutGameCount"
+        android:visibility="invisible" />
+
+    <include layout="@layout/ui_game_3"
         android:id="@+id/layoutGame1"
         android:visibility="invisible" />
 
-    <include layout="@layout/game_ui_2"
+    <include layout="@layout/ui_game_2"
         android:id="@+id/layoutGame2"
         android:visibility="invisible" />
 
-    <include layout="@layout/game_ui_3"
+    <include layout="@layout/ui_game_1"
         android:id="@+id/layoutGame3"
         android:visibility="invisible" />
 
