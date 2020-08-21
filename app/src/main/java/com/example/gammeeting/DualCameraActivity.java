@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.gammeeting.view.HandView;
+
 import java.util.ArrayList;
 
 public class DualCameraActivity extends AppCompatActivity
@@ -41,6 +43,8 @@ public class DualCameraActivity extends AppCompatActivity
 
     ImageView imageView;
     CountDownTimer countDownTimer;
+
+    HandView handViewSelf, handViewOpponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +151,12 @@ public class DualCameraActivity extends AppCompatActivity
         });
 
         textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
+
+        handViewOpponent = findViewById(R.id.handViewOpponent);
+        handViewSelf = findViewById(R.id.handViewSelf);
+
+        handViewOpponent.setHandType(HandView.SCISSORS).setName("asdf");
+        handViewSelf.setHandType(HandView.PAPER).setName("ㅁㄴㅇㄹ");
     }
 
     private void setLayoutVisibility(int index) {
@@ -176,7 +186,6 @@ public class DualCameraActivity extends AppCompatActivity
                 detectResult = "paper";
                 break;
         }
-
     }
 
     @Override
