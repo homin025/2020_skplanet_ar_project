@@ -138,6 +138,7 @@ public class GameFragment extends ArFragment {
     }
 
     private boolean setupAugmentedImageDatabase(Config config, Session session) {
+        HashMap<String, Idol> fileNames = new HashMap<>();
         fileNames.put("img1.png", new Idol("방탄소년단", "rock"));
         fileNames.put("img2.png", new Idol("NCT127", "scissors"));
         fileNames.put("img3.jpg", new Idol("레드벨벳", "paper"));
