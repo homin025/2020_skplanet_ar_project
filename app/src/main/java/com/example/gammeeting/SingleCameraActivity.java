@@ -58,16 +58,16 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         layouts.add(layoutGame3);
 
         layoutGameCount = findViewById(R.id.layoutGameCount);
-        countDownTimer = new CountDownTimer(7000, 1000) {
+        countDownTimer = new CountDownTimer(5000, 1000) {
             ImageView imageGameCount = layoutGameCount.findViewById(R.id.imageGameCount);
 
             @Override
             public void onTick(long l) {
                 switch ((int) Math.round((double)l / 1000)) {
-                    case 6:
+                    case 5:
                         imageGameCount.setImageResource(R.drawable.ready);
                         break;
-                    case 5:
+                    case 4:
                         layoutGameCount.setVisibility(View.VISIBLE);
                         break;
                     case 3:
@@ -101,15 +101,9 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
         // AR 마커를 인식하면 GameChooseDialog 표시
-//        gameChooseDialog.setOnDismissListener(view ->
-//                setLayoutVisibility(gameChooseDialog.getChoice()));
-
-        gameChooseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                showGameUI(gameChooseDialog.getChoice());
-                countDownTimer.start();
-            }
+        gameChooseDialog.setOnDismissListener(dialogInterface -> {
+            showGameUI(gameChooseDialog.getChoice());
+            countDownTimer.start();
         });
 
         button = findViewById(R.id.buttonGameChoose);
@@ -141,28 +135,24 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     }
 
     public void initGameUI() {
-
         // 가위바위보
         findViewById(R.id.buttonScissor).setOnClickListener(view -> {
             UserHandType = "scissors";
-            //setGameResult();
             showGameResult(1000);
         });
         findViewById(R.id.buttonRock).setOnClickListener(view -> {
             UserHandType = "rock";
-            //setGameResult();
             showGameResult(1000);
         });
         findViewById(R.id.buttonPaper).setOnClickListener(view -> {
             UserHandType = "paper";
-            //setGameResult();
             showGameResult(1000);
         });
 
         // 참참참
         findViewById(R.id.buttonLeft).setOnClickListener(view -> {
         });
-        findViewById(R.id.buttonLeft).setOnClickListener(view -> {
+        findViewById(R.id.buttonRight).setOnClickListener(view -> {
         });
 
         // 스피드퀴즈
@@ -181,7 +171,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             layouts.get(i).setVisibility(i == index ? View.VISIBLE : View.INVISIBLE);
     }
 
-    private void setHandViewVisibility(boolean visible) {
+    private void showHandView(boolean visible) {
         if (visible) {
             handViewOpponent.setVisibility(View.VISIBLE);
             handViewSelf.setVisibility(View.VISIBLE);
@@ -193,11 +183,43 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     }
 
     public void showGameResult(int delay) {
+        setGameResult();
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             gameResultDialog.create();
             gameResultDialog.setResult(gameResult);
             gameResultDialog.show();
         }, delay);
+    }
+
+    private void setGameResult() {
+        if (UserHandType.equals(idolHandType)) {
+            //gameResult = ?;
+        }
+        else {
+            switch(UserHandType) {
+                case "rock":
+                    if (idolHandType.equals("paper")) {
+                        gameResult = false;
+                    } else {
+                        gameResult = true;
+                    }
+                    break;
+                case "scissors":
+                    if (idolHandType.equals("rock")) {
+                        gameResult = false;
+                    } else {
+                        gameResult = true;
+                    }
+                    break;
+                case "paper":
+                    if (idolHandType.equals("scissors")) {
+                        gameResult = false;
+                    } else {
+                        gameResult = true;
+                    }
+                    break;
+            }
+        }
     }
 
     public void onMarkerFound(GameFragment.Idol idol) {

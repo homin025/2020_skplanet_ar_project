@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,16 +80,16 @@ public class DualCameraActivity extends AppCompatActivity
 //        });
 
         layoutGameCount = findViewById(R.id.layoutGameCount);
-        countDownTimer = new CountDownTimer(7000, 1000) {
+        countDownTimer = new CountDownTimer(5000, 1000) {
             ImageView imageGameCount = layoutGameCount.findViewById(R.id.imageGameCount);
 
             @Override
             public void onTick(long l) {
                 switch ((int) Math.round((double)l / 1000)) {
-                    case 6:
+                    case 5:
                         imageGameCount.setImageResource(R.drawable.ready);
                         break;
-                    case 5:
+                    case 4:
                         layoutGameCount.setVisibility(View.VISIBLE);
                         break;
                     case 3:
@@ -156,6 +157,26 @@ public class DualCameraActivity extends AppCompatActivity
         handViewSelf = (HandView)findViewById(R.id.handViewSelf);
     }
 
+    private void showHandView(boolean visible) {
+        if (visible) {
+            handViewOpponent.setVisibility(View.VISIBLE);
+            handViewSelf.setVisibility(View.VISIBLE);
+        }
+        else {
+            handViewOpponent.setVisibility(View.INVISIBLE);
+            handViewSelf.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void showGameResult(int delay) {
+        setGameResult();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            gameResultDialog.create();
+            gameResultDialog.setResult(gameResult);
+            gameResultDialog.show();
+        }, delay);
+    }
+
     private void setGameResult() {
         if (UserHandType.equals(idolHandType)) {
             //gameResult = ?;
@@ -184,17 +205,6 @@ public class DualCameraActivity extends AppCompatActivity
                     }
                     break;
             }
-        }
-    }
-
-    private void setHandViewVisibility(boolean visible) {
-        if (visible) {
-            handViewOpponent.setVisibility(View.VISIBLE);
-            handViewSelf.setVisibility(View.VISIBLE);
-        }
-        else {
-            handViewOpponent.setVisibility(View.INVISIBLE);
-            handViewSelf.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -240,18 +250,8 @@ public class DualCameraActivity extends AppCompatActivity
 
         // 사용자의 손 모양이 인식되면 HandView를 보이도록 함
         handViewSelf.setHandType(handType).setName("YOU");
-        setHandViewVisibility(true);
-        setGameResult();
-
-        new Handler().postDelayed(() -> {
-            gameResultDialog.create();
-            gameResultDialog.setResult(gameResult);
-            gameResultDialog.setOnDismissListener(dialogInterface -> {
-                detectFragment.resumeDetection();
-                setHandViewVisibility(false);
-            });
-            gameResultDialog.show();
-        }, 1000);
+        showHandView(true);
+        showGameResult(1000);
     }
 
     @Override
