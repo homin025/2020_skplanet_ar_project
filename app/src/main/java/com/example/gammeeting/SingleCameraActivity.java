@@ -28,14 +28,15 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
     Button button, buttonWin, buttonLose, buttonStart;
 
-    String idolName;
-    String idolHandType;
-
     IntroDialog introDialog;
     FitLogoDialog fitLogoDialog;
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
     TextView textViewTrackingImage;
+
+    String idolName;
+    String idolHandType;
+    HandView handViewSelf, handViewOpponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,9 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         });
 
         textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
+
+        handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
+        handViewSelf = (HandView)findViewById(R.id.handViewSelf);
     }
 
     private void setLayoutVisibility(int index) {
@@ -128,7 +132,19 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             layouts.get(i).setVisibility(i == index ? View.VISIBLE : View.INVISIBLE);
     }
 
+    private void setHandViewVisibility(boolean visible) {
+        if (visible) {
+            handViewOpponent.setVisibility(View.VISIBLE);
+            handViewSelf.setVisibility(View.VISIBLE);
+        }
+        else {
+            handViewOpponent.setVisibility(View.INVISIBLE);
+            handViewSelf.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public void onMarkerFound(GameFragment.Idol idol) {
+        // 마커가 인식됐을 때, 받아오는 클래스를 만듬 (아이돌 이름과 아이돌이 낼 손 모양)
         idolName = idol.getName();
         idolHandType = idol.getHandType();
 
@@ -136,5 +152,19 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
         gameChooseDialog.show();
         gameChooseDialog.setOpponentName(idolName);
+
+        // 아이돌의 이름과 손 모양을 세팅함
+        handViewOpponent.setName(idolName);
+        switch (idolHandType) {
+            case "rock":
+                handViewOpponent.setHandType(HandView.ROCK);
+                break;
+            case "scissors":
+                handViewOpponent.setHandType(HandView.SCISSORS);
+                break;
+            case "paper":
+                handViewOpponent.setHandType(HandView.PAPER);
+                break;
+        }
     }
 }

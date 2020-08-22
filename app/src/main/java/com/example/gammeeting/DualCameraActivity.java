@@ -43,7 +43,7 @@ public class DualCameraActivity extends AppCompatActivity
 
     String idolName;
     String idolHandType;
-    String detectedHandType;
+    String UserHandType;
     HandView handViewSelf, handViewOpponent;
 
     @Override
@@ -139,10 +139,10 @@ public class DualCameraActivity extends AppCompatActivity
             detectFragment.resumeDetection();
         });
 
-        textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
+        textViewTrackingImage = (TextView)findViewById(R.id.textViewTrackingImage);
 
-        handViewOpponent = findViewById(R.id.handViewOpponent);
-        handViewSelf = findViewById(R.id.handViewSelf);
+        handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
+        handViewSelf = (HandView)findViewById(R.id.handViewSelf);
     }
 
     private void setHandViewVisibility(boolean visible) {
@@ -186,13 +186,13 @@ public class DualCameraActivity extends AppCompatActivity
     public void onHandDetected(int handType) {
         switch(handType) {
             case 101:
-                detectedHandType = "rock";
+                UserHandType = "rock";
                 break;
             case 102:
-                detectedHandType = "scissors";
+                UserHandType = "scissors";
                 break;
             case 103:
-                detectedHandType = "paper";
+                UserHandType = "paper";
                 break;
         }
 

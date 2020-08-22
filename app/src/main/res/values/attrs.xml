@@ -2,5 +2,8 @@
 <resources>
     <declare-styleable name="HandView">
         <attr name="opponent" format="boolean"/>
+        <attr name="textviewname" format="reference|string"/>
+        <attr name="textviewhand" format="reference|string"/>
+        <attr name="imageviewhand" format="reference|integer"/>
     </declare-styleable>
 </resources>

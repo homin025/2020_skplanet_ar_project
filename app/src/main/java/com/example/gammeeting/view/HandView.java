@@ -6,11 +6,13 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.example.gammeeting.R;
 
@@ -28,9 +30,10 @@ public class HandView extends ConstraintLayout {
     }
 
     private void initView(Context context, @Nullable AttributeSet attrs) {
-        LayoutInflater.from(context).inflate(R.layout.handview_opponent, this, true);
+        String inflaterService = Context.LAYOUT_INFLATER_SERVICE;
+        LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(inflaterService);
 
-        TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.HandView, 0, 0);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HandView, 0, 0);
         boolean isOpponent = false;
         try {
             isOpponent = typedArray.getBoolean(R.styleable.HandView_opponent, false);
@@ -38,17 +41,22 @@ public class HandView extends ConstraintLayout {
             Log.e("HandView", e.getMessage());
             e.printStackTrace();
         } finally {
-            typedArray.recycle();
+            View view = layoutInflater.inflate(isOpponent?R.layout.handview_opponent:R.layout.handview_self, this, false);
+            addView(view);
         }
 
-        LayoutInflater.from(context).inflate(isOpponent?R.layout.handview_opponent :R.layout.handview_self, this, true);
+        textViewName = (TextView)findViewById(R.id.textViewName);
+        textViewHand = (TextView)findViewById(R.id.textViewHand);
+        imageViewHand = (ImageView)findViewById(R.id.imageViewHand);
 
-        textViewName = findViewById(R.id.textViewName);
-        textViewHand = findViewById(R.id.textViewHand);
-        imageViewHand = findViewById(R.id.imageViewHand);
+        setType(typedArray);
+    }
 
-        if(!isOpponent)
-            textViewName.setText("YOU");
+    private void setType(TypedArray typedArray) {
+        textViewName.setText(typedArray.getString(R.styleable.HandView_textviewname));
+        textViewHand.setText(typedArray.getString(R.styleable.HandView_textviewhand));
+        imageViewHand.setImageResource(typedArray.getResourceId(R.styleable.HandView_imageviewhand, R.drawable.ic_vector_rock));
+        typedArray.recycle();
     }
 
     public HandView setName(String name) {

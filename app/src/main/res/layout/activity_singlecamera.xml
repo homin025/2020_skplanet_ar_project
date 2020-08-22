@@ -52,6 +52,30 @@
         android:layout_marginTop="50dp"
         android:text="Tracking Image Name" />
 
+    <com.example.gammeeting.view.HandView
+        android:id="@+id/handViewOpponent"
+        android:layout_gravity="left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:visibility="invisible"
+        app:opponent="true"
+        app:textviewname="OPPONENT"
+        app:textviewhand="바위"
+        app:imageviewhand="@drawable/ic_vector_rock"/>
+
+    <com.example.gammeeting.view.HandView
+        android:id="@+id/handViewSelf"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="490dp"
+        android:visibility="invisible"
+        app:opponent="false"
+        app:textviewname="YOU"
+        app:textviewhand="바위"
+        app:imageviewhand="@drawable/ic_vector_rock"/>
+
     <include layout="@layout/ui_game_count"
         android:id="@+id/layoutGameCount"
         android:visibility="invisible" />
