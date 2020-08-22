@@ -1,8 +1,10 @@
 package com.example.gammeeting;
 
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,8 +45,10 @@ public class DualCameraActivity extends AppCompatActivity
 
     String idolName;
     String idolHandType;
-    String UserHandType;
     HandView handViewSelf, handViewOpponent;
+
+    String UserHandType;
+    boolean gameResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +119,13 @@ public class DualCameraActivity extends AppCompatActivity
 
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
+        gameChooseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                countDownTimer.start();
+            }
+        });
+
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);
         buttonLose = findViewById(R.id.buttonLose);
@@ -143,6 +154,37 @@ public class DualCameraActivity extends AppCompatActivity
 
         handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
         handViewSelf = (HandView)findViewById(R.id.handViewSelf);
+    }
+
+    private void setGameResult() {
+        if (UserHandType.equals(idolHandType)) {
+            //gameResult = ?;
+        }
+        else {
+            switch(UserHandType) {
+                case "rock":
+                    if (idolHandType.equals("paper")) {
+                        gameResult = false;
+                    } else {
+                        gameResult = true;
+                    }
+                    break;
+                case "scissors":
+                    if (idolHandType.equals("rock")) {
+                        gameResult = false;
+                    } else {
+                        gameResult = true;
+                    }
+                    break;
+                case "paper":
+                    if (idolHandType.equals("scissors")) {
+                        gameResult = false;
+                    } else {
+                        gameResult = true;
+                    }
+                    break;
+            }
+        }
     }
 
     private void setHandViewVisibility(boolean visible) {
@@ -199,6 +241,16 @@ public class DualCameraActivity extends AppCompatActivity
         // 사용자의 손 모양이 인식되면 HandView를 보이도록 함
         handViewSelf.setHandType(handType).setName("YOU");
         setHandViewVisibility(true);
+        setGameResult();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                gameResultDialog.create();
+                gameResultDialog.setResult(gameResult);
+                gameResultDialog.show();
+            }
+        }, 1000);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.gammeeting;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -104,16 +105,16 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
         // AR 마커를 인식하면 GameChooseDialog 표시
-        gameChooseDialog.setOnDismissListener(view ->
-                setLayoutVisibility(gameChooseDialog.getChoice()));
+//        gameChooseDialog.setOnDismissListener(view ->
+//                setLayoutVisibility(gameChooseDialog.getChoice()));
 
-//        gameChooseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialogInterface) {
-//                setLayoutVisibility(gameChooseDialog.getChoice());
-//                countDownTimer.start();
-//            }
-//        });
+        gameChooseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                setLayoutVisibility(gameChooseDialog.getChoice());
+                countDownTimer.start();
+            }
+        });
 
         button = findViewById(R.id.buttonGameChoose);
         buttonWin = findViewById(R.id.buttonWin);
@@ -170,7 +171,6 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
                     break;
             }
         }
-
     }
 
     private void setLayoutVisibility(int index) {
@@ -185,9 +185,14 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
                         UserHandType = "scissors";
                         setGameResult();
 
-                        gameResultDialog.create();
-                        gameResultDialog.setResult(gameResult);
-                        gameResultDialog.show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                gameResultDialog.create();
+                                gameResultDialog.setResult(gameResult);
+                                gameResultDialog.show();
+                            }
+                        }, 1000);
                     }
                 });
                 findViewById(R.id.buttonRock).setOnClickListener(new View.OnClickListener() {
@@ -196,9 +201,14 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
                         UserHandType = "rock";
                         setGameResult();
 
-                        gameResultDialog.create();
-                        gameResultDialog.setResult(gameResult);
-                        gameResultDialog.show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                gameResultDialog.create();
+                                gameResultDialog.setResult(gameResult);
+                                gameResultDialog.show();
+                            }
+                        }, 1000);
                     }
                 });
                 findViewById(R.id.buttonPaper).setOnClickListener(new View.OnClickListener() {
@@ -207,9 +217,14 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
                         UserHandType = "paper";
                         setGameResult();
 
-                        gameResultDialog.create();
-                        gameResultDialog.setResult(gameResult);
-                        gameResultDialog.show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                gameResultDialog.create();
+                                gameResultDialog.setResult(gameResult);
+                                gameResultDialog.show();
+                            }
+                        }, 1000);
                     }
                 });
                 break;
