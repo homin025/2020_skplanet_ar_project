@@ -14,23 +14,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.google.ar.core.Anchor;
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.AugmentedImageDatabase;
 import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
-import com.google.ar.core.Pose;
 import com.google.ar.core.Session;
-import com.google.ar.core.TrackingState;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.FrameTime;
-import com.google.ar.sceneform.Node;
-import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.Color;
 import com.google.ar.sceneform.rendering.ExternalTexture;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.Renderable;
 import com.google.ar.sceneform.ux.ArFragment;
 
 import java.io.IOException;
@@ -224,7 +218,7 @@ public class GameFragment extends ArFragment {
 
     public void changeVideo() {
         texture = new ExternalTexture();
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid_alpha);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.video_alpha);
         mediaPlayer.setSurface(texture.getSurface());
         videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
     }

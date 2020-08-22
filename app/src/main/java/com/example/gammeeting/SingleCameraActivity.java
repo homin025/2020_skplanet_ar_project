@@ -1,6 +1,5 @@
 package com.example.gammeeting;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -65,19 +64,19 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             public void onTick(long l) {
                 switch ((int) Math.round((double)l / 1000)) {
                     case 5:
-                        imageGameCount.setImageResource(R.drawable.ready);
+                        imageGameCount.setImageResource(R.drawable.image_ready);
                         break;
                     case 4:
                         layoutGameCount.setVisibility(View.VISIBLE);
                         break;
                     case 3:
-                        imageGameCount.setImageResource(R.drawable.three);
+                        imageGameCount.setImageResource(R.drawable.image_three);
                         break;
                     case 2:
-                        imageGameCount.setImageResource(R.drawable.two);
+                        imageGameCount.setImageResource(R.drawable.image_two);
                         break;
                     case 1:
-                        imageGameCount.setImageResource(R.drawable.one);
+                        imageGameCount.setImageResource(R.drawable.image_one);
                         break;
                 }
             }

@@ -40,13 +40,13 @@ public class GameResultDialog extends Dialog {
         Resources res = getContext().getResources();
 
         if(win) {
-            imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.win));
+            imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.image_win));
             textViewTitle.setText(res.getString(R.string.result_title_win));
             textViewDescription.setText(res.getString(R.string.result_description_win));
             button.setText(res.getString(R.string.result_button_win));
         }
         else {
-            imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.lose));
+            imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.image_lose));
             textViewTitle.setText(res.getString(R.string.result_title_lose));
             textViewDescription.setText(res.getString(R.string.result_description_lose));
             button.setText(res.getString(R.string.result_button_lose));

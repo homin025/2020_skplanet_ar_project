@@ -1,30 +1,20 @@
 package com.example.gammeeting;
 
-import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.gammeeting.view.HandView;
-
-import java.util.ArrayList;
-
-import static android.content.DialogInterface.*;
 
 public class DualCameraActivity extends AppCompatActivity
         implements GameFragment.GameEventListener, DetectFragment.DetectEventListener {
@@ -87,19 +77,19 @@ public class DualCameraActivity extends AppCompatActivity
             public void onTick(long l) {
                 switch ((int) Math.round((double)l / 1000)) {
                     case 5:
-                        imageGameCount.setImageResource(R.drawable.ready);
+                        imageGameCount.setImageResource(R.drawable.image_ready);
                         break;
                     case 4:
                         layoutGameCount.setVisibility(View.VISIBLE);
                         break;
                     case 3:
-                        imageGameCount.setImageResource(R.drawable.three);
+                        imageGameCount.setImageResource(R.drawable.image_three);
                         break;
                     case 2:
-                        imageGameCount.setImageResource(R.drawable.two);
+                        imageGameCount.setImageResource(R.drawable.image_two);
                         break;
                     case 1:
-                        imageGameCount.setImageResource(R.drawable.one);
+                        imageGameCount.setImageResource(R.drawable.image_one);
                         break;
                 }
             }
