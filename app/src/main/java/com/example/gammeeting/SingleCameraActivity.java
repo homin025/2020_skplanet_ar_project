@@ -4,19 +4,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import com.example.gammeeting.util.Logger;
 import com.example.gammeeting.view.HandView;
 
 import java.util.ArrayList;
@@ -111,7 +107,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         gameChooseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                setLayoutVisibility(gameChooseDialog.getChoice());
+                showGameUI(gameChooseDialog.getChoice());
                 countDownTimer.start();
             }
         });
@@ -140,93 +136,49 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
         handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
         handViewSelf = (HandView)findViewById(R.id.handViewSelf);
+
+        initGameUI();
     }
 
-    private void setGameResult() {
-        if (UserHandType.equals(idolHandType)) {
-            //gameResult = ?;
-        }
-        else {
-            switch(UserHandType) {
-                case "rock":
-                    if (idolHandType.equals("paper")) {
-                        gameResult = false;
-                    } else {
-                        gameResult = true;
-                    }
-                    break;
-                case "scissors":
-                    if (idolHandType.equals("rock")) {
-                        gameResult = false;
-                    } else {
-                        gameResult = true;
-                    }
-                    break;
-                case "paper":
-                    if (idolHandType.equals("scissors")) {
-                        gameResult = false;
-                    } else {
-                        gameResult = true;
-                    }
-                    break;
-            }
-        }
+    public void initGameUI() {
+
+        // 가위바위보
+        findViewById(R.id.buttonScissor).setOnClickListener(view -> {
+            UserHandType = "scissors";
+            //setGameResult();
+            showGameResult(1000);
+        });
+        findViewById(R.id.buttonRock).setOnClickListener(view -> {
+            UserHandType = "rock";
+            //setGameResult();
+            showGameResult(1000);
+        });
+        findViewById(R.id.buttonPaper).setOnClickListener(view -> {
+            UserHandType = "paper";
+            //setGameResult();
+            showGameResult(1000);
+        });
+
+        // 참참참
+        findViewById(R.id.buttonLeft).setOnClickListener(view -> {
+        });
+        findViewById(R.id.buttonLeft).setOnClickListener(view -> {
+        });
+
+        // 스피드퀴즈
+        findViewById(R.id.buttonChoice1).setOnClickListener(view -> {
+        });
+        findViewById(R.id.buttonChoice2).setOnClickListener(view -> {
+        });
+        findViewById(R.id.buttonChoice3).setOnClickListener(view -> {
+        });
+        findViewById(R.id.buttonChoice4).setOnClickListener(view -> {
+        });
     }
 
-    private void setLayoutVisibility(int index) {
+    private void showGameUI(int index) {
         for(int i=0; i<layouts.size(); i++)
             layouts.get(i).setVisibility(i == index ? View.VISIBLE : View.INVISIBLE);
-
-        switch(index) {
-            case 0:
-                findViewById(R.id.buttonScissor).setOnClickListener(view -> {
-                    UserHandType = "scissors";
-                    setGameResult();
-
-                    new Handler().postDelayed(() -> {
-                        gameResultDialog.create();
-                        gameResultDialog.setResult(gameResult);
-                        gameResultDialog.show();
-                    }, 1000);
-                });
-                findViewById(R.id.buttonRock).setOnClickListener(view -> {
-                    UserHandType = "rock";
-                    setGameResult();
-
-                    new Handler().postDelayed(() -> {
-                        gameResultDialog.create();
-                        gameResultDialog.setResult(gameResult);
-                        gameResultDialog.show();
-                    }, 1000);
-                });
-                findViewById(R.id.buttonPaper).setOnClickListener(view -> {
-                    UserHandType = "paper";
-                    setGameResult();
-
-                    new Handler().postDelayed(() -> {
-                        gameResultDialog.create();
-                        gameResultDialog.setResult(gameResult);
-                        gameResultDialog.show();
-                    }, 1000);
-                });
-                break;
-            case 1:
-                findViewById(R.id.buttonLeft).setOnClickListener(view -> {
-                });
-                findViewById(R.id.buttonLeft).setOnClickListener(view -> {
-                });
-                break;
-            case 2:
-
-                findViewById(R.id.buttonChoice1).setOnClickListener(view -> {
-                });
-                findViewById(R.id.buttonChoice2).setOnClickListener(view -> {
-                });
-                findViewById(R.id.buttonChoice3).setOnClickListener(view -> {
-                });
-                findViewById(R.id.buttonChoice4).setOnClickListener(view -> {
-                });
-        }
     }
 
     private void setHandViewVisibility(boolean visible) {
@@ -238,6 +190,14 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             handViewOpponent.setVisibility(View.INVISIBLE);
             handViewSelf.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public void showGameResult(int delay) {
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            gameResultDialog.create();
+            gameResultDialog.setResult(gameResult);
+            gameResultDialog.show();
+        }, delay);
     }
 
     public void onMarkerFound(GameFragment.Idol idol) {
