@@ -102,9 +102,8 @@ public class GameFragment extends ArFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         texture = new ExternalTexture();
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.vid2);
-        mediaPlayer.setSurface(texture.getSurface());
-        mediaPlayer.setLooping(false);
+        mediaPlayer = new MediaPlayer();
+
         ModelRenderable.builder()
                 .setSource(getContext(), R.raw.video_screen)
                 .build()
@@ -138,9 +137,9 @@ public class GameFragment extends ArFragment {
     }
 
     private boolean setupAugmentedImageDatabase(Config config, Session session) {
-        fileNames.put("img1.png", new Idol("방탄소년단", "rock"));
-        fileNames.put("img2.png", new Idol("NCT127", "scissors"));
-        fileNames.put("img3.jpg", new Idol("레드벨벳", "paper"));
+        fileNames.put("logo_exo.jpg", new Idol("EXO", "rock"));
+        fileNames.put("logo_nct.jpg", new Idol("NCT127", "scissors"));
+        fileNames.put("logo_redvelvet.jpg", new Idol("RED VELVET", "paper"));
 
         AugmentedImageDatabase augmentedImageDatabase = new AugmentedImageDatabase(session);
         ArrayList<Bitmap> augmentedImageBitmap = new ArrayList<>();
@@ -175,6 +174,7 @@ public class GameFragment extends ArFragment {
             Idol idol = fileNames.get(augmentedImage.getName());
             if(!currTrackingImageName.equals(idol.getName())) {
                 listener.onMarkerFound(idol);
+                setVideo(idol);
                 currTrackingImageName = idol.getName();
             }
 
@@ -191,13 +191,35 @@ public class GameFragment extends ArFragment {
 
     private AnchorNode createVideoNode(AugmentedImage augmentedImage) {
         AnchorNode anchorNode = new AnchorNode(augmentedImage.createAnchor(augmentedImage.getCenterPose()));
+
         mediaPlayer.start();
+
         texture.getSurfaceTexture().setOnFrameAvailableListener(surfaceTexture -> {
             anchorNode.setRenderable(videoRenderable);
             anchorNode.setLocalScale(new Vector3(
                     augmentedImage.getExtentX(), 1.0f, augmentedImage.getExtentZ()));
         });
+
         return anchorNode;
+    }
+
+    public void setVideo(Idol idol) {
+        String name = idol.getName();
+
+        switch (name) {
+            case "EXO":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.video_rock);
+                break;
+            case "NCT127":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.video_scissors);
+                break;
+            case "RED VELVET":
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.video_paper);
+                break;
+        }
+
+        mediaPlayer.setSurface(texture.getSurface());
+        mediaPlayer.setLooping(false);
     }
 
     public void changeVideo() {

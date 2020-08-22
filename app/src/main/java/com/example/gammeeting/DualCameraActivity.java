@@ -121,11 +121,9 @@ public class DualCameraActivity extends AppCompatActivity
 
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
-        gameChooseDialog.setOnDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                countDownTimer.start();
-            }
+        gameChooseDialog.setOnDismissListener(dialogInterface -> {
+            detectFragment.resumeDetection();
+            countDownTimer.start();
         });
 
         button = findViewById(R.id.buttonGameChoose);
@@ -245,22 +243,18 @@ public class DualCameraActivity extends AppCompatActivity
         setHandViewVisibility(true);
         setGameResult();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                gameResultDialog.create();
-                gameResultDialog.setResult(gameResult);
-                gameResultDialog.setOnDismissListener(dialogInterface -> {
-                    detectFragment.resumeDetection();
-                    setHandViewVisibility(false);
-                });
-                gameResultDialog.show();
-            }
+        new Handler().postDelayed(() -> {
+            gameResultDialog.create();
+            gameResultDialog.setResult(gameResult);
+            gameResultDialog.setOnDismissListener(dialogInterface -> {
+                detectFragment.resumeDetection();
+                setHandViewVisibility(false);
+            });
+            gameResultDialog.show();
         }, 1000);
     }
 
     @Override
     public void onHandDisappeared() {
-
     }
 }

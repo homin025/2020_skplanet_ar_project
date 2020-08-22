@@ -57,7 +57,7 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
     private HandlerThread handlerThread;
     private boolean useCamera2API;
     private boolean isProcessingFrame = false;
-    public boolean isHandDetected = false;
+    public boolean isHandDetected = true;
     private byte[][] yuvBytes = new byte[3][];
     private int[] rgbBytes = null;
     private int yRowStride;
