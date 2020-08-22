@@ -80,7 +80,7 @@
         android:id="@+id/layoutGameCount"
         android:visibility="invisible" />
 
-    <include layout="@layout/ui_game_3"
+    <include layout="@layout/ui_game_1"
         android:id="@+id/layoutGame1"
         android:visibility="invisible" />
 
@@ -88,7 +88,7 @@
         android:id="@+id/layoutGame2"
         android:visibility="invisible" />
 
-    <include layout="@layout/ui_game_1"
+    <include layout="@layout/ui_game_3"
         android:id="@+id/layoutGame3"
         android:visibility="invisible" />
 

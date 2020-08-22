@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/bts_logo" />
+        app:srcCompat="@drawable/bof_logo" />
 
     <TextView
         android:layout_marginTop="50dp"
