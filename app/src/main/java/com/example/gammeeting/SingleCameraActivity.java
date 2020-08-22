@@ -179,88 +179,52 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
         switch(index) {
             case 0:
-                findViewById(R.id.buttonScissor).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        UserHandType = "scissors";
-                        setGameResult();
+                findViewById(R.id.buttonScissor).setOnClickListener(view -> {
+                    UserHandType = "scissors";
+                    setGameResult();
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                gameResultDialog.create();
-                                gameResultDialog.setResult(gameResult);
-                                gameResultDialog.show();
-                            }
-                        }, 1000);
-                    }
+                    new Handler().postDelayed(() -> {
+                        gameResultDialog.create();
+                        gameResultDialog.setResult(gameResult);
+                        gameResultDialog.show();
+                    }, 1000);
                 });
-                findViewById(R.id.buttonRock).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        UserHandType = "rock";
-                        setGameResult();
+                findViewById(R.id.buttonRock).setOnClickListener(view -> {
+                    UserHandType = "rock";
+                    setGameResult();
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                gameResultDialog.create();
-                                gameResultDialog.setResult(gameResult);
-                                gameResultDialog.show();
-                            }
-                        }, 1000);
-                    }
+                    new Handler().postDelayed(() -> {
+                        gameResultDialog.create();
+                        gameResultDialog.setResult(gameResult);
+                        gameResultDialog.show();
+                    }, 1000);
                 });
-                findViewById(R.id.buttonPaper).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        UserHandType = "paper";
-                        setGameResult();
+                findViewById(R.id.buttonPaper).setOnClickListener(view -> {
+                    UserHandType = "paper";
+                    setGameResult();
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                gameResultDialog.create();
-                                gameResultDialog.setResult(gameResult);
-                                gameResultDialog.show();
-                            }
-                        }, 1000);
-                    }
+                    new Handler().postDelayed(() -> {
+                        gameResultDialog.create();
+                        gameResultDialog.setResult(gameResult);
+                        gameResultDialog.show();
+                    }, 1000);
                 });
                 break;
             case 1:
-                findViewById(R.id.buttonLeft).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                findViewById(R.id.buttonLeft).setOnClickListener(view -> {
                 });
-                findViewById(R.id.buttonLeft).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                findViewById(R.id.buttonLeft).setOnClickListener(view -> {
                 });
                 break;
             case 2:
 
-                findViewById(R.id.buttonChoice1).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                findViewById(R.id.buttonChoice1).setOnClickListener(view -> {
                 });
-                findViewById(R.id.buttonChoice2).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                findViewById(R.id.buttonChoice2).setOnClickListener(view -> {
                 });
-                findViewById(R.id.buttonChoice3).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                findViewById(R.id.buttonChoice3).setOnClickListener(view -> {
                 });
-                findViewById(R.id.buttonChoice4).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    }
+                findViewById(R.id.buttonChoice4).setOnClickListener(view -> {
                 });
         }
     }
