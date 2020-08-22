@@ -23,6 +23,8 @@ import com.example.gammeeting.view.HandView;
 
 import java.util.ArrayList;
 
+import static android.content.DialogInterface.*;
+
 public class DualCameraActivity extends AppCompatActivity
         implements GameFragment.GameEventListener, DetectFragment.DetectEventListener {
 
@@ -119,7 +121,7 @@ public class DualCameraActivity extends AppCompatActivity
 
         fitLogoDialog.setOnDismissListener(view -> gameFragment.setInstructionDone(true));
 
-        gameChooseDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        gameChooseDialog.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
                 countDownTimer.start();
@@ -248,6 +250,10 @@ public class DualCameraActivity extends AppCompatActivity
             public void run() {
                 gameResultDialog.create();
                 gameResultDialog.setResult(gameResult);
+                gameResultDialog.setOnDismissListener(dialogInterface -> {
+                    detectFragment.resumeDetection();
+                    setHandViewVisibility(false);
+                });
                 gameResultDialog.show();
             }
         }, 1000);
