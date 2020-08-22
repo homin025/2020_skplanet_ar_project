@@ -85,16 +85,12 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
         LOGGER.d("onCreateView " + this);
 
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
-//      setDesiredPreviewFrameSize(new Size(view.getMeasuredWidth(), view.getMeasuredHeight()));
-//      setDesiredPreviewFrameSize(new Size(1280, 600));
-//        Toast.makeText(getContext(), "measured width:" + view.getMeasuredWidth() + ", height:" + view.getMeasuredHeight(), Toast.LENGTH_LONG).show();
 
         if (hasPermission()) {
             view.post(new Runnable() {
                 @Override
                 public void run() {
                     setDesiredPreviewFrameSize(new Size(view.getMeasuredWidth(), view.getMeasuredHeight()));
-                    Toast.makeText(getContext(), "measured width:" + view.getMeasuredWidth() + ", height:" + view.getMeasuredHeight(), Toast.LENGTH_LONG).show();
                     setFragment();
                 }
             });
@@ -408,8 +404,6 @@ public abstract class CameraFragment extends Fragment implements OnImageAvailabl
                             getDesiredPreviewFrameSize());
             camera2Fragment.setAspectRatio(getDesiredPreviewFrameSize().getWidth(), getDesiredPreviewFrameSize().getHeight());
 
-            Size pSize = getDesiredPreviewFrameSize();
-            Toast.makeText(getContext(), "desired preview frame width:" + pSize.getWidth() + ", height:" + pSize.getHeight(), Toast.LENGTH_LONG).show();
             camera2Fragment.setCamera(cameraId);
             fragment = camera2Fragment;
         } else {

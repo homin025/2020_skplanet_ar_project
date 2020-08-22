@@ -50,6 +50,7 @@ public class GameFragment extends ArFragment {
 
     public interface GameEventListener {
         void onMarkerFound(Idol idol);
+        void onVideoStarted();
         // 게임들 끝났을 떄 (가위바위보 내는 타이밍, 참참참 타이밍) 호출되는 이벤트메소드 추가하기
     }
 

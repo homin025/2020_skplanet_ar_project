@@ -346,16 +346,12 @@ public class CameraConnectionFragment extends Fragment {
                       map.getOutputSizes(SurfaceTexture.class),
                       inputSize.getWidth(),
                       inputSize.getHeight());
-      Toast.makeText(getContext(), "width:" + previewSize.getWidth() + ", height:" + previewSize.getHeight(), Toast.LENGTH_LONG).show();
 
       // We fit the aspect ratio of TextureView to the size of preview we picked.
       final int orientation = getResources().getConfiguration().orientation;
       if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-        Toast.makeText(getContext(), "portrait", Toast.LENGTH_SHORT).show();
-        //textureView.setAspectRatio(aspectSize.getWidth(), aspectSize.getHeight());
         textureView.setAspectRatio(previewSize.getWidth(), previewSize.getHeight());
       } else {
-        Toast.makeText(getContext(), "landscape", Toast.LENGTH_SHORT).show();
         textureView.setAspectRatio(aspectSize.getHeight(), aspectSize.getWidth());
       }
     } catch (final CameraAccessException e) {
@@ -485,18 +481,14 @@ public class CameraConnectionFragment extends Fragment {
                 previewRequest = previewRequestBuilder.build();
                 captureSession.setRepeatingRequest(
                     previewRequest, captureCallback, backgroundHandler);
-
-                 showToast("Capture Session 구성 성공");
               } catch (final CameraAccessException e) {
                 LOGGER.e(e, "Exception!");
                 LOGGER.e(e, ""+e.getMessage());
-                showToast("Capture Session 구성 중 예외발생");
               }
             }
 
             @Override
             public void onConfigureFailed(final CameraCaptureSession cameraCaptureSession) {
-              showToast("Capture Session 구성 실패");
             }
           },
           null);

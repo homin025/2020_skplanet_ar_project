@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -77,10 +78,9 @@ public class DualCameraActivity extends AppCompatActivity
             public void onTick(long l) {
                 switch ((int) Math.round((double)l / 1000)) {
                     case 5:
-                        imageGameCount.setImageResource(R.drawable.image_ready);
-                        break;
                     case 4:
                         layoutGameCount.setVisibility(View.VISIBLE);
+                        imageGameCount.setImageResource(R.drawable.image_ready);
                         break;
                     case 3:
                         imageGameCount.setImageResource(R.drawable.image_three);
@@ -225,7 +225,15 @@ public class DualCameraActivity extends AppCompatActivity
     }
 
     @Override
+    public void onVideoStarted() {
+        Log.i("onVideoStarted", "Dual");
+        countDownTimer.start();
+    }
+
+    @Override
     public void onHandDetected(int handType) {
+        detectFragment.stopDetection();
+
         switch(handType) {
             case 101:
                 UserHandType = "rock";

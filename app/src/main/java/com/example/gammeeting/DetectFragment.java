@@ -259,7 +259,6 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
 
                             getActivity().runOnUiThread(()->listener.onHandDetected(handType));
 
-                            stopDetection();
                             detectCount = 0;
                         }
                         else if (detectCount == 0) {

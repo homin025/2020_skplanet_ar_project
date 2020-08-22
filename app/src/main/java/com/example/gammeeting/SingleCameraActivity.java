@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -64,10 +65,9 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
             public void onTick(long l) {
                 switch ((int) Math.round((double)l / 1000)) {
                     case 5:
-                        imageGameCount.setImageResource(R.drawable.image_ready);
-                        break;
                     case 4:
                         layoutGameCount.setVisibility(View.VISIBLE);
+                        imageGameCount.setImageResource(R.drawable.image_ready);
                         break;
                     case 3:
                         imageGameCount.setImageResource(R.drawable.image_three);
@@ -221,6 +221,7 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         }
     }
 
+    @Override
     public void onMarkerFound(GameFragment.Idol idol) {
         // 마커가 인식됐을 때, 받아오는 클래스를 만듬 (아이돌 이름과 아이돌이 낼 손 모양)
         idolName = idol.getName();
@@ -244,5 +245,11 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
                 handViewOpponent.setHandType(HandView.PAPER);
                 break;
         }
+    }
+
+    @Override
+    public void onVideoStarted() {
+        Log.i("onVideoStarted", "Single");
+        countDownTimer.start();
     }
 }
