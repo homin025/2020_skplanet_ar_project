@@ -239,9 +239,9 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
 
                         currDetectResult = result.getTitle();
 
-                        // 인식 결과가 3번 연속으로 동일하게 나오면 인식 결과 확정
+                        // 인식 결과가 2번 연속으로 동일하게 나오면 인식 결과 확정
                         // 인식 결과 확정되면 인식 중단 (카운트에 맞춰서 다시 인식 시작)
-                        if (detectCount == 3) {
+                        if (detectCount == 2) {
                             int handType;
                             switch (currDetectResult) {
                                 case "rock":
