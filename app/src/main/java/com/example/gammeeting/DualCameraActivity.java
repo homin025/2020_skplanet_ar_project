@@ -35,7 +35,6 @@ public class DualCameraActivity extends AppCompatActivity
     FitLogoDialog fitLogoDialog;
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
-    TextView textViewTrackingImage;
 
     String idolName;
     String idolHandType;
@@ -116,8 +115,6 @@ public class DualCameraActivity extends AppCompatActivity
             detectFragment.resumeDetection();
             countDownTimer.start();
         });
-
-        textViewTrackingImage = (TextView)findViewById(R.id.textViewTrackingImage);
 
         handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
         handViewSelf = (HandView)findViewById(R.id.handViewSelf);
@@ -204,8 +201,6 @@ public class DualCameraActivity extends AppCompatActivity
         // 마커가 인식됐을 때, 받아오는 클래스를 만듬 (아이돌 이름과 아이돌이 낼 손 모양)
         idolName = idol.getName();
         idolHandType = idol.getHandType();
-
-        textViewTrackingImage.setText(idolName);
 
         gameChooseDialog.show();
         gameChooseDialog.setOpponentName(idolName);

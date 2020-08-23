@@ -7,10 +7,12 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -45,8 +47,10 @@ public class GameFragment extends ArFragment {
 
     GameEventListener listener;
 
-    boolean instructionDone;
     String currTrackingImageName = "";
+    boolean trackingDone = false;
+
+    boolean instructionDone;
 
     public interface GameEventListener {
         void onMarkerFound(Idol idol);
@@ -139,9 +143,10 @@ public class GameFragment extends ArFragment {
         AugmentedImageDatabase augmentedImageDatabase = new AugmentedImageDatabase(session);
         ArrayList<Bitmap> augmentedImageBitmap = new ArrayList<>();
 
-        for(String imgName: fileNames.keySet()) {
-            try (InputStream is = getActivity().getAssets().open(imgName)) {
-                augmentedImageDatabase.addImage(imgName, BitmapFactory.decodeStream(is));
+        for(String imageName: fileNames.keySet()) {
+            try (InputStream inputStream = getActivity().getAssets().open(imageName)) {
+                // 3번째 인수는 widthInMeters 로, 이미지의 물리적 너비를 추가함으로써 감지 지연시간을 감소시킴
+                augmentedImageDatabase.addImage(imageName, BitmapFactory.decodeStream(inputStream), (float).5);
             } catch (IOException e) {
                 Log.e("error", "IOError on loading Bitmap");
                 return false;
@@ -167,14 +172,18 @@ public class GameFragment extends ArFragment {
 
         for (AugmentedImage augmentedImage : updatedAugmentedImages) {
             Idol idol = fileNames.get(augmentedImage.getName());
-            if(!currTrackingImageName.equals(idol.getName())) {
-                listener.onMarkerFound(idol);
+            if(!currTrackingImageName.equals(idol.getName()) || trackingDone) {
+                trackingDone = true;
                 setVideo(idol);
                 currTrackingImageName = idol.getName();
             }
 
             switch (augmentedImage.getTrackingState()) {
                 case TRACKING:
+                    if (trackingDone) {
+                        listener.onMarkerFound(idol);
+                        trackingDone = false;
+                    }
                     getArSceneView().getScene().addChild(createVideoNode(augmentedImage));
                     break;
                 case STOPPED:
@@ -187,7 +196,7 @@ public class GameFragment extends ArFragment {
     private AnchorNode createVideoNode(AugmentedImage augmentedImage) {
         AnchorNode anchorNode = new AnchorNode(augmentedImage.createAnchor(augmentedImage.getCenterPose()));
 
-        mediaPlayer.start();
+        new Handler().postDelayed((Runnable) () -> mediaPlayer.start(), 3000);
 
         texture.getSurfaceTexture().setOnFrameAvailableListener(surfaceTexture -> {
             anchorNode.setRenderable(videoRenderable);
@@ -224,8 +233,8 @@ public class GameFragment extends ArFragment {
         videoRenderable.getMaterial().setExternalTexture("videoTexture", texture);
     }
 
-    public void setInstructionDone(boolean value) {
-        instructionDone = value;
+    public void setInstructionDone(boolean isInstructionDone) {
+        instructionDone = isInstructionDone;
     }
 
     // 손 표시 방식이 2d로 결정됨

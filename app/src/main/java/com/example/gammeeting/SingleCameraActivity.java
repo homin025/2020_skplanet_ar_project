@@ -35,7 +35,6 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     FitLogoDialog fitLogoDialog;
     GameChooseDialog gameChooseDialog;
     GameResultDialog gameResultDialog;
-    TextView textViewTrackingImage;
 
     String idolName;
     String idolHandType;
@@ -109,12 +108,10 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
                 countDownTimer.start();
             });
 
-            textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
+        handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
+        handViewSelf = (HandView)findViewById(R.id.handViewSelf);
 
-            handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
-            handViewSelf = (HandView)findViewById(R.id.handViewSelf);
-
-            // 디버깅용 버튼
+        // 디버깅용 버튼
 //        button = findViewById(R.id.buttonGameChoose);
 //        buttonWin = findViewById(R.id.buttonWin);
 //        buttonLose = findViewById(R.id.buttonLose);
@@ -244,8 +241,6 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
         // 마커가 인식됐을 때, 받아오는 클래스를 만듬 (아이돌 이름과 아이돌이 낼 손 모양)
         idolName = idol.getName();
         idolHandType = idol.getHandType();
-
-        textViewTrackingImage.setText(idolName);
 
         gameChooseDialog.show();
         gameChooseDialog.setOpponentName(idolName);

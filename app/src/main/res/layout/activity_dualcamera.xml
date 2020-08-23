@@ -73,14 +73,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewTrackingImage"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="50dp"
-        android:text="Tracking Image Name" />
-
     <include layout="@layout/ui_game_count"
         android:id="@+id/layoutGameCount"
         android:visibility="invisible" />

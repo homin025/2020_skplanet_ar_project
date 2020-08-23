@@ -41,7 +41,7 @@ public class DetectFragment extends CameraFragment implements OnImageAvailableLi
     private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/skplanet.txt";
 
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
-    public static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+    public static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.3f;
     private static final boolean MAINTAIN_ASPECT = false;
     private Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;

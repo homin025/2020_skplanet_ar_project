@@ -12,14 +12,6 @@
         android:layout_height="match_parent"
         android:name="com.example.gammeeting.GameFragment" />
 
-    <TextView
-        android:id="@+id/textViewTrackingImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="50dp"
-        android:text="Tracking Image Name" />
-
     <com.example.gammeeting.view.HandView
         android:id="@+id/handViewOpponent"
         android:layout_gravity="left"
