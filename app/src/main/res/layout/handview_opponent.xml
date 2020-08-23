@@ -39,7 +39,7 @@
         android:layout_height="100dp"
         android:layout_marginEnd="55dp"
         android:layout_marginTop="6dp"
-        android:src="@drawable/ic_vector_rock"
+        android:src="@drawable/ic_vector_rock_unclicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

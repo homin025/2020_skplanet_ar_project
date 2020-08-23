@@ -15,7 +15,7 @@
         android:layout_width="80dp"
         android:layout_height="match_parent"
         android:layout_marginRight="160dp"
-        android:background="@drawable/game_button_shape"
+        android:background="@drawable/game_button_shape_unclicked"
         android:src="@drawable/ic_vector_arrow_left"
         android:scaleType="fitCenter"
         android:padding="15dp"/>
@@ -24,7 +24,7 @@
         android:id="@+id/buttonRight"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:background="@drawable/game_button_shape"
+        android:background="@drawable/game_button_shape_unclicked"
         android:src="@drawable/ic_vector_arrow_right"
         android:scaleType="fitCenter"
         android:padding="15dp"/>

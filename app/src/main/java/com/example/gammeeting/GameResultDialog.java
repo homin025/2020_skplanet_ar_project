@@ -12,10 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-public class GameResultDialog extends Dialog {
+public class    GameResultDialog extends Dialog {
 
     ImageView imageView;
-    TextView textViewTitle, textViewDescription;
+    TextView textViewUsername, textViewTitle, textViewDescription;
     Button button;
 
     public GameResultDialog(@NonNull Context context) {
@@ -31,6 +31,7 @@ public class GameResultDialog extends Dialog {
         setContentView(R.layout.dialog_result);
 
         imageView = findViewById(R.id.imageView);
+        textViewUsername = findViewById(R.id.textViewUsername);
         textViewTitle = findViewById(R.id.textViewTitle);
         textViewDescription = findViewById(R.id.textViewDescription);
         button = findViewById(R.id.button);
@@ -41,12 +42,14 @@ public class GameResultDialog extends Dialog {
 
         if(win) {
             imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.image_win));
+            textViewUsername.setText("케이팝");
             textViewTitle.setText(res.getString(R.string.result_title_win));
             textViewDescription.setText(res.getString(R.string.result_description_win));
             button.setText(res.getString(R.string.result_button_win));
         }
         else {
             imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.image_lose));
+            textViewUsername.setText("케이팝");
             textViewTitle.setText(res.getString(R.string.result_title_lose));
             textViewDescription.setText(res.getString(R.string.result_description_lose));
             button.setText(res.getString(R.string.result_button_lose));

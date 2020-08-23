@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +27,9 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
     LinearLayout layoutGameCount;
     CountDownTimer countDownTimer;
 
-    Button button, buttonWin, buttonLose, buttonStart;
+    ImageButton buttonScissors, buttonRock, buttonPaper;
+    ImageButton buttonLeft, buttonRight;
+    Button buttonChoice1, buttonChoice2, buttonChoice3, buttonChoice4;
 
     IntroDialog introDialog;
     FitLogoDialog fitLogoDialog;
@@ -101,50 +104,65 @@ public class SingleCameraActivity extends AppCompatActivity implements GameFragm
 
         // AR 마커를 인식하면 GameChooseDialog 표시
         gameChooseDialog.setOnDismissListener(dialogInterface -> {
-            showGameUI(gameChooseDialog.getChoice());
-            countDownTimer.start();
-        });
+                initGameUI(gameChooseDialog.getChoice());
+                showGameUI(gameChooseDialog.getChoice());
+                countDownTimer.start();
+            });
 
-        button = findViewById(R.id.buttonGameChoose);
-        buttonWin = findViewById(R.id.buttonWin);
-        buttonLose = findViewById(R.id.buttonLose);
-        buttonStart = findViewById(R.id.buttonStart);
+            textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
 
-        button.setOnClickListener(view -> gameChooseDialog.show());
-        buttonWin.setOnClickListener(view -> {
-            gameResultDialog.create();
-            gameResultDialog.setResult(true);
-            gameResultDialog.show();
-        });
-        buttonLose.setOnClickListener(view -> {
-            gameResultDialog.create();
-            gameResultDialog.setResult(false);
-            gameResultDialog.show();
-        });
-        buttonStart.setOnClickListener(view -> {
-            countDownTimer.start();
-        });
+            handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
+            handViewSelf = (HandView)findViewById(R.id.handViewSelf);
 
-        textViewTrackingImage = findViewById(R.id.textViewTrackingImage);
-
-        handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
-        handViewSelf = (HandView)findViewById(R.id.handViewSelf);
-
-        initGameUI();
+            // 디버깅용 버튼
+//        button = findViewById(R.id.buttonGameChoose);
+//        buttonWin = findViewById(R.id.buttonWin);
+//        buttonLose = findViewById(R.id.buttonLose);
+//        buttonStart = findViewById(R.id.buttonStart);
+//
+//        button.setOnClickListener(view -> gameChooseDialog.show());
+//        buttonWin.setOnClickListener(view -> {
+//            gameResultDialog.create();
+//            gameResultDialog.setResult(true);
+//            gameResultDialog.show();
+//        });
+//        buttonLose.setOnClickListener(view -> {
+//            gameResultDialog.create();
+//            gameResultDialog.setResult(false);
+//            gameResultDialog.show();
+//        });
+//        buttonStart.setOnClickListener(view -> {
+//            countDownTimer.start();
+//        });
     }
 
-    public void initGameUI() {
+    public void initGameUI(int index) {
         // 가위바위보
-        findViewById(R.id.buttonScissor).setOnClickListener(view -> {
+        buttonScissors = findViewById(R.id.buttonScissor);
+        buttonScissors.setImageResource(R.drawable.ic_vector_scissors_unclicked);
+        buttonScissors.setBackgroundResource(R.drawable.game_button_shape_unclicked);
+        buttonScissors.setOnClickListener(view -> {
             UserHandType = "scissors";
+            buttonScissors.setImageResource(R.drawable.ic_vector_scissors_clicked);
+            buttonScissors.setBackgroundResource(R.drawable.game_button_shape_clicked);
             showGameResult(1000);
         });
+        buttonRock = findViewById(R.id.buttonRock);
+        buttonRock.setImageResource(R.drawable.ic_vector_rock_unclicked);
+        buttonRock.setBackgroundResource(R.drawable.game_button_shape_unclicked);
         findViewById(R.id.buttonRock).setOnClickListener(view -> {
             UserHandType = "rock";
+            buttonRock.setImageResource(R.drawable.ic_vector_scissors_clicked);
+            buttonRock.setBackgroundResource(R.drawable.game_button_shape_clicked);
             showGameResult(1000);
         });
+        buttonPaper = findViewById(R.id.buttonPaper);
+        buttonPaper.setImageResource(R.drawable.ic_vector_paper_unclicked);
+        buttonPaper.setBackgroundResource(R.drawable.game_button_shape_unclicked);
         findViewById(R.id.buttonPaper).setOnClickListener(view -> {
             UserHandType = "paper";
+            buttonPaper.setImageResource(R.drawable.ic_vector_paper_clicked);
+            buttonPaper.setBackgroundResource(R.drawable.game_button_shape_clicked);
             showGameResult(1000);
         });
 

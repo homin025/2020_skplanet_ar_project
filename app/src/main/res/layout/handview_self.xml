@@ -39,7 +39,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="6dp"
-        android:src="@drawable/ic_vector_rock"
+        android:src="@drawable/ic_vector_rock_unclicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

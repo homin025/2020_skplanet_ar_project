@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import com.example.gammeeting.R;
 
@@ -55,7 +54,7 @@ public class HandView extends ConstraintLayout {
     private void setType(TypedArray typedArray) {
         textViewName.setText(typedArray.getString(R.styleable.HandView_textviewname));
         textViewHand.setText(typedArray.getString(R.styleable.HandView_textviewhand));
-        imageViewHand.setImageResource(typedArray.getResourceId(R.styleable.HandView_imageviewhand, R.drawable.ic_vector_rock));
+        imageViewHand.setImageResource(typedArray.getResourceId(R.styleable.HandView_imageviewhand, R.drawable.ic_vector_rock_unclicked));
         typedArray.recycle();
     }
 
@@ -73,15 +72,15 @@ public class HandView extends ConstraintLayout {
         switch(type) {
             case ROCK:
                 handText = "바위";
-                imgId = R.drawable.ic_vector_rock;
+                imgId = R.drawable.ic_vector_rock_clicked;
                 break;
             case SCISSORS:
                 handText = "가위";
-                imgId = R.drawable.ic_vector_scissors;
+                imgId = R.drawable.ic_vector_scissors_clicked;
                 break;
             case PAPER:
                 handText = "보";
-                imgId = R.drawable.ic_vector_paper;
+                imgId = R.drawable.ic_vector_paper_clicked;
                 break;
             default:
                 handText = "";

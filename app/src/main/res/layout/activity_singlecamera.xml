@@ -12,38 +12,6 @@
         android:layout_height="match_parent"
         android:name="com.example.gammeeting.GameFragment" />
 
-    <Button
-        android:id="@+id/buttonGameChoose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:text="choice"/>
-
-    <Button
-        android:id="@+id/buttonWin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="0dp"
-        android:text="win" />
-
-    <Button
-        android:id="@+id/buttonLose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="0dp"
-        android:text="lose" />
-
-    <Button
-        android:id="@+id/buttonStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="0dp"
-        android:text="start" />
-
     <TextView
         android:id="@+id/textViewTrackingImage"
         android:layout_width="wrap_content"
@@ -62,7 +30,7 @@
         app:opponent="true"
         app:textviewname="OPPONENT"
         app:textviewhand="바위"
-        app:imageviewhand="@drawable/ic_vector_rock"/>
+        app:imageviewhand="@drawable/ic_vector_rock_unclicked"/>
 
     <com.example.gammeeting.view.HandView
         android:id="@+id/handViewSelf"
@@ -74,7 +42,7 @@
         app:opponent="false"
         app:textviewname="YOU"
         app:textviewhand="바위"
-        app:imageviewhand="@drawable/ic_vector_rock"/>
+        app:imageviewhand="@drawable/ic_vector_rock_unclicked"/>
 
     <include layout="@layout/ui_game_count"
         android:id="@+id/layoutGameCount"
@@ -91,5 +59,37 @@
     <include layout="@layout/ui_game_3"
         android:id="@+id/layoutGame3"
         android:visibility="invisible" />
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonGameChoose"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="0dp"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:text="choice"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonWin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="100dp"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:text="win" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonLose"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="200dp"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:text="lose" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonStart"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="300dp"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:text="start" />-->
 
 </FrameLayout>

@@ -117,34 +117,35 @@ public class DualCameraActivity extends AppCompatActivity
             countDownTimer.start();
         });
 
-        button = findViewById(R.id.buttonGameChoose);
-        buttonWin = findViewById(R.id.buttonWin);
-        buttonLose = findViewById(R.id.buttonLose);
-        buttonStart = findViewById(R.id.buttonStart);
-        buttonDetect = findViewById(R.id.buttonDetect);
-
-        button.setOnClickListener(view -> gameChooseDialog.show());
-        buttonWin.setOnClickListener(view -> {
-            gameResultDialog.create();
-            gameResultDialog.setResult(true);
-            gameResultDialog.show();
-        });
-        buttonLose.setOnClickListener(view -> {
-            gameResultDialog.create();
-            gameResultDialog.setResult(false);
-            gameResultDialog.show();
-        });
-        buttonStart.setOnClickListener(view -> {
-            countDownTimer.start();
-        });
-        buttonDetect.setOnClickListener(view -> {
-            detectFragment.resumeDetection();
-        });
-
         textViewTrackingImage = (TextView)findViewById(R.id.textViewTrackingImage);
 
         handViewOpponent = (HandView)findViewById(R.id.handViewOpponent);
         handViewSelf = (HandView)findViewById(R.id.handViewSelf);
+
+        // 디버깅용 버튼
+//        button = findViewById(R.id.buttonGameChoose);
+//        buttonWin = findViewById(R.id.buttonWin);
+//        buttonLose = findViewById(R.id.buttonLose);
+//        buttonStart = findViewById(R.id.buttonStart);
+//        buttonDetect = findViewById(R.id.buttonDetect);
+//
+//        button.setOnClickListener(view -> gameChooseDialog.show());
+//        buttonWin.setOnClickListener(view -> {
+//            gameResultDialog.create();
+//            gameResultDialog.setResult(true);
+//            gameResultDialog.show();
+//        });
+//        buttonLose.setOnClickListener(view -> {
+//            gameResultDialog.create();
+//            gameResultDialog.setResult(false);
+//            gameResultDialog.show();
+//        });
+//        buttonStart.setOnClickListener(view -> {
+//            countDownTimer.start();
+//        });
+//        buttonDetect.setOnClickListener(view -> {
+//            detectFragment.resumeDetection();
+//        });
     }
 
     private void showHandView(boolean visible) {

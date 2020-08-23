@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.gammeeting"
+        applicationId "com.example.image_instruction"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1

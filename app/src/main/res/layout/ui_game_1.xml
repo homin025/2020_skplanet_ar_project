@@ -14,10 +14,10 @@
         android:id="@+id/buttonScissor"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:background="@drawable/game_button_shape"
-        android:src="@drawable/ic_vector_scissors"
+        android:background="@drawable/game_button_shape_unclicked"
         android:scaleType="fitCenter"
-        android:padding="15dp"/>
+        android:padding="15dp"
+        android:src="@drawable/ic_vector_scissors_clicked"/>
 
     <ImageButton
         android:id="@+id/buttonRock"
@@ -25,17 +25,17 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:background="@drawable/game_button_shape"
-        android:src="@drawable/ic_vector_rock"
+        android:background="@drawable/game_button_shape_unclicked"
         android:scaleType="fitCenter"
-        android:padding="20dp" />
+        android:padding="20dp"
+        android:src="@drawable/ic_vector_rock_clicked"/>
 
     <ImageButton
         android:id="@+id/buttonPaper"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:background="@drawable/game_button_shape"
-        android:src="@drawable/ic_vector_paper"
+        android:background="@drawable/game_button_shape_unclicked"
         android:scaleType="fitCenter"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:src="@drawable/ic_vector_paper_clicked"/>
 </LinearLayout>
