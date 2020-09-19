@@ -1,4 +1,4 @@
-# 2020_skplanet_ar_project
+# Game-meeting
 
 ## Team members
 
